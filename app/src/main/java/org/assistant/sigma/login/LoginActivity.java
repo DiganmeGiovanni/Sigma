@@ -1,7 +1,7 @@
 package org.assistant.sigma.login;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import org.assistant.sigma.R;
@@ -29,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
             );
         }
 
-        // TODO Initialize presenter
+        // Initialize presenter
+        new LoginPresenter(loginFragment);
     }
 }
