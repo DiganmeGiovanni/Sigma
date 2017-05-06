@@ -1,4 +1,19 @@
 <resources>
     <string name="app_name">Sigma</string>
+    <string name="facebook_app_id">1392316410853307</string>
+    <string name="fb_login_protocol_scheme">fb1392316410853307</string>
+
     <string name="login_fb">Login with Facebook</string>
+    <string name="transactions_count">Conteo de transacciones</string>
+    <string name="transactions_today">Transacciones hoy</string>
+    <string name="incomes_today">Ingresos hoy</string>
+    <string name="transactions">Transacciones</string>
+    <string name="under_limit">Debajo del limite</string>
+    <string name="last_transaction">Última transacción</string>
+    <string name="last_transactions">Ultimas transacciones</string>
+    <string name="name">Nombre</string>
+    <string name="card_number">Número de tarjeta</string>
+    <string name="create">Crear</string>
+    <string name="error_name_required">Ingresa un nombre valido</string>
+    <string name="error_card_number_invalid">Ingresa un número valido</string>
 </resources>

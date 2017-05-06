@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="lb_big">24sp</dimen>
+    <dimen name="lb_medium">17sp</dimen>
+</resources>

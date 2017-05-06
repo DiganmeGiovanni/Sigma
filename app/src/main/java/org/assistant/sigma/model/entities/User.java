@@ -1,5 +1,6 @@
 package org.assistant.sigma.model.entities;
 
+import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -16,6 +17,8 @@ public class User extends RealmObject {
     private String firstName;
     private String lastName;
     private boolean active;
+
+    private RealmList<Account> accounts;
 
     public long getFbId() {
         return fbId;
@@ -55,5 +58,13 @@ public class User extends RealmObject {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public RealmList<Account> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(RealmList<Account> accounts) {
+        this.accounts = accounts;
     }
 }

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:padding="5dp"
+        android:textColor="@color/blue_dark"
+        android:textSize="@dimen/lb_medium"
+        tools:text="Cuenta citibanamex"/>
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/tv_account"
+        android:layout_alignParentEnd="true"
+        android:padding="5dp"
+        android:textSize="@dimen/lb_medium"
+        tools:text="5 hrs"/>
+
+    <TextView
+        android:id="@+id/tv_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_account"
+        android:layout_toStartOf="@+id/tv_quantity"
+        android:maxLines="2"
+        android:paddingBottom="5dp"
+        android:paddingEnd="5dp"
+        android:paddingStart="5dp"
+        tools:text="Lorem ipsum dollot Lorem ipsum dollot Lorem ipsum dollot"/>
+
+    <TextView
+        android:id="@+id/tv_quantity"
+        android:gravity="end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_time"
+        android:layout_alignParentEnd="true"
+        android:paddingEnd="5dp"
+        android:paddingStart="5dp"
+        android:textColor="@color/blue_dark"
+        tools:text="$1,500.67"/>
+
+    <View
+        android:background="@color/blue_darker"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/tv_description"
+        android:layout_marginTop="5dp"/>
+</RelativeLayout>

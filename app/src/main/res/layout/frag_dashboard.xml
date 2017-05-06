@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <!-- Resume view -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!-- Period resume -->
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/tv_period_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="15dp"
+                        android:textColor="@color/blue_dark"
+                        android:textSize="@dimen/lb_big"
+                        android:textStyle="bold"
+                        tools:text="$15,000.00" />
+                    <TextView
+                        android:id="@+id/tv_period_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_period_amount"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginTop="3dp"
+                        android:textColor="@color/gray_ash"
+                        android:textSize="@dimen/lb_medium"
+                        tools:text="(Quincena actual)" />
+
+                    <!-- Today transactions -->
+                    <TextView
+                        android:id="@+id/tv_lb_period_transactions"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@id/tv_period_name"
+                        android:layout_marginBottom="5dp"
+                        android:text="@string/transactions"
+                        android:textColor="@color/gray_ash"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/tv_period_transactions"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_below="@id/tv_period_name"
+                        android:layout_marginBottom="5dp"
+                        android:textColor="@color/blue_dark"
+                        tools:text="10"/>
+
+                    <!-- Distance to/from limit -->
+                    <TextView
+                        android:id="@+id/tv_lb_limit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@id/tv_lb_period_transactions"
+                        android:text="@string/under_limit"
+                        android:textColor="@color/gray_ash"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/tv_under_limit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_below="@id/tv_period_transactions"
+                        android:textColor="@color/green"
+                        tools:text="$719.87"/>
+                </RelativeLayout>
+
+                <!-- Period small resume -->
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/tv_period_sm_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="15dp"
+                        android:textColor="@color/blue_dark"
+                        android:textSize="@dimen/lb_big"
+                        android:textStyle="bold"
+                        tools:text="$5,000.00" />
+                    <TextView
+                        android:id="@+id/tv_period_sm_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_period_sm_amount"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginTop="3dp"
+                        android:textColor="@color/gray_ash"
+                        android:textSize="@dimen/lb_medium"
+                        tools:text="(Hoy)" />
+
+                    <!-- Today transactions -->
+                    <TextView
+                        android:id="@+id/tv_lb_period_sm_transactions"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@id/tv_period_sm_name"
+                        android:layout_marginBottom="5dp"
+                        android:text="@string/transactions"
+                        android:textColor="@color/gray_ash"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/tv_period_sm_transactions"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_below="@id/tv_period_sm_name"
+                        android:layout_marginBottom="5dp"
+                        android:textColor="@color/blue_dark"
+                        tools:text="10"/>
+
+                    <!-- Last transaction -->
+                    <TextView
+                        android:id="@+id/tv_lb_last_transaction"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@id/tv_lb_period_sm_transactions"
+                        android:text="@string/last_transaction"
+                        android:textColor="@color/gray_ash"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/tv_last_transaction"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_below="@id/tv_period_sm_transactions"
+                        android:textColor="@color/blue_dark"
+                        tools:text="5 hrs"/>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <!-- Last transactions title -->
+            <TextView
+                android:background="@color/gray_light"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:padding="10dp"
+                android:text="@string/last_transactions"
+                android:textColor="@color/blue_dark"
+                android:textSize="@dimen/lb_medium"/>
+
+            <!-- Last transactions list view -->
+            <ListView
+                android:id="@+id/lv_last_transactions"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/btn_add_transaction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            app:fabSize="normal"/>
+    </RelativeLayout>
+</layout>
