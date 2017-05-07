@@ -18,7 +18,9 @@ public class User extends RealmObject {
     private String lastName;
     private boolean active;
 
+    private Settings settings;
     private RealmList<Account> accounts;
+
 
     public long getFbId() {
         return fbId;
@@ -66,5 +68,13 @@ public class User extends RealmObject {
 
     public void setAccounts(RealmList<Account> accounts) {
         this.accounts = accounts;
+    }
+
+    public Settings getSettings() {
+        return settings;
+    }
+
+    public void setSettings(Settings settings) {
+        this.settings = settings;
     }
 }

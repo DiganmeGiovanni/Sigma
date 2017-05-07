@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/resume_pane"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"
+                android:textSize="@dimen/lb_medium"/>
+
+            <!-- Short period -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/small_period"
+                android:textStyle="bold"/>
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/rb_period_sm_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sm_period_daily_weekend_as_single_day"/>
+                <RadioButton
+                    android:id="@+id/rb_period_sm_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sm_period_daily"/>
+            </RadioGroup>
+
+            <!-- Large period -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/large_period"
+                android:textStyle="bold"/>
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/rb_period_lg_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lg_period_monthly"/>
+                <RadioButton
+                    android:id="@+id/rb_period_lg_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lg_period_fortnight"/>
+                <RadioButton
+                    android:id="@+id/rb_period_lg_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lg_period_weekly"/>
+            </RadioGroup>
+
+            <!-- Day start hour -->
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/til_day_start_hour"
+                android:hint="@string/setting_day_start_hour"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+
+                <EditText
+                    android:id="@+id/et_start_day_hour"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/spent_limit_warnings"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"
+                android:textSize="@dimen/lb_medium"/>
+
+            <!-- Large period spent limit -->
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/til_spent_limit"
+                android:hint="@string/period_lg_spent_limit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+
+                <EditText
+                    android:id="@+id/et_spent_limit"
+                    android:inputType="numberDecimal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </android.support.design.widget.TextInputLayout>
+
+            <!-- Exclude home spent from limits -->
+            <CheckBox
+                android:id="@+id/cb_include_home_spent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/include_home_spent_from_limits"/>
+
+
+            <!-- Ask for transaction if any -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/ask_for_transactions_if_there_are_not"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"
+                android:textSize="@dimen/lb_medium"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <!-- Transactions reminder 1 -->
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/til_transactions_reminder_1"
+                    android:hint="@string/reminder_1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".5">
+
+                    <EditText
+                        android:id="@+id/et_transactions_reminder_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </android.support.design.widget.TextInputLayout>
+
+                <!-- Transactions reminder 2 -->
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/til_transactions_reminder_2"
+                    android:hint="@string/reminder_2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".5">
+
+                    <EditText
+                        android:id="@+id/et_transactions_reminder_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+
+            <Button style="@style/Widget.AppCompat.Button.Colored"
+                android:id="@+id/btn_save"
+                android:layout_gravity="end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/save"/>
+        </LinearLayout>
+    </ScrollView>
+</layout>

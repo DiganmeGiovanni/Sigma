@@ -20,7 +20,6 @@ import io.realm.Sort;
  * Created by giovanni on 6/05/17.
  */
 public class TransactionCategoriesRepository {
-    private HashMap<String, String> categories = new HashMap<>();
     private Realm realm = Realm.getDefaultInstance();
 
     public RealmResults<TransactionCategory> allSpentCategories() {

@@ -56,4 +56,23 @@
     <string name="preferences">Preferencias</string>
     <string name="scheduled_transactions">Transacciones programadas</string>
     <string name="charts">Graficas y analisis</string>
+    <string name="resume_pane">Panel de resumen</string>
+    <string name="small_period">Periodo corto</string>
+    <string name="sm_period_daily_weekend_as_single_day">Por cada dia pero agrupar los fines de semana</string>
+    <string name="sm_period_daily">Por cada dia</string>
+    <string name="large_period">Periodo largo</string>
+    <string name="lg_period_monthly">Mes actual</string>
+    <string name="lg_period_fortnight">Quincena en curso (Desde el 1 ó 15 del mes)</string>
+    <string name="lg_period_weekly">Semana actual</string>
+    <string name="setting_day_start_hour">Inicio del dia (Periodos cortos)</string>
+    <string name="analysis_params">Parametros de análisis automatico</string>
+    <string name="period_lg_spent_limit">Límite de gastos (Periodo largo)</string>
+    <string name="ask_for_transactions_if_there_are_not">Solicitar transacciones si no las hay</string>
+    <string name="reminder_1">Primer recordatorio</string>
+    <string name="reminder_2">Segundo recordatorio</string>
+    <string name="save">Guardar</string>
+    <string name="error_valid_hour">Ingresa una hora valida</string>
+    <string name="error_must_be_greater_than_first_reminder">Debe ser posterior al primer recordatorio</string>
+    <string name="spent_limit_warnings">Advertencias de limite de gastos</string>
+    <string name="include_home_spent_from_limits">Incluir gastos de hogar y pagos de servicios</string>
 </resources>

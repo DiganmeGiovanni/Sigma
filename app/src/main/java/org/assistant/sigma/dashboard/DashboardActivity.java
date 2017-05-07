@@ -6,9 +6,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.TextView;
 
 import org.assistant.sigma.R;
+import org.assistant.sigma.settings.SettingsFragment;
+import org.assistant.sigma.settings.SettingsPresenter;
 import org.assistant.sigma.utils.ActivityUtils;
 
 /**
@@ -17,6 +21,7 @@ import org.assistant.sigma.utils.ActivityUtils;
  */
 public class DashboardActivity extends AppCompatActivity {
 
+    private DrawerLayout mDrawerLayout;
     private Toolbar toolbar;
 
     @Override
@@ -51,7 +56,7 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     private void setupDrawerLayout() {
-        DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(
                 this,
                 mDrawerLayout,
@@ -72,6 +77,26 @@ public class DashboardActivity extends AppCompatActivity {
         };
 
         mDrawerLayout.addDrawerListener(mDrawerToggle);
+        setupDrawerMenuItems();
+    }
 
+    private void setupDrawerMenuItems() {
+        TextView tvPreferences = (TextView) findViewById(R.id.tv_preferences);
+        tvPreferences.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SettingsFragment fragment = new SettingsFragment();
+                new SettingsPresenter(fragment);
+
+                ActivityUtils.replaceFragmentInActivity(
+                        getSupportFragmentManager(),
+                        fragment,
+                        R.id.content,
+                        "settings"
+                );
+
+                mDrawerLayout.closeDrawer(Gravity.LEFT);
+            }
+        });
     }
 }
