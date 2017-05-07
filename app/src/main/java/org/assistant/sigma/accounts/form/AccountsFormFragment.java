@@ -72,6 +72,7 @@ public class AccountsFormFragment extends Fragment implements AccountsFormContra
             public void onClick(View view) {
                 if (validateFields()) {
                     Account account = new Account();
+                    account.setActive(true);
                     account.setName(viewBinding.etName.getText().toString());
                     account.setCardNumber(viewBinding.etCardNumber.getText().toString());
                     account.setCreatedAt(new Date());

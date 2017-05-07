@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 import org.assistant.sigma.R;
 import org.assistant.sigma.accounts.AccountsActivity;
 import org.assistant.sigma.databinding.FragDashboardBinding;
+import org.assistant.sigma.transactions.TransactionsFormFragment;
+import org.assistant.sigma.transactions.TransactionsFormPresenter;
+import org.assistant.sigma.utils.ActivityUtils;
 
 /**
  *
@@ -23,23 +26,13 @@ public class DashboardFragment extends Fragment implements DashboardContract.Vie
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.frag_dashboard, container, false);
         viewBinding = FragDashboardBinding.bind(rootView);
 
-        setupAddTransactionButton();
+        setupAddButton();
         return rootView;
-    }
-
-    private void setupAddTransactionButton() {
-        viewBinding.btnAddTransaction.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                // TODO Remove this temporal code
-                DashboardFragment.this.goToAccounts();
-            }
-        });
     }
 
     @Override
@@ -51,5 +44,35 @@ public class DashboardFragment extends Fragment implements DashboardContract.Vie
     public void goToAccounts() {
         Intent intent = new Intent(getActivity(), AccountsActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void goToAddTransaction() {
+        TransactionsFormFragment fragment = new TransactionsFormFragment();
+        new TransactionsFormPresenter(fragment); // Initialize presenter
+
+        ActivityUtils.replaceFragmentInActivity(
+                getFragmentManager(),
+                fragment,
+                R.id.content,
+                "transactionsForm"
+        );
+    }
+
+    /**
+     * Configure add button to go to add transaction or to
+     * add account if user has not registered accounts
+     */
+    private void setupAddButton() {
+        viewBinding.btnAddTransaction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mPresenter.allowAddTransaction()) {
+                    DashboardFragment.this.goToAddTransaction();
+                } else {
+                    DashboardFragment.this.goToAccounts();
+                }
+            }
+        });
     }
 }

@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/gray_foreground"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
     android:orientation="vertical">
 
     <TextView
@@ -11,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:padding="5dp"
-        android:textColor="@color/blue_dark"
+        android:textColor="@color/textColorLightMain"
         android:textSize="@dimen/lb_medium"
         tools:text="Cuenta citibanamex"/>
 
@@ -22,23 +24,24 @@
         android:layout_alignEnd="@id/tv_name"
         android:layout_alignParentEnd="true"
         android:padding="5dp"
+        android:textColor="@color/textColorLightSecondary"
         android:textSize="@dimen/lb_medium"
         tools:text="1294"/>
 
     <TextView
-        android:id="@+id/tv_quantity"
+        android:id="@+id/tv_balance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_name"
         android:paddingEnd="5dp"
         android:paddingStart="5dp"
-        android:textColor="@color/green"
+        android:textColor="@color/colorPrimary"
         tools:text="$1,500.67"/>
 
     <View
-        android:background="@color/blue_darker"
+        android:background="@color/colorAccent"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_below="@id/tv_quantity"
+        android:layout_height="1dp"
+        android:layout_below="@id/tv_balance"
         android:layout_marginTop="10dp"/>
 </RelativeLayout>

@@ -1,8 +1,7 @@
 package org.assistant.sigma.dashboard;
 
 import org.assistant.sigma.dashboard.DashboardContract.Presenter;
-
-import io.realm.Realm;
+import org.assistant.sigma.model.repositories.AccountsRepository;
 
 /**
  *
@@ -11,17 +10,20 @@ import io.realm.Realm;
 class DashboardPresenter implements Presenter {
 
     private final DashboardContract.View mDashboardView;
-    private Realm realm;
+    private AccountsRepository accountsRepository;
 
     DashboardPresenter(DashboardContract.View mDashboardView) {
         this.mDashboardView = mDashboardView;
         mDashboardView.setPresenter(this);
 
-        this.realm = Realm.getDefaultInstance();
+        accountsRepository = new AccountsRepository();
     }
 
     @Override
-    public void start() {
+    public void start() { }
 
+    @Override
+    public boolean allowAddTransaction() {
+        return accountsRepository.allActive().size() > 0;
     }
 }

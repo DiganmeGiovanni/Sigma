@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:padding="5dp"
-        android:textColor="@color/blue_dark"
+        android:textColor="@color/textColorLightMain"
         android:textSize="@dimen/lb_medium"
         tools:text="Cuenta citibanamex"/>
 
@@ -22,6 +22,7 @@
         android:layout_alignEnd="@id/tv_account"
         android:layout_alignParentEnd="true"
         android:padding="5dp"
+        android:textColor="@color/textColorLightSecondary"
         android:textSize="@dimen/lb_medium"
         tools:text="5 hrs"/>
 
@@ -35,6 +36,7 @@
         android:paddingBottom="5dp"
         android:paddingEnd="5dp"
         android:paddingStart="5dp"
+        android:textColor="@color/textColorLightSecondary"
         tools:text="Lorem ipsum dollot Lorem ipsum dollot Lorem ipsum dollot"/>
 
     <TextView
@@ -46,13 +48,13 @@
         android:layout_alignParentEnd="true"
         android:paddingEnd="5dp"
         android:paddingStart="5dp"
-        android:textColor="@color/blue_dark"
+        android:textColor="@color/colorPrimary"
         tools:text="$1,500.67"/>
 
     <View
-        android:background="@color/blue_darker"
+        android:background="@color/colorAccent"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="1dp"
         android:layout_below="@id/tv_description"
         android:layout_marginTop="5dp"/>
 </RelativeLayout>

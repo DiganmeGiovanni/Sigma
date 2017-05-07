@@ -11,9 +11,12 @@ interface DashboardContract {
 
     interface Presenter extends BasePresenter {
 
+        boolean allowAddTransaction();
     }
 
     interface View extends BaseView<Presenter> {
+
+        void goToAddTransaction();
 
         void goToAccounts();
     }

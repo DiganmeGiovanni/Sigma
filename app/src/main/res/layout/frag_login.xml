@@ -9,10 +9,13 @@
 
         <Button
             android:id="@+id/btn_login_fb"
+            android:background="@color/blue_facebook"
             android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="15dp"
             android:text="@string/login_fb"
+            android:textColor="@color/textColorPrimary"
             android:visibility="visible"
             tools:visibility="visible"/>
 

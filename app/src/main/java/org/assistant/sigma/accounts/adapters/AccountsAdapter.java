@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import org.assistant.sigma.R;
 import org.assistant.sigma.model.entities.Account;
+import org.assistant.sigma.model.repositories.AccountsRepository;
+import org.assistant.sigma.utils.TextUtils;
 
 import io.realm.RealmList;
 
@@ -18,12 +20,15 @@ import io.realm.RealmList;
  */
 public class AccountsAdapter extends BaseAdapter {
 
+    private AccountsRepository accountsRepository;
     private RealmList<Account> accounts;
     private LayoutInflater inflater;
 
     public AccountsAdapter(Context mContext, RealmList<Account> accounts) {
         this.accounts = accounts;
         inflater = LayoutInflater.from(mContext);
+
+        accountsRepository = new AccountsRepository();
     }
 
     @Override
@@ -56,10 +61,11 @@ public class AccountsAdapter extends BaseAdapter {
 
         // Set card digits
         TextView tvCardDigits = (TextView) contentView.findViewById(R.id.tv_last_card_digits);
-        tvCardDigits.setText(account.getCardNumber() != null && account.getCardNumber().length() > 0
-                ? account.getCardNumber().substring(account.getCardNumber().length() - 4, account.getCardNumber().length())
-                : ""
-        );
+        tvCardDigits.setText(account.lastCardDigits());
+
+        // Set current account balance
+        TextView tvBalance = (TextView) contentView.findViewById(R.id.tv_balance);
+        tvBalance.setText(TextUtils.asMoney(accountsRepository.currentBalance(account)));
 
         return contentView;
     }

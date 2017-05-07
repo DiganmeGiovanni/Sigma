@@ -1,9 +1,11 @@
 package org.assistant.sigma.model.entities;
 
 import java.util.Date;
+import java.util.UUID;
 
 import io.realm.RealmList;
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 /**
  *
@@ -11,13 +13,31 @@ import io.realm.RealmObject;
  */
 public class Account extends RealmObject {
 
+    @PrimaryKey
+    private String id = UUID.randomUUID().toString();
     private String name;
     private String cardNumber;
+    private boolean active;
     private Date createdAt;
     private Date updatedAt;
 
     private RealmList<Transaction> transactions;
     private User user;
+
+    public String lastCardDigits() {
+        return getCardNumber() != null && getCardNumber().length() > 0
+                ? getCardNumber().substring(getCardNumber().length() - 4, getCardNumber().length())
+                : "";
+    }
+
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -65,5 +85,13 @@ public class Account extends RealmObject {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }
