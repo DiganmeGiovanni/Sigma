@@ -1,10 +1,14 @@
 package org.assistant.sigma.transactions;
 
+import android.content.Context;
+
 import org.assistant.sigma.BasePresenter;
 import org.assistant.sigma.BaseView;
 import org.assistant.sigma.model.entities.Account;
 import org.assistant.sigma.model.entities.Transaction;
 import org.assistant.sigma.model.entities.TransactionCategory;
+
+import java.util.List;
 
 import io.realm.RealmResults;
 
@@ -18,7 +22,7 @@ interface TransactionsFormContract {
 
         void loadAccounts();
 
-        void loadSpentCategories();
+        void loadSpentCategories(Context mContext);
 
         void loadIncomeCategories();
 
@@ -29,7 +33,7 @@ interface TransactionsFormContract {
 
         void updateAccountsSpinner(RealmResults<Account> accounts);
 
-        void updateCategoriesSpinner(RealmResults<TransactionCategory> categories);
+        void updateCategoriesSpinner(List<TransactionCategory> categories);
 
         void setupForm();
 

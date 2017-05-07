@@ -10,7 +10,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:padding="5dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="5dp"
+        android:paddingStart="5dp"
         android:textColor="@color/textColorLightMain"
         android:textSize="@dimen/lb_medium"
         tools:text="Cuenta citibanamex"/>
@@ -21,23 +23,35 @@
         android:layout_height="wrap_content"
         android:layout_alignEnd="@id/tv_account"
         android:layout_alignParentEnd="true"
-        android:padding="5dp"
+        android:paddingEnd="5dp"
+        android:paddingStart="5dp"
+        android:paddingTop="5dp"
         android:textColor="@color/textColorLightSecondary"
-        android:textSize="@dimen/lb_medium"
         tools:text="5 hrs"/>
+
+    <TextView
+        android:id="@+id/tv_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_account"
+        android:layout_alignParentStart="true"
+        android:paddingEnd="5dp"
+        android:paddingStart="5dp"
+        android:textColor="@color/textColorLightSecondary"
+        android:textStyle="bold"
+        tools:text="Viveres y despensa"/>
 
     <TextView
         android:id="@+id/tv_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_account"
+        android:layout_below="@id/tv_category"
         android:layout_toStartOf="@+id/tv_quantity"
         android:maxLines="2"
-        android:paddingBottom="5dp"
-        android:paddingEnd="5dp"
-        android:paddingStart="5dp"
+        android:padding="5dp"
         android:textColor="@color/textColorLightSecondary"
-        tools:text="Lorem ipsum dollot Lorem ipsum dollot Lorem ipsum dollot"/>
+        tools:text="Lorem ipsum dollot Lorem ipsum dollot Lorem ipsum dollot"
+        tools:visibility="gone"/>
 
     <TextView
         android:id="@+id/tv_quantity"
@@ -48,13 +62,14 @@
         android:layout_alignParentEnd="true"
         android:paddingEnd="5dp"
         android:paddingStart="5dp"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorAccent"
+        android:textStyle="bold"
         tools:text="$1,500.67"/>
 
     <View
-        android:background="@color/colorAccent"
+        android:background="@color/dividerColor"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_below="@id/tv_description"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginTop="10dp"/>
 </RelativeLayout>

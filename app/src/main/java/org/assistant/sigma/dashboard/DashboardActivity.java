@@ -2,8 +2,11 @@ package org.assistant.sigma.dashboard;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import org.assistant.sigma.R;
 import org.assistant.sigma.utils.ActivityUtils;
@@ -22,6 +25,8 @@ public class DashboardActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        setupDrawerLayout();
+
         DashboardFragment dashboardFragment = (DashboardFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.content);
         if (dashboardFragment == null) {
@@ -36,5 +41,33 @@ public class DashboardActivity extends AppCompatActivity {
 
         // Initialize presenter and bind to view
         new DashboardPresenter(dashboardFragment);
+    }
+
+    private void setupDrawerLayout() {
+        DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(
+                this,
+                mDrawerLayout,
+                R.string.drawer_open,
+                R.string.drawer_close
+        ) {
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+            }
+        };
+
+        mDrawerLayout.addDrawerListener(mDrawerToggle);
+
+        if (getActionBar() != null) {
+            getActionBar().setDisplayHomeAsUpEnabled(true);
+            getActionBar().setHomeButtonEnabled(true);
+        }
     }
 }

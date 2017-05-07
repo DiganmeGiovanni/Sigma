@@ -1,13 +1,19 @@
 package org.assistant.sigma.model.repositories;
 
+import android.content.Context;
+
+import org.assistant.sigma.R;
 import org.assistant.sigma.model.entities.TransactionCategory;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
+import io.realm.Sort;
 
 /**
  *
@@ -18,7 +24,46 @@ public class TransactionCategoriesRepository {
     private Realm realm = Realm.getDefaultInstance();
 
     public RealmResults<TransactionCategory> allSpentCategories() {
-        return realm.where(TransactionCategory.class).equalTo("incomeCategory", false).findAll();
+        return realm.where(TransactionCategory.class)
+                .equalTo("incomeCategory", false)
+                .findAll()
+                .sort("name", Sort.ASCENDING);
+    }
+
+    /**
+     * Returns all categories marked as spent. if categories for 'provisions' is found
+     * this will be returned at first position of results and if 'other' is found
+     * this will be returned at last position of results.
+     *
+     * @param mContext Context to retrieve category name for 'Provisions' and 'other'
+     * @return Spent categories
+     */
+    public List<TransactionCategory> allSpentCategories(Context mContext) {
+        TransactionCategory provisions = realm.where(TransactionCategory.class)
+                .equalTo("name", mContext.getString(R.string.category_name_provisions))
+                .equalTo("incomeCategory", false)
+                .findFirst();
+
+        TransactionCategory others = realm.where(TransactionCategory.class)
+                .equalTo("name", mContext.getString(R.string.category_name_other))
+                .equalTo("incomeCategory", false)
+                .findFirst();
+
+        RealmResults<TransactionCategory> categories = realm.where(TransactionCategory.class)
+                .equalTo("incomeCategory", false)
+                .notEqualTo("name", mContext.getString(R.string.category_name_provisions))
+                .notEqualTo("name", mContext.getString(R.string.category_name_other))
+                .findAll()
+                .sort("name", Sort.ASCENDING);
+
+        List<TransactionCategory> sortedCategories = new ArrayList<>();
+        sortedCategories.add(provisions);
+        for (TransactionCategory category : categories) {
+            sortedCategories.add(category);
+        }
+        sortedCategories.add(others);
+
+        return sortedCategories;
     }
 
     public RealmResults<TransactionCategory> allIncomeCategories() {

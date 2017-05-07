@@ -1,8 +1,11 @@
 package org.assistant.sigma.transactions;
 
+import android.content.Context;
+
 import org.assistant.sigma.model.entities.Transaction;
 import org.assistant.sigma.model.repositories.AccountsRepository;
 import org.assistant.sigma.model.repositories.TransactionCategoriesRepository;
+import org.assistant.sigma.model.repositories.TransactionsRepository;
 
 /**
  *
@@ -13,6 +16,7 @@ public class TransactionsFormPresenter implements TransactionsFormContract.Prese
     private TransactionsFormContract.View mTransactionsFormView;
 
     private AccountsRepository accountsRepository;
+    private TransactionsRepository transactionsRepository;
     private TransactionCategoriesRepository categoriesRepository;
 
     public TransactionsFormPresenter(TransactionsFormContract.View mTransactionsFormView) {
@@ -20,6 +24,7 @@ public class TransactionsFormPresenter implements TransactionsFormContract.Prese
         mTransactionsFormView.setPresenter(this);
 
         accountsRepository = new AccountsRepository();
+        transactionsRepository = new TransactionsRepository();
         categoriesRepository = new TransactionCategoriesRepository();
     }
 
@@ -32,8 +37,9 @@ public class TransactionsFormPresenter implements TransactionsFormContract.Prese
     }
 
     @Override
-    public void loadSpentCategories() {
-        mTransactionsFormView.updateCategoriesSpinner(categoriesRepository.allSpentCategories());
+    public void loadSpentCategories(Context mContext) {
+        mTransactionsFormView
+                .updateCategoriesSpinner(categoriesRepository.allSpentCategories(mContext));
     }
 
     @Override
@@ -43,6 +49,9 @@ public class TransactionsFormPresenter implements TransactionsFormContract.Prese
 
     @Override
     public void saveTransaction(Transaction transaction) {
+        double balance = accountsRepository.currentBalance(transaction.getAccount());
+        transaction.setCurrentAccountBalance(balance + transaction.getQuantity());
 
+        transactionsRepository.insert(transaction);
     }
 }

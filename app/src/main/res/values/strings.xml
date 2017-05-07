@@ -44,4 +44,12 @@
     <string name="category_description_salary">Pago por actividades de trabajo</string>
     <string name="category_description_other">Ninguna de las anteriores</string>
     <string name="category_name_other">Otra</string>
+    <string name="no">No</string>
+    <string name="yes">Si</string>
+    <string name="date_time">Fecha y hora</string>
+    <string name="error_date_before_required">Ingresa una fecha menor</string>
+    <string name="error_quantity_greater_zero">Ingresa una cantidad mayor a 0</string>
+    <string name="accounts">Cuentas</string>
+    <string name="drawer_open">Menu lateral abierto</string>
+    <string name="drawer_close">Cerrar menu lateral</string>
 </resources>

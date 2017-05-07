@@ -10,7 +10,7 @@ import android.widget.TextView;
 import org.assistant.sigma.R;
 import org.assistant.sigma.model.entities.TransactionCategory;
 
-import io.realm.RealmResults;
+import java.util.List;
 
 /**
  *
@@ -18,10 +18,10 @@ import io.realm.RealmResults;
  */
 public class SPTransactionCategoriesAdapter extends BaseAdapter {
 
-    private RealmResults<TransactionCategory> categories;
+    private List<TransactionCategory> categories;
     private LayoutInflater inflater;
 
-    public SPTransactionCategoriesAdapter(Context mContext, RealmResults<TransactionCategory> categories) {
+    public SPTransactionCategoriesAdapter(Context mContext, List<TransactionCategory> categories) {
         this.categories = categories;
         inflater = LayoutInflater.from(mContext);
     }
