@@ -52,4 +52,8 @@
     <string name="accounts">Cuentas</string>
     <string name="drawer_open">Menu lateral abierto</string>
     <string name="drawer_close">Cerrar menu lateral</string>
+    <string name="transactions_categories">Categorias de transacciones</string>
+    <string name="preferences">Preferencias</string>
+    <string name="scheduled_transactions">Transacciones programadas</string>
+    <string name="charts">Graficas y analisis</string>
 </resources>

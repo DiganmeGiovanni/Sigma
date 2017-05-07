@@ -39,17 +39,6 @@
         </LinearLayout>
 
         <!-- Drawer content -->
-        <LinearLayout
-            android:id="@+id/ll_left_drawer"
-            android:layout_width="240dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="15dp"
-                android:text="@string/accounts"/>
-        </LinearLayout>
+        <include layout="@layout/side_bar_menu" />
     </android.support.v4.widget.DrawerLayout>
 </layout>

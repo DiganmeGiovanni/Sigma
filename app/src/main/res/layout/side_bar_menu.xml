@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_left_drawer"
+    android:background="@color/gray_background"
+    android:clickable="true"
+    android:layout_gravity="start"
+    android:layout_width="280dp"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:background="@color/colorPrimary"
+        android:gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+        <TextView
+            android:gravity="end"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="@dimen/lb_big"
+            tools:text="Giovanni Aguirre"/>
+        <TextView
+            android:gravity="end"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="@dimen/lb_medium"
+            tools:text="giovanni.fi05@gmail.com"/>
+    </LinearLayout>
+
+    <TextView
+        android:background="@color/gray_foreground"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:padding="15dp"
+        android:text="@string/accounts"
+        android:textSize="@dimen/lb_medium"/>
+    <View
+        android:background="@color/dividerColor"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+    <TextView
+        android:background="@color/gray_foreground"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:text="@string/scheduled_transactions"
+        android:textSize="@dimen/lb_medium"/>
+    <View
+        android:background="@color/dividerColor"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+    <TextView
+        android:background="@color/gray_foreground"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:text="@string/charts"
+        android:textSize="@dimen/lb_medium"/>
+    <View
+        android:background="@color/dividerColor"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+    <TextView
+        android:background="@color/gray_foreground"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:text="@string/preferences"
+        android:textSize="@dimen/lb_medium"/>
+</LinearLayout>
