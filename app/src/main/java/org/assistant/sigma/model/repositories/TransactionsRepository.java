@@ -1,11 +1,15 @@
 package org.assistant.sigma.model.repositories;
 
-import org.assistant.sigma.model.entities.Transaction;
+import android.os.AsyncTask;
 
-import java.util.Calendar;
+import org.assistant.sigma.model.entities.Transaction;
+import org.assistant.sigma.utils.callbacks.CBGeneric;
+
+import java.util.Date;
 import java.util.UUID;
 
 import io.realm.Realm;
+import io.realm.RealmQuery;
 import io.realm.RealmResults;
 import io.realm.Sort;
 
@@ -38,28 +42,38 @@ public class TransactionsRepository {
         return realm.where(Transaction.class).findAllSorted("createdAt", Sort.DESCENDING);
     }
 
-    public double todaySpent() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
+    public void spentSince(final Date startDate, final String[] excludedCategoriesNames,
+                           final CBGeneric<Double> callback) {
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                Realm realm = Realm.getDefaultInstance();
+                RealmQuery<Transaction> query = realm.where(Transaction.class)
+                        .greaterThan("createdAt", startDate)
+                        .lessThan("quantity", (double) 0);
 
-        double todaySpent = realm.where(Transaction.class)
-                .greaterThan("createdAt", calendar.getTime())
-                .lessThan("quantity", (double) 0)
-                .sum("quantity")
-                .doubleValue();
-        return Math.abs(todaySpent);
+                if (excludedCategoriesNames != null && excludedCategoriesNames.length > 0) {
+                    query.not().in("transactionCategory.name", excludedCategoriesNames);
+                }
+
+                double spent = query.sum("quantity").doubleValue();
+                callback.onResponse(Math.abs(spent));
+                realm.close();
+            }
+        });
     }
 
-    public long todayTransactionsCount() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-
-        return realm.where(Transaction.class)
-                .greaterThan("createdAt", calendar.getTime())
-                .count();
+    public void transactionsSince(final Date startDate, final CBGeneric<Long> callback) {
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                Realm realm = Realm.getDefaultInstance();
+                long count = realm.where(Transaction.class)
+                        .greaterThan("createdAt", startDate)
+                        .count();
+                callback.onResponse(count);
+                realm.close();
+            }
+        });
     }
 }

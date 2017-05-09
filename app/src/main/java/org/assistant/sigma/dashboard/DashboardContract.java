@@ -2,7 +2,10 @@ package org.assistant.sigma.dashboard;
 
 import org.assistant.sigma.BasePresenter;
 import org.assistant.sigma.BaseView;
+import org.assistant.sigma.model.entities.Settings;
 import org.assistant.sigma.model.entities.Transaction;
+
+import java.util.Date;
 
 import io.realm.RealmResults;
 
@@ -14,13 +17,23 @@ interface DashboardContract {
 
     interface Presenter extends BasePresenter {
 
+        Settings activeUserSettings();
+
         boolean allowAddTransaction();
 
         void loadLastTransactions();
 
+        void loadPeriodLgAmount(String... excludedCategoriesNames);
+
+        void loadPeriodLgTransactionsCount();
+
         void loadPeriodSmAmount();
 
         void loadPeriodSmTransactionsCount();
+
+        Date largePeriodStartDate();
+
+        Date shortPeriodStartDate();
     }
 
     interface View extends BaseView<Presenter> {
@@ -29,9 +42,15 @@ interface DashboardContract {
 
         void goToAccounts();
 
-        void showPeriodSmAmount(double periodSmSpent, int WARNING_LEVEL);
+        void showPeriodLgAmount(double amount, double beforeLimit, int WARNING_LEVEL);
 
-        void showPeriodSmTransactionsCount(long transactionsCount);
+        void showPeriodLgTransactionsCount(long count);
+
+        void showPeriodsNames();
+
+        void showPeriodSmAmount(double amount, int WARNING_LEVEL);
+
+        void showPeriodSmTransactionsCount(long count);
 
         void updateLastTransactions(RealmResults<Transaction> transactions);
     }

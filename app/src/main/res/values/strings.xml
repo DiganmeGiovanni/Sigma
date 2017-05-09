@@ -75,4 +75,10 @@
     <string name="error_must_be_greater_than_first_reminder">Debe ser posterior al primer recordatorio</string>
     <string name="spent_limit_warnings">Advertencias de limite de gastos</string>
     <string name="include_home_spent_from_limits">Incluir gastos de hogar y pagos de servicios</string>
+    <string name="over_limit">Sobre el limite</string>
+    <string name="today">Hoy</string>
+    <string name="this_weekend">Fin de semana</string>
+    <string name="this_week">Esta semana</string>
+    <string name="this_fortnight">Esta quincena</string>
+    <string name="this_month">Este mes</string>
 </resources>

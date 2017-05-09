@@ -11,6 +11,9 @@
     <color name="dividerColor">#BDBDBD</color>
     <color name="blue_facebook">#3B5998</color>
 
+    <color name="textColorWarning">#e67e22</color>
+    <color name="textColorDanger">#c0392b</color>
+
     <color name="blue_dark">#2c3e50</color>
     <color name="blue_darker">#2c3e50</color>
 
