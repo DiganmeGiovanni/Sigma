@@ -1,16 +1,18 @@
 package org.assistant.sigma.dashboard;
 
+import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 
 import org.assistant.sigma.R;
+import org.assistant.sigma.accounts.AccountsActivity;
+import org.assistant.sigma.databinding.ActDashboardBinding;
 import org.assistant.sigma.settings.SettingsFragment;
 import org.assistant.sigma.settings.SettingsPresenter;
 import org.assistant.sigma.utils.ActivityUtils;
@@ -21,17 +23,15 @@ import org.assistant.sigma.utils.ActivityUtils;
  */
 public class DashboardActivity extends AppCompatActivity {
 
-    private DrawerLayout mDrawerLayout;
-    private Toolbar toolbar;
+    private ActDashboardBinding viewBinding;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_dashboard);
+        viewBinding = DataBindingUtil.setContentView(this, R.layout.act_dashboard);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setNavigationIcon(R.drawable.ic_menu);
-        setSupportActionBar(toolbar);
+        viewBinding.toolbar.setNavigationIcon(R.drawable.ic_menu);
+        setSupportActionBar(viewBinding.toolbar);
 
         if (getActionBar() != null) {
             getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -56,11 +56,10 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     private void setupDrawerLayout() {
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(
                 this,
-                mDrawerLayout,
-                toolbar,
+                viewBinding.drawerLayout,
+                viewBinding.toolbar,
                 R.string.drawer_open,
                 R.string.drawer_close
         ) {
@@ -76,7 +75,7 @@ public class DashboardActivity extends AppCompatActivity {
             }
         };
 
-        mDrawerLayout.addDrawerListener(mDrawerToggle);
+        viewBinding.drawerLayout.addDrawerListener(mDrawerToggle);
         setupDrawerMenuItems();
     }
 
@@ -95,7 +94,18 @@ public class DashboardActivity extends AppCompatActivity {
                         "settings"
                 );
 
-                mDrawerLayout.closeDrawer(Gravity.LEFT);
+                viewBinding.drawerLayout.closeDrawer(Gravity.START);
+            }
+        });
+
+        TextView tvAccounts = (TextView) findViewById(R.id.tv_accounts);
+        tvAccounts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewBinding.drawerLayout.closeDrawer(Gravity.START);
+
+                Intent intent = new Intent(DashboardActivity.this, AccountsActivity.class);
+                startActivity(intent);
             }
         });
     }
