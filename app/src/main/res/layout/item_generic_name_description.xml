@@ -13,6 +13,7 @@
         android:layout_marginEnd="10dp"
         android:layout_marginTop="10dp"
         android:textColor="@color/textColorLightMain"
+        android:textSize="@dimen/text_regular"
         tools:text="Nombre del elemento"/>
 
     <TextView
@@ -23,6 +24,7 @@
         android:layout_marginEnd="10dp"
         android:maxLines="1"
         android:textColor="@color/textColorLightSecondary"
+        android:textSize="@dimen/text_small"
         tools:text="Descripcion del elemento"/>
 
     <View

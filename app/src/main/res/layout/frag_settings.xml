@@ -15,7 +15,7 @@
                 android:text="@string/resume_pane"
                 android:textColor="@color/colorAccent"
                 android:textStyle="bold"
-                android:textSize="@dimen/lb_medium"/>
+                android:textSize="@dimen/text_subheading"/>
 
             <!-- Short period -->
             <TextView
@@ -23,7 +23,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/small_period"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:textSize="@dimen/text_regular"/>
             <RadioGroup
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -44,9 +45,10 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:text="@string/large_period"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:textSize="@dimen/text_regular"/>
             <RadioGroup
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -89,7 +91,7 @@
                 android:text="@string/spent_limit_warnings"
                 android:textColor="@color/colorAccent"
                 android:textStyle="bold"
-                android:textSize="@dimen/lb_medium"/>
+                android:textSize="@dimen/text_subheading"/>
 
             <!-- Large period spent limit -->
             <android.support.design.widget.TextInputLayout
@@ -112,7 +114,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@string/include_home_spent_from_limits"/>
+                android:text="@string/include_home_spent_from_limits"
+                android:textSize="@dimen/text_regular"/>
 
 
             <!-- Ask for transaction if any -->

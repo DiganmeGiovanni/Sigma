@@ -11,5 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/textColorLightMain"
+        android:textSize="@dimen/text_regular"
         tools:text="Nombre del elemento"/>
 </LinearLayout>

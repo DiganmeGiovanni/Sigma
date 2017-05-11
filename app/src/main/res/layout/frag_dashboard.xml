@@ -32,7 +32,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="15dp"
                         android:textColor="@color/textColorLightMain"
-                        android:textSize="@dimen/lb_big"
+                        android:textSize="@dimen/text_big"
                         android:textStyle="bold"
                         tools:text="$15,000.00" />
                     <TextView
@@ -43,8 +43,8 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginBottom="20dp"
                         android:textColor="@color/textColorLightSecondary"
-                        android:textSize="@dimen/lb_medium"
-                        tools:text="(Quincena actual)" />
+                        android:textSize="@dimen/text_title"
+                        tools:text="Quincena actual" />
 
                     <!-- Today transactions -->
                     <TextView
@@ -55,7 +55,8 @@
                         android:layout_below="@id/tv_period_name"
                         android:text="@string/transactions"
                         android:textColor="@color/textColorLightSecondary"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold"
+                        android:textSize="@dimen/text_regular"/>
                     <TextView
                         android:id="@+id/tv_period_transactions"
                         android:layout_width="wrap_content"
@@ -63,6 +64,7 @@
                         android:layout_alignParentEnd="true"
                         android:layout_below="@id/tv_period_name"
                         android:textColor="@color/textColorLightMain"
+                        android:textSize="@dimen/text_regular"
                         tools:text="10"/>
 
                     <!-- Distance to/from limit -->
@@ -74,7 +76,8 @@
                         android:layout_below="@id/tv_lb_period_transactions"
                         android:text="@string/under_limit"
                         android:textColor="@color/textColorLightSecondary"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold"
+                        android:textSize="@dimen/text_regular"/>
                     <TextView
                         android:id="@+id/tv_under_limit"
                         android:layout_width="wrap_content"
@@ -82,6 +85,7 @@
                         android:layout_alignParentEnd="true"
                         android:layout_below="@id/tv_period_transactions"
                         android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/text_regular"
                         tools:text="$719.87"/>
                 </RelativeLayout>
 
@@ -99,7 +103,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="15dp"
                         android:textColor="@color/textColorLightMain"
-                        android:textSize="@dimen/lb_big"
+                        android:textSize="@dimen/text_big"
                         android:textStyle="bold"
                         tools:text="$5,000.00" />
                     <TextView
@@ -110,7 +114,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginBottom="20dp"
                         android:textColor="@color/textColorLightSecondary"
-                        android:textSize="@dimen/lb_medium"
+                        android:textSize="@dimen/text_title"
                         android:textStyle="normal"
                         tools:text="Hoy" />
 
@@ -123,7 +127,8 @@
                         android:layout_below="@id/tv_period_sm_name"
                         android:text="@string/transactions"
                         android:textColor="@color/textColorLightSecondary"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold"
+                        android:textSize="@dimen/text_regular"/>
                     <TextView
                         android:id="@+id/tv_period_sm_transactions"
                         android:layout_width="wrap_content"
@@ -131,6 +136,7 @@
                         android:layout_alignParentEnd="true"
                         android:layout_below="@id/tv_period_sm_name"
                         android:textColor="@color/textColorLightMain"
+                        android:textSize="@dimen/text_regular"
                         tools:text="10"/>
 
                     <!-- Last transaction -->
@@ -142,7 +148,8 @@
                         android:layout_below="@id/tv_lb_period_sm_transactions"
                         android:text="@string/last_transaction"
                         android:textColor="@color/textColorLightSecondary"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold"
+                        android:textSize="@dimen/text_regular"/>
                     <TextView
                         android:id="@+id/tv_last_transaction"
                         android:layout_width="wrap_content"
@@ -150,6 +157,7 @@
                         android:layout_alignParentEnd="true"
                         android:layout_below="@id/tv_period_sm_transactions"
                         android:textColor="@color/textColorLightMain"
+                        android:textSize="@dimen/text_regular"
                         tools:text="5 hrs"/>
                 </RelativeLayout>
             </LinearLayout>
@@ -164,7 +172,7 @@
                 android:padding="8dp"
                 android:text="@string/last_transactions"
                 android:textColor="@color/textColorPrimary"
-                android:textSize="@dimen/lb_medium"/>
+                android:textSize="@dimen/text_title"/>
 
             <!-- Last transactions list view -->
             <ListView

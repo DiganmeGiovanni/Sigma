@@ -74,15 +74,6 @@ public class TransactionsAdapter extends BaseAdapter {
         TextView tvTime = (TextView) containerView.findViewById(R.id.tv_time);
         tvTime.setText(android.text.format.DateUtils.getRelativeTimeSpanString(transaction.getCreatedAt().getTime()));
 
-        // Description
-        TextView tvDescription = (TextView) containerView.findViewById(R.id.tv_description);
-        tvDescription.setText(transaction.getDescription());
-        if (transaction.getDescription() != null && transaction.getDescription().length() > 0) {
-            tvDescription.setVisibility(View.VISIBLE);
-        } else {
-            tvDescription.setVisibility(View.GONE);
-        }
-
         return containerView;
     }
 }

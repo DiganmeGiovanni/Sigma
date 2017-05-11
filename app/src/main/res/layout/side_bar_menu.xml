@@ -22,14 +22,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/textColorPrimary"
-            android:textSize="@dimen/lb_big"
+            android:textSize="@dimen/text_title"
             tools:text="Giovanni Aguirre"/>
         <TextView
             android:gravity="end"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/textColorPrimary"
-            android:textSize="@dimen/lb_medium"
+            android:textSize="@dimen/text_subheading"
             tools:text="giovanni.fi05@gmail.com"/>
     </LinearLayout>
 
@@ -41,7 +41,7 @@
         android:layout_marginTop="15dp"
         android:padding="15dp"
         android:text="@string/accounts"
-        android:textSize="@dimen/lb_medium"/>
+        android:textSize="@dimen/text_subheading"/>
     <View
         android:background="@color/dividerColor"
         android:layout_width="match_parent"
@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:padding="15dp"
         android:text="@string/scheduled_transactions"
-        android:textSize="@dimen/lb_medium"/>
+        android:textSize="@dimen/text_subheading"/>
     <View
         android:background="@color/dividerColor"
         android:layout_width="match_parent"
@@ -63,7 +63,7 @@
         android:layout_height="wrap_content"
         android:padding="15dp"
         android:text="@string/charts"
-        android:textSize="@dimen/lb_medium"/>
+        android:textSize="@dimen/text_subheading"/>
     <View
         android:background="@color/dividerColor"
         android:layout_width="match_parent"
@@ -75,5 +75,5 @@
         android:layout_height="wrap_content"
         android:padding="15dp"
         android:text="@string/preferences"
-        android:textSize="@dimen/lb_medium"/>
+        android:textSize="@dimen/text_subheading"/>
 </LinearLayout>
