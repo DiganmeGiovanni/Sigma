@@ -70,10 +70,6 @@ public class TransactionsAdapter extends BaseAdapter {
             tvQuantity.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
         }
 
-        // Time
-        TextView tvTime = (TextView) containerView.findViewById(R.id.tv_time);
-        tvTime.setText(android.text.format.DateUtils.getRelativeTimeSpanString(transaction.getCreatedAt().getTime()));
-
         return containerView;
     }
 }

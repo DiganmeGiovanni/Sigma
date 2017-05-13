@@ -55,7 +55,7 @@
     <string name="transactions_categories">Categorias de transacciones</string>
     <string name="preferences">Preferencias</string>
     <string name="scheduled_transactions">Transacciones programadas</string>
-    <string name="charts">Graficas y analisis</string>
+    <string name="charts">Gráficas y análisis</string>
     <string name="resume_pane">Panel de resumen</string>
     <string name="small_period">Periodo corto</string>
     <string name="sm_period_daily_weekend_as_single_day">Por cada dia pero agrupar los fines de semana</string>

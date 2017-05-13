@@ -10,12 +10,17 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import org.assistant.sigma.R;
 import org.assistant.sigma.accounts.AccountsActivity;
 import org.assistant.sigma.databinding.ActDashboardBinding;
+import org.assistant.sigma.model.repositories.UsersRepository;
 import org.assistant.sigma.settings.SettingsFragment;
 import org.assistant.sigma.settings.SettingsPresenter;
 import org.assistant.sigma.utils.ActivityUtils;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  *
@@ -24,12 +29,14 @@ import org.assistant.sigma.utils.ActivityUtils;
 public class DashboardActivity extends AppCompatActivity {
 
     private ActDashboardBinding viewBinding;
+    private UsersRepository usersRepository;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        viewBinding = DataBindingUtil.setContentView(this, R.layout.act_dashboard);
+        usersRepository = new UsersRepository();
 
+        viewBinding = DataBindingUtil.setContentView(this, R.layout.act_dashboard);
         viewBinding.toolbar.setNavigationIcon(R.drawable.ic_menu);
         setSupportActionBar(viewBinding.toolbar);
 
@@ -77,6 +84,7 @@ public class DashboardActivity extends AppCompatActivity {
 
         viewBinding.drawerLayout.addDrawerListener(mDrawerToggle);
         setupDrawerMenuItems();
+        setupDrawerUserData();
     }
 
     private void setupDrawerMenuItems() {
@@ -108,5 +116,16 @@ public class DashboardActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void setupDrawerUserData() {
+        TextView tvUserName = (TextView) findViewById(R.id.tv_user_name);
+        tvUserName.setText(usersRepository.activeUser().fullName());
+
+        TextView tvUserEmail = (TextView) findViewById(R.id.tv_user_email);
+        tvUserEmail.setText(usersRepository.activeUser().getEmail());
+
+        CircleImageView civProfile = (CircleImageView) findViewById(R.id.civ_user_profile_image);
+        Glide.with(this).load(usersRepository.activeUser().getUrlPicture()).into(civProfile);
     }
 }

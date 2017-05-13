@@ -65,6 +65,14 @@ class LoginPresenter implements LoginContract.Presenter {
                 user.setFirstName(jObject.getString("first_name"));
                 user.setLastName(jObject.has("last_name") ? jObject.getString("last_name") : "");
 
+                // Retrieve picture url
+                if (jObject.has("picture") && jObject.getJSONObject("picture").has("data")) {
+                    JSONObject data = jObject.getJSONObject("picture").getJSONObject("data");
+                    if (data.has("url")) {
+                        user.setUrlPicture(data.getString("url"));
+                    }
+                }
+
                 // Save and activate user
                 usersRepository.saveUser(user);
                 usersRepository.activateUser(user);

@@ -116,7 +116,7 @@ public class LoginFragment extends Fragment implements LoginContract.View {
                 );
 
                 Bundle bundle = new Bundle();
-                bundle.putString("fields", "first_name, last_name, email");
+                bundle.putString("fields", "first_name, last_name, email, picture.width(150).height(150)");
                 graphRequest.setParameters(bundle);
                 graphRequest.executeAsync();
             }

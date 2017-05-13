@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingTop="3dp">
 
     <TextView
         android:id="@+id/tv_account"
@@ -13,21 +14,10 @@
         android:paddingTop="5dp"
         android:paddingEnd="5dp"
         android:paddingStart="5dp"
-        android:textColor="@color/textColorLightMain"
-        android:textSize="@dimen/lb_medium"
-        tools:text="Cuenta citibanamex"/>
-
-    <TextView
-        android:id="@+id/tv_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@id/tv_account"
-        android:layout_alignParentEnd="true"
-        android:paddingEnd="5dp"
-        android:paddingStart="5dp"
-        android:paddingTop="5dp"
         android:textColor="@color/textColorLightSecondary"
-        tools:text="5 hrs"/>
+        android:textSize="@dimen/text_subheading"
+        android:textStyle="bold"
+        tools:text="Cuenta citibanamex"/>
 
     <TextView
         android:id="@+id/tv_category"
@@ -38,40 +28,27 @@
         android:paddingEnd="5dp"
         android:paddingStart="5dp"
         android:textColor="@color/textColorLightSecondary"
-        android:textStyle="bold"
+        android:textSize="@dimen/text_subheading"
         tools:text="Viveres y despensa"/>
-
-    <TextView
-        android:id="@+id/tv_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_category"
-        android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/tv_quantity"
-        android:maxLines="2"
-        android:paddingEnd="5dp"
-        android:paddingStart="5dp"
-        android:textColor="@color/textColorLightSecondary"
-        tools:text="Lorem ipsum dollot Lorem ipsum dollot Lorem ipsum dollot"
-        tools:visibility="visible"/>
 
     <TextView
         android:id="@+id/tv_quantity"
         android:gravity="end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_time"
         android:layout_alignParentEnd="true"
+        android:layout_marginTop="15dp"
         android:paddingEnd="5dp"
         android:paddingStart="5dp"
         android:textColor="@color/colorAccent"
         android:textStyle="bold"
+        android:textSize="@dimen/text_title"
         tools:text="$1,500.67"/>
 
     <View
         android:background="@color/dividerColor"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@id/tv_description"
+        android:layout_below="@id/tv_category"
         android:layout_marginTop="10dp"/>
 </RelativeLayout>
