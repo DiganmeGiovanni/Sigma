@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="186dp"
         android:orientation="vertical"
-        android:padding="15dp">
+        android:padding="16dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/civ_user_profile_image"
@@ -46,7 +46,6 @@
 
     <TextView
         android:id="@+id/tv_transactions"
-        android:background="@color/gray_background"
         android:drawableStart="@drawable/ic_money_1x"
         android:drawablePadding="16dp"
         android:gravity="center_vertical"
