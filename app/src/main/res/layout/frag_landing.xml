@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="15dp" >
+
+    <com.github.lzyzsd.circleprogress.DonutProgress
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        app:donut_max="150"
+        app:donut_progress="95"
+        app:donut_text="$500.00"
+        app:donut_finished_color="@color/colorPrimary"
+        app:donut_unfinished_color="@color/gray_background"
+        app:donut_text_color="@color/colorPrimary"
+        app:donut_text_size="@dimen/text_title"/>
+
+    <LinearLayout
+        android:gravity="end"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_big"
+            tools:text="$150.00"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/text_regular"
+            tools:text="Gastados hoy"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_big"
+            tools:text="Hace 4hrs"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/text_regular"
+            tools:text="Última transacción"/>
+    </LinearLayout>
+</LinearLayout>
