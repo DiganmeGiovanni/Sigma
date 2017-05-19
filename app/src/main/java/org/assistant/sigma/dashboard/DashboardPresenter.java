@@ -3,6 +3,7 @@ package org.assistant.sigma.dashboard;
 import org.assistant.sigma.dashboard.DashboardContract.Presenter;
 import org.assistant.sigma.model.catalogs.Periods;
 import org.assistant.sigma.model.entities.Settings;
+import org.assistant.sigma.model.entities.Transaction;
 import org.assistant.sigma.model.repositories.AccountsRepository;
 import org.assistant.sigma.model.repositories.TransactionsRepository;
 import org.assistant.sigma.model.repositories.UsersRepository;
@@ -16,14 +17,14 @@ import java.util.Date;
  *
  * Created by giovanni on 5/05/17.
  */
-class DashboardPresenter implements Presenter {
+public class DashboardPresenter implements Presenter {
 
     private final DashboardContract.View mDashboardView;
     private AccountsRepository accountsRepository;
     private TransactionsRepository transactionsRepository;
     private UsersRepository usersRepository;
 
-    DashboardPresenter(DashboardContract.View mDashboardView) {
+    public DashboardPresenter(DashboardContract.View mDashboardView) {
         this.mDashboardView = mDashboardView;
         mDashboardView.setPresenter(this);
 
@@ -46,12 +47,16 @@ class DashboardPresenter implements Presenter {
     }
 
     @Override
-    public void loadLastTransactions() {
-        mDashboardView.updateLastTransactions(transactionsRepository.lastTransactions());
+    public void loadLastTransactionTime() {
+        Transaction transaction = transactionsRepository.lastTransaction();
+        mDashboardView.showLastTransactionTime(transaction != null
+                ? transaction.getCreatedAt()
+                : null
+        );
     }
 
     @Override
-    public void loadPeriodLgAmount(String... excludedCategoriesNames) {
+    public void loadSpentPeriodLg(String... excludedCategoriesNames) {
         final double spentLimit = usersRepository.activeUser().getSettings().getSpentLimitLarge();
         transactionsRepository.spentSince(
                 largePeriodStartDate(),
@@ -66,38 +71,18 @@ class DashboardPresenter implements Presenter {
                             warningLevel = Warning.LEVEL_WARNING;
                         }
 
-                        mDashboardView.showPeriodLgAmount(spent, spentLimit - spent, warningLevel);
+                        mDashboardView.showSpentPeriodLg(spent, spentLimit - spent, warningLevel);
                     }
                 }
         );
     }
 
     @Override
-    public void loadPeriodLgTransactionsCount() {
-        transactionsRepository.transactionsSince(largePeriodStartDate(), new CBGeneric<Long>() {
-            @Override
-            public void onResponse(Long count) {
-                mDashboardView.showPeriodLgTransactionsCount(count);
-            }
-        });
-    }
-
-    @Override
-    public void loadPeriodSmAmount() {
+    public void loadSpentPeriodSm() {
         transactionsRepository.spentSince(shortPeriodStartDate(), null, new CBGeneric<Double>() {
             @Override
             public void onResponse(Double spent) {
-                mDashboardView.showPeriodSmAmount(spent, Warning.LEVEL_NORMAL);
-            }
-        });
-    }
-
-    @Override
-    public void loadPeriodSmTransactionsCount() {
-        transactionsRepository.transactionsSince(shortPeriodStartDate(), new CBGeneric<Long>() {
-            @Override
-            public void onResponse(Long count) {
-                mDashboardView.showPeriodSmTransactionsCount(count);
+                mDashboardView.showSpentPeriodSm(spent, Warning.LEVEL_NORMAL);
             }
         });
     }

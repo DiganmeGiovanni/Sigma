@@ -19,6 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".landing.LandingActivity" />
         <activity android:name=".dashboard.DashboardActivity" />
         <activity android:name=".accounts.AccountsActivity" />
 

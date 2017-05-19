@@ -18,8 +18,8 @@ import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 
 import org.assistant.sigma.R;
-import org.assistant.sigma.dashboard.DashboardActivity;
 import org.assistant.sigma.databinding.FragLoginBinding;
+import org.assistant.sigma.landing.LandingActivity;
 import org.json.JSONObject;
 
 import java.util.Arrays;
@@ -72,7 +72,7 @@ public class LoginFragment extends Fragment implements LoginContract.View {
     @Override
     public void goToDashboard() {
         Log.i(getClass().getName(), "Going to dashboard");
-        Intent intent = new Intent(getActivity(), DashboardActivity.class);
+        Intent intent = new Intent(getActivity(), LandingActivity.class);
         startActivity(intent);
         getActivity().finish();
     }

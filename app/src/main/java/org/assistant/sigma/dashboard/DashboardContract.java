@@ -3,11 +3,8 @@ package org.assistant.sigma.dashboard;
 import org.assistant.sigma.BasePresenter;
 import org.assistant.sigma.BaseView;
 import org.assistant.sigma.model.entities.Settings;
-import org.assistant.sigma.model.entities.Transaction;
 
 import java.util.Date;
-
-import io.realm.RealmResults;
 
 /**
  *
@@ -21,15 +18,11 @@ interface DashboardContract {
 
         boolean allowAddTransaction();
 
-        void loadLastTransactions();
+        void loadLastTransactionTime();
 
-        void loadPeriodLgAmount(String... excludedCategoriesNames);
+        void loadSpentPeriodLg(String... excludedCategoriesNames);
 
-        void loadPeriodLgTransactionsCount();
-
-        void loadPeriodSmAmount();
-
-        void loadPeriodSmTransactionsCount();
+        void loadSpentPeriodSm();
 
         Date largePeriodStartDate();
 
@@ -38,20 +31,12 @@ interface DashboardContract {
 
     interface View extends BaseView<Presenter> {
 
-        void goToAddTransaction();
+        void showLastTransactionTime(Date date);
 
-        void goToAccounts();
+        void showShortPeriodLabel();
 
-        void showPeriodLgAmount(double amount, double beforeLimit, int WARNING_LEVEL);
+        void showSpentPeriodSm(double amount, int WARNING_LEVEL);
 
-        void showPeriodLgTransactionsCount(long count);
-
-        void showPeriodsNames();
-
-        void showPeriodSmAmount(double amount, int WARNING_LEVEL);
-
-        void showPeriodSmTransactionsCount(long count);
-
-        void updateLastTransactions(RealmResults<Transaction> transactions);
+        void showSpentPeriodLg(double amount, double beforeLimit, int WARNING_LEVEL);
     }
 }

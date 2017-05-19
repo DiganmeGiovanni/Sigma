@@ -42,6 +42,14 @@ public class TransactionsRepository {
         return realm.where(Transaction.class).findAllSorted("createdAt", Sort.DESCENDING);
     }
 
+    public Transaction lastTransaction() {
+        if (lastTransactions().size() > 0) {
+            return lastTransactions().first();
+        }
+
+        return null;
+    }
+
     public void spentSince(final Date startDate, final String[] excludedCategoriesNames,
                            final CBGeneric<Double> callback) {
         AsyncTask.execute(new Runnable() {

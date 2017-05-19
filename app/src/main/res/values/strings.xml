@@ -81,4 +81,7 @@
     <string name="this_week">Esta semana</string>
     <string name="this_fortnight">Esta quincena</string>
     <string name="this_month">Este mes</string>
+    <string name="spent_today">Gastados hoy</string>
+    <string name="spent_this_weekend">Este fin de semana</string>
+    <string name="never">Nunca</string>
 </resources>
