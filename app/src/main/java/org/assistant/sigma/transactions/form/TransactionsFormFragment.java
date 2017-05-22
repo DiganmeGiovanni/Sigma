@@ -1,4 +1,4 @@
-package org.assistant.sigma.transactions;
+package org.assistant.sigma.transactions.form;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

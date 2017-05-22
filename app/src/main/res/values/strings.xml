@@ -29,7 +29,7 @@
     <string name="category_name_transport">Transporte</string>
     <string name="category_description_transport">Gastos en transporte publico o gasolina</string>
     <string name="category_name_entertainment">Entretenimiento</string>
-    <string name="category_description_entertainment">Gasos en entretenimiento (cine, conciertos, viajes, paseos etc)</string>
+    <string name="category_description_entertainment">Gastos en entretenimiento (cine, conciertos, viajes, paseos etc)</string>
     <string name="category_name_provisions">Despensa/Viveres</string>
     <string name="category_description_provisions">Gastos en comida, despensa y provisiones en general</string>
     <string name="category_name_clothes_shoes">Ropa y zapatos</string>
@@ -55,7 +55,7 @@
     <string name="transactions_categories">Categorias de transacciones</string>
     <string name="preferences">Preferencias</string>
     <string name="scheduled_transactions">Transacciones programadas</string>
-    <string name="charts">Gráficas y análisis</string>
+    <string name="charts"><Grá></Grá>ficas y análisis</string>
     <string name="resume_pane">Panel de resumen</string>
     <string name="small_period">Periodo corto</string>
     <string name="sm_period_daily_weekend_as_single_day">Por cada dia pero agrupar los fines de semana</string>
@@ -84,4 +84,6 @@
     <string name="spent_today">Gastados hoy</string>
     <string name="spent_this_weekend">Este fin de semana</string>
     <string name="never">Nunca</string>
+    <string name="transaction">Transacción</string>
+    <string name="without_transactions">Sin transacciones</string>
 </resources>

@@ -2,20 +2,26 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingTop="3dp">
+    android:layout_height="wrap_content"
+    android:paddingTop="10dp">
+
+    <ImageView
+        android:id="@+id/iv_icon_category"
+        android:contentDescription="@string/transaction"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        tools:src="@drawable/ic_category_market_2x"/>
 
     <TextView
         android:id="@+id/tv_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:paddingTop="5dp"
-        android:paddingEnd="5dp"
-        android:paddingStart="5dp"
-        android:textColor="@color/textColorLightSecondary"
-        android:textSize="@dimen/text_subheading"
+        android:layout_toEndOf="@id/iv_icon_category"
+        android:layout_toStartOf="@+id/tv_quantity"
+        android:textSize="18sp"
         android:textStyle="bold"
         tools:text="Cuenta citibanamex"/>
 
@@ -24,22 +30,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_account"
-        android:layout_alignParentStart="true"
-        android:paddingEnd="5dp"
-        android:paddingStart="5dp"
+        android:layout_toEndOf="@id/iv_icon_category"
+        android:layout_toStartOf="@+id/tv_quantity"
         android:textColor="@color/textColorLightSecondary"
         android:textSize="@dimen/text_subheading"
         tools:text="Viveres y despensa"/>
 
     <TextView
         android:id="@+id/tv_quantity"
-        android:gravity="end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="15dp"
-        android:paddingEnd="5dp"
-        android:paddingStart="5dp"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="5dp"
         android:textColor="@color/colorAccent"
         android:textStyle="bold"
         android:textSize="@dimen/text_title"
@@ -49,6 +53,6 @@
         android:background="@color/dividerColor"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@id/tv_category"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/tv_category"/>
 </RelativeLayout>

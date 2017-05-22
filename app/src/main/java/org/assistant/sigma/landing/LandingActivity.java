@@ -12,6 +12,10 @@ import org.assistant.sigma.accounts.AccountsActivity;
 import org.assistant.sigma.dashboard.DashboardFragment;
 import org.assistant.sigma.dashboard.DashboardPresenter;
 import org.assistant.sigma.databinding.ActLandingBinding;
+import org.assistant.sigma.transactions.form.TransactionsFormFragment;
+import org.assistant.sigma.transactions.form.TransactionsFormPresenter;
+import org.assistant.sigma.transactions.list.TransactionsListFragment;
+import org.assistant.sigma.transactions.list.TransactionsListPresenter;
 import org.assistant.sigma.utils.ActivityUtils;
 
 /**
@@ -30,6 +34,7 @@ public class LandingActivity extends AppCompatActivity {
         viewBinding = DataBindingUtil.setContentView(this, R.layout.act_landing);
 
         loadDashboardFragment();
+        loadTransactionsListFragment();
         setupAddButton();
     }
 
@@ -45,12 +50,33 @@ public class LandingActivity extends AppCompatActivity {
         );
     }
 
+    private void loadTransactionsListFragment() {
+        TransactionsListFragment fragment = new TransactionsListFragment();
+        new TransactionsListPresenter(fragment);
+
+        ActivityUtils.replaceFragmentInActivity(
+                getSupportFragmentManager(),
+                fragment,
+                R.id.body_content_frame,
+                "list_transactions"
+        );
+    }
+
     private void setupAddButton() {
         viewBinding.btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (dashboardPresenter.allowAddTransaction()) {
                     // TODO Go to add transactions
+                    TransactionsFormFragment fragment = new TransactionsFormFragment();
+                    new TransactionsFormPresenter(fragment);
+
+                    ActivityUtils.replaceFragmentInActivity(
+                            getSupportFragmentManager(),
+                            fragment,
+                            R.id.body_content_frame,
+                            "form_transactions"
+                    );
                 } else {
                     // Go to accounts
                     Intent intent = new Intent(LandingActivity.this, AccountsActivity.class);
