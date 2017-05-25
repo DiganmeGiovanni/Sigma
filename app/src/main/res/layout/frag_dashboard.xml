@@ -2,9 +2,8 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-
     <LinearLayout
-        tools:background="@color/colorPrimary"
+        tools:background="@drawable/background_gradient_primary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -17,10 +16,11 @@
             app:donut_max="150"
             app:donut_progress="95"
             app:donut_text="$500.00"
-            app:donut_finished_color="@color/blueWhite"
+            app:donut_finished_color="@color/gray_medium"
             app:donut_unfinished_color="@color/colorPrimaryDark"
-            app:donut_text_color="@color/blueWhite"
-            app:donut_text_size="@dimen/text_title"/>
+            app:donut_unfinished_stroke_width="6dp"
+            app:donut_text_color="@color/gray_medium"
+            app:donut_text_size="@dimen/text_big"/>
 
         <LinearLayout
             android:gravity="end"
@@ -33,15 +33,14 @@
                 android:id="@+id/tv_spent_short_period"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/blueWhite"
+                android:textColor="@color/gray_medium"
                 android:textSize="@dimen/text_big"
-                android:textStyle="bold"
                 tools:text="$150.00"/>
             <TextView
                 android:id="@+id/tv_lb_spent_short_period"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/blueWhite"
+                android:textColor="@color/gray_medium"
                 android:textSize="@dimen/text_regular"
                 tools:text="Gastados hoy"/>
 
@@ -50,16 +49,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
-                android:textColor="@color/blueWhite"
+                android:textColor="@color/gray_medium"
                 android:textSize="@dimen/text_big"
-                android:textStyle="bold"
                 tools:text="Hace 4hrs"/>
             <TextView
                 android:id="@+id/tv_lb_last_transaction_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/last_transaction"
-                android:textColor="@color/blueWhite"
+                android:textColor="@color/gray_medium"
                 android:textSize="@dimen/text_regular"/>
         </LinearLayout>
     </LinearLayout>

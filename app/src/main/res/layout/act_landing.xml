@@ -14,16 +14,24 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
             <android.support.design.widget.CollapsingToolbarLayout
+                android:background="@drawable/background_gradient_primary"
                 android:layout_width="match_parent"
-                android:layout_height="205dp">
+                android:layout_height="205dp"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
                 <FrameLayout
                     android:id="@+id/header_content_frame"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </android.support.design.widget.CollapsingToolbarLayout>
-
         </android.support.design.widget.AppBarLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_transactions"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="25dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/btn_add"
@@ -33,11 +41,5 @@
             app:layout_anchorGravity="bottom|end"
             app:fabSize="normal"
             app:srcCompat="@drawable/ic_add_1x" />
-
-        <android.support.v4.widget.NestedScrollView
-            android:id="@+id/body_content_frame"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
     </android.support.design.widget.CoordinatorLayout>
 </layout>

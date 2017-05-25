@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.assistant.sigma.R;
@@ -51,6 +52,31 @@ public class TransactionsAdapter extends BaseAdapter {
         View containerView = view;
         if (containerView == null) {
             containerView = inflater.inflate(R.layout.item_transaction, viewGroup, false);
+        }
+
+        // Icon category
+        ImageView ivIconCategory = (ImageView) containerView.findViewById(R.id.iv_icon_category);
+        String categoryName = transaction.getTransactionCategory().getName();
+        if (categoryName.equals(mContext.getString(R.string.category_name_transport))) {
+            ivIconCategory.setImageDrawable(mContext.getResources().getDrawable(
+                    R.drawable.ic_category_transport_2x
+            ));
+        } else if (categoryName.equals(mContext.getString(R.string.category_name_provisions))) {
+            ivIconCategory.setImageDrawable(mContext.getResources().getDrawable(
+                    R.drawable.ic_category_market_2x
+            ));
+        } else if (categoryName.equals(mContext.getString(R.string.category_name_clothes_shoes))) {
+            ivIconCategory.setImageDrawable(mContext.getResources().getDrawable(
+                    R.drawable.ic_category_clothes_2x
+            ));
+        } else if (categoryName.equals(mContext.getString(R.string.category_name_home))) {
+            ivIconCategory.setImageDrawable(mContext.getResources().getDrawable(
+                    R.drawable.ic_category_home_2x
+            ));
+        } else if (categoryName.equals(mContext.getString(R.string.category_name_restaurants))) {
+            ivIconCategory.setImageDrawable(mContext.getResources().getDrawable(
+                    R.drawable.ic_category_restaurant_2x
+            ));
         }
 
         // Account name

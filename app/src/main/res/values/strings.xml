@@ -23,7 +23,7 @@
     <string name="quantity">Cantidad</string>
     <string name="description">Descripción</string>
     <string name="income">Ingreso</string>
-    <string name="is_income">¿Registrar como ingreso?</string>
+    <string name="is_income">¿Ingreso?</string>
     <string name="transaction_income_description">La cantidad será abonada a la cuenta</string>
     <string name="transaction_spent_description">La cantidad será descontada de la cuenta</string>
     <string name="category_name_transport">Transporte</string>
@@ -86,4 +86,6 @@
     <string name="never">Nunca</string>
     <string name="transaction">Transacción</string>
     <string name="without_transactions">Sin transacciones</string>
+    <string name="register_transaction">Registrar transacción</string>
+    <string name="now">Ahora</string>
 </resources>

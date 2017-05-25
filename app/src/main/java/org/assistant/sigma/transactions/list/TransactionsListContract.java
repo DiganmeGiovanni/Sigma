@@ -9,7 +9,7 @@ import io.realm.RealmResults;
  *
  * Created by giovanni on 21/05/17.
  */
-interface TransactionsListContract {
+public interface TransactionsListContract {
 
     interface Presenter {
 

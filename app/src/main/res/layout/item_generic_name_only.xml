@@ -4,13 +4,13 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp">
+    android:padding="8dp">
 
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/textColorLightMain"
+        android:textColor="@color/textColorLightSecondary"
         android:textSize="@dimen/text_regular"
         tools:text="Nombre del elemento"/>
 </LinearLayout>

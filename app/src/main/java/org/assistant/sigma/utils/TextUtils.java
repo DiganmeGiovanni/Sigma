@@ -1,5 +1,7 @@
 package org.assistant.sigma.utils;
 
+import android.text.format.DateUtils;
+
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -44,5 +46,18 @@ public class TextUtils {
 
     public static String forHumans(Calendar calendar) {
         return forHumans(calendar.getTime());
+    }
+
+    public static String relative(Date date, boolean abbrevAll) {
+        return DateUtils.getRelativeTimeSpanString(
+                date.getTime(),
+                new Date().getTime(),
+                1000,
+                DateUtils.FORMAT_ABBREV_ALL
+        ).toString();
+    }
+
+    public static String relative(Calendar calendar, boolean abbrevAll) {
+        return relative(calendar.getTime(), abbrevAll);
     }
 }

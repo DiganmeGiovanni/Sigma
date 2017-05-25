@@ -51,8 +51,10 @@ public class TransactionsListFragment extends Fragment implements TransactionsLi
             viewBinding.lvTransactions.setAdapter(adapter);
 
             viewBinding.tvWithoutTransactions.setVisibility(View.GONE);
+            viewBinding.tvTransactionsTitle.setVisibility(View.VISIBLE);
             viewBinding.lvTransactions.setVisibility(View.VISIBLE);
         } else {
+            viewBinding.tvTransactionsTitle.setVisibility(View.GONE);
             viewBinding.lvTransactions.setVisibility(View.GONE);
             viewBinding.tvWithoutTransactions.setVisibility(View.VISIBLE);
         }

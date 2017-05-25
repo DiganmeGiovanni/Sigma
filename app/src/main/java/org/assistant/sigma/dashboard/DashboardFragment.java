@@ -3,7 +3,6 @@ package org.assistant.sigma.dashboard;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,7 +55,7 @@ public class DashboardFragment extends Fragment implements DashboardContract.Vie
         if (date == null) {
             viewBinding.tvLastTransactionTime.setText(getString(R.string.never));
         } else {
-            viewBinding.tvLastTransactionTime.setText(DateUtils.getRelativeTimeSpanString(date.getTime()));
+            viewBinding.tvLastTransactionTime.setText(TextUtils.relative(date, true));
         }
     }
 
