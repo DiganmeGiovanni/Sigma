@@ -70,11 +70,10 @@ public class LandingActivity extends AppCompatActivity implements TransactionsLi
         DashboardFragment dashboardFragment = new DashboardFragment();
         dashboardPresenter = new DashboardPresenter(dashboardFragment);
 
-        ActivityUtils.replaceFragmentInActivity(
+        ActivityUtils.addFragmentToActivity(
                 getSupportFragmentManager(),
                 dashboardFragment,
-                R.id.header_content_frame,
-                "dashboard"
+                R.id.header_content_frame
         );
     }
 

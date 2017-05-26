@@ -88,4 +88,12 @@
     <string name="without_transactions">Sin transacciones</string>
     <string name="register_transaction">Registrar transacción</string>
     <string name="now">Ahora</string>
+    <string name="just_now">Justo ahora</string>
+    <string name="relative_time_past_prefix">Hace</string>
+    <string name="time_abbr_mins">mins</string>
+    <string name="time_abbr_min">min</string>
+    <string name="time_abbr_hour">hr</string>
+    <string name="time_abbr_hours">hrs</string>
+    <string name="time_abbr_days">dias</string>
+    <string name="time_abbr_day">dia</string>
 </resources>

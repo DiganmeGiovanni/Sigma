@@ -55,7 +55,9 @@ public class DashboardFragment extends Fragment implements DashboardContract.Vie
         if (date == null) {
             viewBinding.tvLastTransactionTime.setText(getString(R.string.never));
         } else {
-            viewBinding.tvLastTransactionTime.setText(TextUtils.relative(date, true));
+            viewBinding
+                    .tvLastTransactionTime
+                    .setText(TextUtils.relativeTime(getContext(), date.getTime()));
         }
     }
 

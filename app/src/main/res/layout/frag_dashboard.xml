@@ -51,7 +51,7 @@
                 android:layout_marginTop="25dp"
                 android:textColor="@color/gray_medium"
                 android:textSize="@dimen/text_big"
-                tools:text="Hace 4hrs"/>
+                tools:text="Justo ahora"/>
             <TextView
                 android:id="@+id/tv_lb_last_transaction_time"
                 android:layout_width="wrap_content"
