@@ -62,7 +62,7 @@ public class LandingActivity extends AppCompatActivity implements TransactionsLi
 
     @Override
     public void renderTransactions(RealmResults<Transaction> transactions) {
-        RTransactionsAdapter adapter = new RTransactionsAdapter(transactions);
+        RTransactionsAdapter adapter = new RTransactionsAdapter(getBaseContext(), transactions);
         viewBinding.rvTransactions.setAdapter(adapter);
     }
 

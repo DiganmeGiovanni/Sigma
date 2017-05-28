@@ -6,6 +6,7 @@ import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
+import android.support.v4.content.ContextCompat;
 
 /**
  *
@@ -15,12 +16,13 @@ public class DrawableUtils {
 
     public static Drawable setColorFilter(Context mContext, @DrawableRes int drawableId,
                                       @ColorRes int color) {
-        Drawable drawable = mContext.getResources().getDrawable(drawableId);
+        Drawable drawable = ContextCompat.getDrawable(mContext, drawableId);
+        drawable.mutate();
+
         drawable.setColorFilter(new PorterDuffColorFilter(
                 mContext.getResources().getColor(color),
                 PorterDuff.Mode.SRC_ATOP
         ));
-
         return drawable;
     }
 }

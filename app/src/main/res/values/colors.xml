@@ -29,7 +29,7 @@
     <!-- Theme -->
     <color name="colorPrimary">#243235</color>
     <color name="colorPrimaryDark">#122A38</color>
-    <color name="colorPrimaryLight">#9DFAC5</color>
+    <color name="colorPrimaryLight">#2c3e50</color>
     <color name="colorAccent">#C15257</color>
     <color name="colorAccentDark">#A2847D</color>
     <color name="gray_medium">#F6F6F6</color>
