@@ -18,7 +18,6 @@
             app:donut_text="$500.00"
             app:donut_finished_color="@color/gray_medium"
             app:donut_unfinished_color="@color/colorPrimaryDark"
-            app:donut_unfinished_stroke_width="6dp"
             app:donut_text_color="@color/gray_medium"
             app:donut_text_size="@dimen/text_big"/>
 

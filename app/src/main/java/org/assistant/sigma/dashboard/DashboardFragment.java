@@ -3,6 +3,7 @@ package org.assistant.sigma.dashboard;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,23 +66,36 @@ public class DashboardFragment extends Fragment implements DashboardContract.Vie
     public void showSpentPeriodLg(double spent, double beforeLimit, int WARNING_LEVEL) {
         viewBinding.dpSpentLargePeriod.setText(TextUtils.asMoney(spent));
         viewBinding.dpSpentLargePeriod.setMax((int) (spent + beforeLimit));
-        viewBinding.dpSpentLargePeriod.setProgress((float) spent);
+        if (beforeLimit < 0) {
+            viewBinding.dpSpentLargePeriod.setProgress((float) (spent + beforeLimit));
+        } else {
+            viewBinding.dpSpentLargePeriod.setProgress((float) spent);
+        }
 
         switch (WARNING_LEVEL) {
             case Warning.LEVEL_NORMAL:
                 viewBinding
                         .dpSpentLargePeriod
-                        .setFinishedStrokeColor(getResources().getColor(R.color.blueWhite));
+                        .setFinishedStrokeColor(ContextCompat.getColor(
+                                getContext(),
+                                R.color.blueWhite
+                        ));
                 break;
             case Warning.LEVEL_WARNING:
                 viewBinding
                         .dpSpentLargePeriod
-                        .setFinishedStrokeColor(getResources().getColor(R.color.textColorWarning));
+                        .setFinishedStrokeColor(ContextCompat.getColor(
+                                getContext(),
+                                R.color.textColorWarning
+                        ));
                 break;
             case Warning.LEVEL_DANGER:
                 viewBinding
                         .dpSpentLargePeriod
-                        .setFinishedStrokeColor(getResources().getColor(R.color.textColorDanger));
+                        .setFinishedStrokeColor(ContextCompat.getColor(
+                                getContext(),
+                                R.color.textColorDanger
+                        ));
                 break;
         }
     }
