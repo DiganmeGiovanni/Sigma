@@ -4,8 +4,7 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingTop="25dp">
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/tv_without_transactions"
@@ -13,28 +12,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="24dp"
+            android:paddingTop="98dp"
             android:text="@string/without_transactions"
             android:textColor="@color/textColorLightSecondary"
             android:textSize="@dimen/text_title"
             android:visibility="gone"
             tools:visibility="visible"/>
 
-        <TextView
-            android:id="@+id/tv_transactions_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16sp"
-            android:text="@string/transactions"
-            android:textColor="@color/colorAccentDark"
-            android:textSize="@dimen/text_title"
-            android:visibility="gone"
-            tools:visibility="visible"/>
-
-        <ListView
-            android:id="@+id/lv_transactions"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_transactions"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
             android:visibility="gone"
             tools:visibility="visible"/>
     </LinearLayout>

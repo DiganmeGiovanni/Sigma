@@ -11,7 +11,7 @@
 
     <!-- Header -->
     <LinearLayout
-        android:background="@color/colorPrimary"
+        android:background="@color/colorAccent"
         android:gravity="bottom"
         android:layout_width="match_parent"
         android:layout_height="186dp"
@@ -31,7 +31,7 @@
             android:gravity="center_horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/textColorPrimary"
+            android:textColor="@color/gray_medium"
             android:textSize="@dimen/text_title"
             tools:text="Giovanni Aguirre"/>
         <TextView
@@ -39,7 +39,7 @@
             android:gravity="center_horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/textColorPrimary"
+            android:textColor="@color/gray_medium"
             android:textSize="@dimen/text_subheading"
             tools:text="giovanni.fi05@gmail.com"/>
     </LinearLayout>
@@ -54,7 +54,7 @@
         android:layout_marginTop="16dp"
         android:padding="16dp"
         android:text="@string/transactions"
-        android:textColor="@color/textColorLightSecondary"
+        android:textColor="@color/textColorSecondary"
         android:textSize="@dimen/text_subheading"
         android:textStyle="bold"/>
 
@@ -67,7 +67,7 @@
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:text="@string/accounts"
-        android:textColor="@color/textColorLightSecondary"
+        android:textColor="@color/textColorSecondary"
         android:textSize="@dimen/text_subheading"
         android:textStyle="bold"/>
 
@@ -80,7 +80,7 @@
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:text="@string/scheduled_transactions"
-        android:textColor="@color/textColorLightSecondary"
+        android:textColor="@color/textColorSecondary"
         android:textSize="@dimen/text_subheading"
         android:textStyle="bold"/>
 
@@ -93,7 +93,7 @@
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:text="@string/charts"
-        android:textColor="@color/textColorLightSecondary"
+        android:textColor="@color/textColorSecondary"
         android:textSize="@dimen/text_subheading"
         android:textStyle="bold"/>
 
@@ -106,7 +106,7 @@
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:text="@string/preferences"
-        android:textColor="@color/textColorLightSecondary"
+        android:textColor="@color/textColorSecondary"
         android:textSize="@dimen/text_subheading"
         android:textStyle="bold"/>
 </LinearLayout>

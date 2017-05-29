@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.assistant.sigma.R;
@@ -31,11 +32,19 @@ public class RTransactionsAdapter extends RecyclerView.Adapter<RTransactionsAdap
     private Drawable dHome;
     private Drawable dRestaurant;
 
+    int paddingTopAsPixels16 = 0;
+    int paddingTopAsPixels32 = 0;
+
     public RTransactionsAdapter(Context mContext, RealmResults<Transaction> transactions) {
         this.transactions = transactions;
         this.mContext = mContext;
 
         prepareDrawables();
+
+        // Calculate the top 16dp for first item
+        float scale = mContext.getResources().getDisplayMetrics().density;
+        paddingTopAsPixels16 = (int) (16 * scale + 0.5f);
+        paddingTopAsPixels32 = (int) (32 * scale + 0.5f);
     }
 
     @Override
@@ -55,6 +64,13 @@ public class RTransactionsAdapter extends RecyclerView.Adapter<RTransactionsAdap
         holder.tvAccount.setText(transaction.getAccount().getName());
         holder.tvCategory.setText(transaction.getTransactionCategory().getName());
         holder.tvQuantity.setText(TextUtils.asMoney(Math.abs(transaction.getQuantity())));
+
+        // Set padding top if is first item
+        if (position == 0) {
+            holder.tvQuantity.setPadding(0, paddingTopAsPixels16, 0, 0);
+        } else {
+            holder.tvQuantity.setPadding(0, 0, 0, 0);
+        }
 
         // Set category icon
         String categoryName = transaction.getTransactionCategory().getName();
@@ -105,6 +121,7 @@ public class RTransactionsAdapter extends RecyclerView.Adapter<RTransactionsAdap
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
+        RelativeLayout rlContainer;
         ImageView ivIconCategory;
         TextView tvAccount;
         TextView tvCategory;
@@ -113,6 +130,7 @@ public class RTransactionsAdapter extends RecyclerView.Adapter<RTransactionsAdap
         ViewHolder(View itemView) {
             super(itemView);
 
+            rlContainer = (RelativeLayout) itemView.findViewById(R.id.rl_container);
             ivIconCategory = (ImageView) itemView.findViewById(R.id.iv_icon_category);
             tvAccount = (TextView) itemView.findViewById(R.id.tv_account);
             tvCategory = (TextView) itemView.findViewById(R.id.tv_category);

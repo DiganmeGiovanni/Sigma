@@ -18,7 +18,6 @@
     <color name="red_intense">#e74c3c</color>
     <color name="red">#c0392b</color>
 
-    <color name="gray_background">#EEEEEE</color>
     <color name="gray_foreground">#FAFAFA</color>
     <color name="gray_light">#FAFAFA</color>
 
@@ -32,6 +31,8 @@
     <color name="colorPrimaryLight">#2c3e50</color>
     <color name="colorAccent">#C15257</color>
     <color name="colorAccentDark">#A2847D</color>
+    <color name="gray_background">#EEEEEE</color>
     <color name="gray_medium">#F6F6F6</color>
     <color name="textColorPrimary">#243235</color>
+    <color name="textColorSecondary">#757575</color>
 </resources>
