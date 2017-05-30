@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import org.assistant.sigma.R;
-import org.assistant.sigma.adapters.RTransactionsAdapter;
+import org.assistant.sigma.adapters.TransactionsAdapter;
 import org.assistant.sigma.databinding.FragTransactionsBinding;
 import org.assistant.sigma.model.entities.Transaction;
 
@@ -51,7 +51,7 @@ public class TransactionsListFragment extends Fragment implements TransactionsLi
     @Override
     public void renderTransactions(RealmResults<Transaction> transactions) {
         if (transactions.size() > 0) {
-            RTransactionsAdapter adapter = new RTransactionsAdapter(getContext(), transactions);
+            TransactionsAdapter adapter = new TransactionsAdapter(getContext(), transactions);
             viewBinding.rvTransactions.setAdapter(adapter);
 
             viewBinding.tvWithoutTransactions.setVisibility(View.GONE);

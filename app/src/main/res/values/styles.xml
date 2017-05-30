@@ -20,4 +20,8 @@
     <style name="til_error_appearance" parent="@android:style/TextAppearance">
         <item name="android:textColor">@color/red</item>
     </style>
+
+    <style name="transparent_appearance" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@android:color/transparent</item>
+    </style>
 </resources>

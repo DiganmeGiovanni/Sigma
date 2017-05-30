@@ -15,7 +15,6 @@ import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import org.assistant.sigma.R;
 import org.assistant.sigma.adapters.SPAccountsAdapter;
-import org.assistant.sigma.adapters.SPTransactionCategoriesAdapter;
 import org.assistant.sigma.databinding.FragTransactionsFormBinding;
 import org.assistant.sigma.model.entities.Account;
 import org.assistant.sigma.model.entities.Transaction;
@@ -77,20 +76,20 @@ public class TransactionsFormFragment extends Fragment implements TransactionsFo
 
     @Override
     public void updateCategoriesSpinner(final List<TransactionCategory> categories) {
-        SPTransactionCategoriesAdapter adapter =
-                new SPTransactionCategoriesAdapter(getContext(), categories);
-        viewBinding.spCategory.setAdapter(adapter);
-        viewBinding.spCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                category = categories.get(i);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) { }
-        });
-
-        category = categories.get(0);
+//        TransactionCategoriesAdapter adapter =
+//                new TransactionCategoriesAdapter(getContext(), categories);
+//        viewBinding.spCategory.setAdapter(adapter);
+//        viewBinding.spCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//                category = categories.get(i);
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> adapterView) { }
+//        });
+//
+//        category = categories.get(0);
     }
 
     @Override

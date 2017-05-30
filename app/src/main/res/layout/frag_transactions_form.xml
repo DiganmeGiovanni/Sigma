@@ -1,144 +1,242 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <ScrollView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:background="@color/colorAccent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="15dp">
+            android:padding="16dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <!-- Account -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".6"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/account"
-                        android:textColor="@color/colorAccent"/>
-                    <Spinner
-                        android:id="@+id/sp_account"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-
-                <!-- Time -->
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/til_date"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".4"
-                    app:errorTextAppearance="@style/til_error_appearance">
-
-                    <EditText
-                        android:id="@+id/et_date"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:hint="@string/date_time"
-                        android:inputType="text"
-                        android:textColor="@color/textColorLightSecondary"/>
-                </android.support.design.widget.TextInputLayout>
-            </LinearLayout>
-
-            <!-- Category -->
             <TextView
+                android:id="@+id/tv_title"
+                android:gravity="center_horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/category"
-                android:textColor="@color/colorAccent"/>
-            <Spinner
-                android:id="@+id/sp_category"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:text="@string/register_transaction"
+                android:textAllCaps="true"
+                android:textColor="@color/gray_medium"
+                android:textSize="@dimen/text_title"
+                android:textStyle="bold"/>
 
+            <ImageView
+                android:layout_centerHorizontal="true"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_below="@id/tv_title"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/ic_money_1x"/>
+        </RelativeLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                android:paddingTop="16dp">
 
-                <!-- Quantity -->
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/til_quantity"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".6"
-                    app:errorTextAppearance="@style/til_error_appearance">
-
-                    <EditText
-                        android:id="@+id/et_quantity"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:hint="@string/quantity"
-                        android:inputType="numberDecimal"
-                        android:textColor="@color/textColorLightSecondary"/>
-                </android.support.design.widget.TextInputLayout>
-
-                <!-- Income or spent switch -->
                 <LinearLayout
-                    android:gravity="end"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".4"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/is_income"
-                        android:textColor="@color/colorAccent"/>
-                    <Switch
-                        android:id="@+id/sw_is_income"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:textOff="@string/no"
-                        android:textOn="@string/yes"
-                        android:textColor="@color/colorAccent"/>
-                </LinearLayout>
-            </LinearLayout>
-
-            <!-- Description -->
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/til_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:errorTextAppearance="@style/til_error_appearance">
-
-                <EditText
-                    android:id="@+id/et_description"
-                    android:imeOptions="actionDone"
-                    android:gravity="top|start"
-                    android:hint="@string/description"
-                    android:inputType="textCapSentences"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/textColorLightSecondary"/>
-            </android.support.design.widget.TextInputLayout>
+                    android:orientation="horizontal"
+                    android:paddingEnd="16dp"
+                    android:paddingStart="16dp">
 
+                    <!-- Account -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".6"
+                        android:orientation="vertical">
 
-            <Button style="@style/Widget.AppCompat.Button.Colored"
-                android:id="@+id/btn_save"
-                android:layout_gravity="end"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/create"/>
-        </LinearLayout>
-    </ScrollView>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/account"
+                            android:textColor="@color/colorPrimaryLight"/>
+                        <Spinner
+                            android:id="@+id/sp_account"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                    <!-- Income or spent switch -->
+                    <LinearLayout
+                        android:gravity="end"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".4"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/is_income"
+                            android:textColor="@color/colorPrimaryLight"/>
+                        <android.support.v7.widget.SwitchCompat
+                            android:id="@+id/sw_is_income"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:textOff="@string/no"
+                            android:textOn="@string/yes"
+                            android:textColor="@color/colorAccent"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Category selection -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal"
+                    android:paddingEnd="16dp"
+                    android:paddingStart="16dp">
+
+                    <TextView
+                        android:id="@+id/tv_lb_category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:text="@string/category"
+                        android:textColor="@color/colorPrimaryLight"/>
+
+                    <TextView
+                        android:id="@+id/tv_category"
+                        android:gravity="end"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/tv_lb_category"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="8dp"
+                        android:maxLines="1"
+                        android:textColor="@color/textColorSecondary"
+                        tools:text="@string/category_name_provisions"/>
+                </RelativeLayout>
+                <HorizontalScrollView
+                    android:background="@color/gray_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp">
+                    <LinearLayout
+                        android:id="@+id/ll_categories_container"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingEnd="12dp"
+                        android:paddingStart="12dp"
+                        android:padding="8dp">
+
+                    </LinearLayout>
+                </HorizontalScrollView>
+
+                <LinearLayout
+                    android:baselineAligned="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal"
+                    android:paddingEnd="16dp"
+                    android:paddingStart="16dp">
+
+                    <!-- Quantity -->
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/til_quantity"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".5"
+                        app:errorTextAppearance="@style/til_error_appearance">
+
+                        <EditText
+                            android:id="@+id/et_quantity"
+                            android:ems="10"
+                            android:imeOptions="actionDone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/quantity"
+                            android:inputType="numberDecimal"
+                            android:textColor="@color/textColorLightSecondary"/>
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!-- Time -->
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/til_date"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".5"
+                        app:errorTextAppearance="@style/til_error_appearance">
+
+                        <EditText
+                            android:id="@+id/et_date"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:hint="@string/date_time"
+                            android:inputType="datetime"
+                            android:textColor="@color/textColorLightSecondary"/>
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+
+                <!-- Description -->
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/til_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:paddingEnd="16dp"
+                    android:paddingStart="16dp"
+                    app:errorTextAppearance="@style/til_error_appearance">
+
+                    <EditText
+                        android:id="@+id/et_description"
+                        android:imeOptions="actionDone"
+                        android:gravity="top|start"
+                        android:hint="@string/description"
+                        android:inputType="textCapSentences"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/textColorLightSecondary"/>
+                </android.support.design.widget.TextInputLayout>
+
+                <!-- Buttons bar -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+
+                    <Button style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                        android:id="@+id/btn_cancel"
+                        android:background="@color/gray_background"
+                        android:layout_gravity="end"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".5"
+                        android:text="@string/cancel"
+                        android:textColor="@color/textColorSecondary"/>
+
+                    <View
+                        android:background="@color/textColorSecondary"
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent" />
+
+                    <Button style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                        android:id="@+id/btn_save"
+                        android:background="@color/gray_background"
+                        android:layout_gravity="end"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".5"
+                        android:text="@string/create"/>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
 </layout>

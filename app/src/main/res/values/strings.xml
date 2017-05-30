@@ -96,4 +96,5 @@
     <string name="time_abbr_hours">hrs</string>
     <string name="time_abbr_days">dias</string>
     <string name="time_abbr_day">dia</string>
+    <string name="cancel">Cancelar</string>
 </resources>

@@ -1,27 +1,33 @@
 package org.assistant.sigma.transactions.form;
 
+import android.app.Dialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import org.assistant.sigma.R;
 import org.assistant.sigma.adapters.SPAccountsAdapter;
-import org.assistant.sigma.adapters.SPTransactionCategoriesAdapter;
 import org.assistant.sigma.databinding.FragTransactionsFormBinding;
 import org.assistant.sigma.model.entities.Account;
 import org.assistant.sigma.model.entities.Transaction;
 import org.assistant.sigma.model.entities.TransactionCategory;
 import org.assistant.sigma.utils.TextUtils;
+import org.assistant.sigma.utils.services.CategoryIconProvider;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -41,17 +47,35 @@ public class TransactionsFormDFragment extends DialogFragment implements Transac
     private Account account;
     private TransactionCategory category;
 
+    private CategoryIconProvider iconProvider;
+    private CategoryIconProvider iconProviderChosen;
+
+    @NonNull
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        Dialog dialog = super.onCreateDialog(savedInstanceState);
+
+        if (dialog.getWindow() != null) {
+            dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        }
+
+        return dialog;
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        getDialog().setTitle(getString(R.string.register_transaction));
         View rootView = inflater.inflate(R.layout.frag_transactions_form, container, false);
         viewBinding = FragTransactionsFormBinding.bind(rootView);
 
+        // Initialize icons providers
+        iconProvider = new CategoryIconProvider(getContext(), R.color.colorAccent);
+        iconProviderChosen = new CategoryIconProvider(getContext(), R.color.gray_medium);
+
         setupForm();
         setupSaveBtn();
-
-        getDialog().setTitle(getString(R.string.register_transaction));
         return rootView;
     }
 
@@ -79,20 +103,40 @@ public class TransactionsFormDFragment extends DialogFragment implements Transac
 
     @Override
     public void updateCategoriesSpinner(final List<TransactionCategory> categories) {
-        SPTransactionCategoriesAdapter adapter =
-                new SPTransactionCategoriesAdapter(getDialog().getContext(), categories);
-        viewBinding.spCategory.setAdapter(adapter);
-        viewBinding.spCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                category = categories.get(i);
-            }
+        LayoutInflater inflater = LayoutInflater.from(getContext());
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) { }
-        });
+        // Clear categories and possible previous selection
+        viewBinding.llCategoriesContainer.removeAllViews();
+        viewBinding.tvCategory.setText(null);
+        category = null;
 
-        category = categories.get(0);
+        // Create categories circular views
+        final List<View> categoriesViews = new ArrayList<>();
+        for (final TransactionCategory category : categories) {
+            final View view = inflater.inflate(
+                    R.layout.item_category_circular_button,
+                    viewBinding.llCategoriesContainer,
+                    false
+            );
+
+            // Set icon
+            final ImageView ivIcon = (ImageView) view.findViewById(R.id.iv_icon);
+            iconProvider.setIcon(ivIcon, category);
+
+            // Set click listener
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View clickedView) {
+                    setSelectedStyle(categoriesViews, view, categories);
+
+                    viewBinding.tvCategory.setText(category.getName());
+                    TransactionsFormDFragment.this.category = category;
+                }
+            });
+
+            categoriesViews.add(view);
+            viewBinding.llCategoriesContainer.addView(view);
+        }
     }
 
     @Override
@@ -151,8 +195,15 @@ public class TransactionsFormDFragment extends DialogFragment implements Transac
                     transaction.setAccount(account);
 
                     mPresenter.saveTransaction(transaction);
-                    getFragmentManager().popBackStack();
+                    dismiss();
                 }
+            }
+        });
+
+        viewBinding.btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dismiss();
             }
         });
     }
@@ -202,5 +253,35 @@ public class TransactionsFormDFragment extends DialogFragment implements Transac
         transactionDate.set(Calendar.MINUTE, minute);
 
         viewBinding.etDate.setText(TextUtils.relative(transactionDate, true));
+    }
+
+    /**
+     * Sets unselected style for all given views except <code>selected</code> one
+     * @param categoriesViews All categories circular views
+     * @param selected The circular view to show as selected
+     */
+    private void setSelectedStyle(List<View> categoriesViews, View selected,
+                                  List<TransactionCategory> categories) {
+        for (int i = 0; i < categories.size(); i++) {
+            View view = categoriesViews.get(i);
+            TransactionCategory category = categories.get(i);
+
+            ImageView ivIcon = (ImageView) view.findViewById(R.id.iv_icon);
+            if (view == selected) {
+                view.setBackground(ContextCompat.getDrawable(
+                        getContext(),
+                        R.drawable.background_circle_choosen
+                ));
+
+                iconProviderChosen.setIcon(ivIcon, category);
+            } else {
+                view.setBackground(ContextCompat.getDrawable(
+                        getContext(),
+                        R.drawable.background_circle_gray
+                ));
+
+                iconProvider.setIcon(ivIcon, category);
+            }
+        }
     }
 }
