@@ -4,7 +4,6 @@
     android:background="@color/gray_foreground"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
     android:orientation="vertical">
 
     <TextView
@@ -12,9 +11,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:padding="5dp"
-        android:textColor="@color/textColorLightMain"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:textSize="@dimen/lb_medium"
+        android:textStyle="bold"
         tools:text="Cuenta citibanamex"/>
 
     <TextView
@@ -23,9 +24,11 @@
         android:layout_height="wrap_content"
         android:layout_alignEnd="@id/tv_name"
         android:layout_alignParentEnd="true"
-        android:padding="5dp"
-        android:textColor="@color/textColorLightSecondary"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
         android:textSize="@dimen/lb_medium"
+        android:textStyle="bold"
         tools:text="1294"/>
 
     <TextView
@@ -33,15 +36,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_name"
-        android:paddingEnd="5dp"
-        android:paddingStart="5dp"
-        android:textColor="@color/colorPrimary"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="2dp"
+        android:textSize="@dimen/lb_medium"
         tools:text="$1,500.67"/>
 
     <View
-        android:background="@color/colorAccent"
+        android:background="@color/dividerColor"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_below="@id/tv_balance"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="16dp"/>
 </RelativeLayout>
