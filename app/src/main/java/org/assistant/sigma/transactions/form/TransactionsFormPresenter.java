@@ -1,10 +1,7 @@
 package org.assistant.sigma.transactions.form;
 
-import android.content.Context;
-
 import org.assistant.sigma.model.entities.Transaction;
 import org.assistant.sigma.model.repositories.AccountsRepository;
-import org.assistant.sigma.model.repositories.TransactionCategoriesRepository;
 import org.assistant.sigma.model.repositories.TransactionsRepository;
 
 /**
@@ -17,7 +14,6 @@ public class TransactionsFormPresenter implements TransactionsFormContract.Prese
 
     private AccountsRepository accountsRepository;
     private TransactionsRepository transactionsRepository;
-    private TransactionCategoriesRepository categoriesRepository;
 
     public TransactionsFormPresenter(TransactionsFormContract.View mTransactionsFormView) {
         this.mTransactionsFormView = mTransactionsFormView;
@@ -25,26 +21,20 @@ public class TransactionsFormPresenter implements TransactionsFormContract.Prese
 
         accountsRepository = new AccountsRepository();
         transactionsRepository = new TransactionsRepository();
-        categoriesRepository = new TransactionCategoriesRepository();
     }
 
     @Override
     public void start() { }
 
     @Override
+    public void onDestroy() {
+        accountsRepository.destroy();
+        transactionsRepository.destroy();
+    }
+
+    @Override
     public void loadAccounts() {
         mTransactionsFormView.updateAccountsSpinner(accountsRepository.allActive());
-    }
-
-    @Override
-    public void loadSpentCategories(Context mContext) {
-        mTransactionsFormView
-                .updateCategoriesSpinner(categoriesRepository.allSpentCategories(mContext));
-    }
-
-    @Override
-    public void loadIncomeCategories() {
-        mTransactionsFormView.updateCategoriesSpinner(categoriesRepository.allIncomeCategories());
     }
 
     @Override

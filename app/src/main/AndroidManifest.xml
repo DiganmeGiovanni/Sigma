@@ -22,6 +22,7 @@
         <activity android:name=".landing.LandingActivity" />
         <activity android:name=".dashboard.DashboardActivity" />
         <activity android:name=".accounts.AccountsActivity" />
+        <activity android:name=".transactions.form.TransactionsFormActivity"/>
 
         <activity
             android:name="com.facebook.CustomTabActivity"
