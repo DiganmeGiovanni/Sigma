@@ -1,8 +1,7 @@
 package org.assistant.sigma.model.repositories;
 
-import android.content.Context;
+import android.support.annotation.Nullable;
 
-import org.assistant.sigma.R;
 import org.assistant.sigma.model.entities.TransactionCategory;
 
 import java.util.ArrayList;
@@ -12,6 +11,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import io.realm.Realm;
+import io.realm.RealmQuery;
 import io.realm.RealmResults;
 import io.realm.Sort;
 
@@ -20,53 +20,85 @@ import io.realm.Sort;
  * Created by giovanni on 6/05/17.
  */
 public class TransactionCategoriesRepository {
-    private Realm realm = Realm.getDefaultInstance();
+    private Realm realm;
 
-    public RealmResults<TransactionCategory> allSpentCategories() {
-        return realm.where(TransactionCategory.class)
-                .equalTo("incomeCategory", false)
-                .findAll()
-                .sort("name", Sort.ASCENDING);
+    public TransactionCategoriesRepository() {
+        realm = Realm.getDefaultInstance();
+    }
+
+    public void onDestroy() {
+        realm.close();
     }
 
     /**
-     * Returns all categories marked as spent. if categories for 'provisions' is found
-     * this will be returned at first position of results and if 'other' is found
-     * this will be returned at last position of results.
+     * Returns all categories of given type sorted by name
      *
-     * @param mContext Context to retrieve category name for 'Provisions' and 'other'
-     * @return Spent categories
+     * @param income If true, only categories of 'income' type will be returned
+     * @param firsts Categories in this list will be placed as first results
+     * @param lasts Categories in this list will be placed as last results
+     * @return Spend categories
      */
-    public List<TransactionCategory> allSpentCategories(Context mContext) {
-        TransactionCategory provisions = realm.where(TransactionCategory.class)
-                .equalTo("name", mContext.getString(R.string.category_name_provisions))
-                .equalTo("incomeCategory", false)
-                .findFirst();
+    public List<TransactionCategory> all(boolean income, @Nullable List<String> firsts,
+                                         @Nullable List<String> lasts) {
 
-        TransactionCategory others = realm.where(TransactionCategory.class)
-                .equalTo("name", mContext.getString(R.string.category_name_other))
-                .equalTo("incomeCategory", false)
-                .findFirst();
+        // Find first categories
+        List<TransactionCategory> firstCategories = new ArrayList<>();
+        if (firsts != null) {
+            for (String first : firsts) {
+                TransactionCategory category = realm.where(TransactionCategory.class)
+                        .equalTo("incomeCategory", income)
+                        .equalTo("name", first)
+                        .findFirst();
+                if (category != null) {
+                    firstCategories.add(category);
+                }
+            }
+        }
 
-        RealmResults<TransactionCategory> categories = realm.where(TransactionCategory.class)
-                .equalTo("incomeCategory", false)
-                .notEqualTo("name", mContext.getString(R.string.category_name_provisions))
-                .notEqualTo("name", mContext.getString(R.string.category_name_other))
+        // Find last categories
+        List<TransactionCategory> lastCategories = new ArrayList<>();
+        if (lasts != null) {
+            for (String last : lasts) {
+                TransactionCategory category = realm.where(TransactionCategory.class)
+                        .equalTo("incomeCategory", income)
+                        .equalTo("name", last)
+                        .findFirst();
+                if (category != null) {
+                    lastCategories.add(category);
+                }
+            }
+        }
+
+        // Find categories
+        String[] firstsLasts = new String[0];
+        if (firsts != null) {
+            if (lasts != null) {
+                firsts.addAll(lasts);
+            }
+
+            firstsLasts = firsts.toArray(new String[0]);
+        } else if (lasts != null) {
+            firstsLasts = lasts.toArray(new String[0]);
+        }
+        RealmQuery<TransactionCategory> query = realm.where(TransactionCategory.class);
+        if (firstsLasts.length > 0) {
+            query.not().in("name", firstsLasts);
+        }
+        RealmResults<TransactionCategory> categories = query
+                .equalTo("incomeCategory", income)
                 .findAll()
                 .sort("name", Sort.ASCENDING);
 
+
+        // Sorted categories
         List<TransactionCategory> sortedCategories = new ArrayList<>();
-        sortedCategories.add(provisions);
+        sortedCategories.addAll(firstCategories);
         for (TransactionCategory category : categories) {
             sortedCategories.add(category);
         }
-        sortedCategories.add(others);
+        sortedCategories.addAll(lastCategories);
 
         return sortedCategories;
-    }
-
-    public RealmResults<TransactionCategory> allIncomeCategories() {
-        return realm.where(TransactionCategory.class).equalTo("incomeCategory", true).findAll();
     }
 
     /**

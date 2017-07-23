@@ -19,7 +19,15 @@ import io.realm.Sort;
  */
 public class TransactionsRepository {
 
-    private Realm realm = Realm.getDefaultInstance();
+    private Realm realm;
+
+    public TransactionsRepository() {
+        realm = Realm.getDefaultInstance();
+    }
+
+    public void destroy() {
+        realm.close();
+    }
 
     public void insert(Transaction transaction) {
         realm.beginTransaction();

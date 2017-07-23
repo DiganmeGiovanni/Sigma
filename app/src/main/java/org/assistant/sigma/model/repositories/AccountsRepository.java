@@ -18,7 +18,15 @@ import io.realm.Sort;
  */
 public class AccountsRepository {
 
-    private Realm realm = Realm.getDefaultInstance();
+    private Realm realm;
+
+    public AccountsRepository() {
+        this.realm = Realm.getDefaultInstance();
+    }
+
+    public void destroy() {
+        realm.close();
+    }
 
     public RealmList<Account> userAccounts(User user) {
         return user.getAccounts();
