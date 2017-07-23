@@ -97,4 +97,10 @@
     <string name="time_abbr_days">dias</string>
     <string name="time_abbr_day">dia</string>
     <string name="cancel">Cancelar</string>
+    <string name="stats">Estadísticas</string>
+    <string name="choose_category">Elije una categoría</string>
+    <string name="dots">...</string>
+    <string name="error_category_required_title">Elije una categoría</string>
+    <string name="error_category_required">Debes elejir una categoría para esta transacción</string>
+    <string name="ok">Ok</string>
 </resources>
