@@ -20,8 +20,7 @@ import org.assistant.sigma.dashboard.DashboardFragment;
 import org.assistant.sigma.dashboard.DashboardPresenter;
 import org.assistant.sigma.databinding.ActLandingBinding;
 import org.assistant.sigma.model.repositories.UsersRepository;
-import org.assistant.sigma.transactions.form.TransactionsFormDFragment;
-import org.assistant.sigma.transactions.form.TransactionsFormPresenter;
+import org.assistant.sigma.transactions.form.TransactionsFormActivity;
 import org.assistant.sigma.transactions.list.TransactionsListFragment;
 import org.assistant.sigma.transactions.list.TransactionsListPresenter;
 import org.assistant.sigma.utils.ActivityUtils;
@@ -88,19 +87,8 @@ public class LandingActivity extends AppCompatActivity {
                 if (dashboardPresenter.allowAddTransaction()) {
 
                     // Go to add transactions
-                    TransactionsFormDFragment dFragment = new TransactionsFormDFragment();
-                    new TransactionsFormPresenter(dFragment);
-                    dFragment.show(getSupportFragmentManager(), "transactionFormDialog");
-
-//                    TransactionsFormFragment fragment = new TransactionsFormFragment();
-//                    new TransactionsFormPresenter(fragment);
-//
-//                    ActivityUtils.replaceFragmentInActivity(
-//                            getSupportFragmentManager(),
-//                            fragment,
-//                            R.id.body_content_frame,
-//                            "form_transactions"
-//                    );
+                    Intent intent = new Intent(LandingActivity.this, TransactionsFormActivity.class);
+                    startActivity(intent);
                 } else {
                     // Go to accounts
                     Intent intent = new Intent(LandingActivity.this, AccountsActivity.class);
