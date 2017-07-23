@@ -11,8 +11,8 @@
 
         <com.github.lzyzsd.circleprogress.DonutProgress
             android:id="@+id/dp_spent_large_period"
-            android:layout_width="160dp"
-            android:layout_height="160dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             app:donut_max="150"
             app:donut_progress="95"
             app:donut_text="$500.00"
