@@ -4,15 +4,11 @@ import org.assistant.sigma.model.catalogs.Periods;
 import org.assistant.sigma.model.entities.Settings;
 import org.assistant.sigma.model.entities.User;
 
-import io.realm.Realm;
-
 /**
  *
  * Created by giovanni on 7/05/17.
  */
-public class SettingsRepository {
-
-    private Realm realm = Realm.getDefaultInstance();
+public class SettingsRepository extends RealmRepository {
 
     public Settings activeUserSettings() {
         User user = activeUser();

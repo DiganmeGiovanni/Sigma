@@ -20,10 +20,16 @@ class LoginPresenter implements LoginContract.Presenter {
 
     LoginPresenter(LoginContract.View mLoginView) {
         this.mLoginView = mLoginView;
-        mLoginView.setPresenter(this);
+        this.mLoginView.setPresenter(this);
 
         settingsRepository = new SettingsRepository();
         usersRepository = new UsersRepository();
+    }
+
+    @Override
+    public void onDestroy() {
+        usersRepository.onDestroy();
+        settingsRepository.onDestroy();
     }
 
     /**
@@ -95,7 +101,4 @@ class LoginPresenter implements LoginContract.Presenter {
     public void onFBLoginError() {
         mLoginView.setLoadingIndicator(false);
     }
-
-    @Override
-    public void start() { }
 }

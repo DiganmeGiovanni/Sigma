@@ -34,7 +34,11 @@ public class DashboardPresenter implements Presenter {
     }
 
     @Override
-    public void start() { }
+    public void onDestroy() {
+        accountsRepository.destroy();
+        transactionsRepository.destroy();
+        usersRepository.onDestroy();
+    }
 
     @Override
     public Settings activeUserSettings() {

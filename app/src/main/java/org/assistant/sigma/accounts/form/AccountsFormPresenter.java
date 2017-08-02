@@ -22,7 +22,10 @@ public class AccountsFormPresenter implements AccountsFormContract.Presenter {
     }
 
     @Override
-    public void start() {}
+    public void onDestroy() {
+        accountsRepository.destroy();
+        usersRepository.onDestroy();
+    }
 
     @Override
     public void saveAccount(Account account) {

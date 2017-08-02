@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:padding="16dp"
-            android:text="@string/transactions"
+            android:text="@string/resume_pane"
             android:textColor="@color/textColorSecondary"
             android:textSize="@dimen/text_subheading"
             android:textStyle="bold"/>
@@ -73,6 +73,19 @@
             android:textStyle="bold"/>
 
         <TextView
+            android:id="@+id/tv_charts"
+            android:drawableStart="@drawable/ic_chart_1x"
+            android:drawablePadding="16dp"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="@string/stats"
+            android:textColor="@color/textColorSecondary"
+            android:textSize="@dimen/text_subheading"
+            android:textStyle="bold"/>
+
+        <TextView
             android:id="@+id/tv_scheduled_transactions"
             android:drawableStart="@drawable/ic_schedule_1x"
             android:drawablePadding="16dp"
@@ -81,19 +94,6 @@
             android:layout_height="wrap_content"
             android:padding="16dp"
             android:text="@string/scheduled_transactions"
-            android:textColor="@color/textColorSecondary"
-            android:textSize="@dimen/text_subheading"
-            android:textStyle="bold"/>
-
-        <TextView
-            android:id="@+id/tv_charts"
-            android:drawableStart="@drawable/ic_chart_1x"
-            android:drawablePadding="16dp"
-            android:gravity="center_vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:text="@string/charts"
             android:textColor="@color/textColorSecondary"
             android:textSize="@dimen/text_subheading"
             android:textStyle="bold"/>

@@ -2,7 +2,6 @@ package org.assistant.sigma.login;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 
 import org.assistant.sigma.R;
 import org.assistant.sigma.model.repositories.TransactionCategoriesRepository;
@@ -16,11 +15,9 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_login);
-        this.ensureTransactionsCategoriesExistence();
+        setContentView(R.layout.act_no_toolbar);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        this.ensureTransactionsCategoriesExistence();
 
         LoginFragment loginFragment = (LoginFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.content);
@@ -79,9 +76,11 @@ public class LoginActivity extends AppCompatActivity {
                 getString(R.string.category_description_other)
         );
 
-        new TransactionCategoriesRepository().ensureCategoriesExistence(
+        TransactionCategoriesRepository categoriesRepository = new TransactionCategoriesRepository();
+        categoriesRepository.ensureCategoriesExistence(
                 categoriesSpent,
                 categoriesIncomes
         );
+        categoriesRepository.onDestroy();
     }
 }

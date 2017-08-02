@@ -24,9 +24,6 @@ public class CategoryPickerPresenter implements CategoryPickerContract.CPickerPr
     }
 
     @Override
-    public void start() { }
-
-    @Override
     public void onDestroy() {
         transactionCategoriesRepository.onDestroy();
     }

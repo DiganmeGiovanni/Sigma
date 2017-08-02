@@ -23,4 +23,9 @@ public class TransactionsListPresenter implements TransactionsListContract.Prese
     public void loadLastTransactions() {
         mTransactionsListView.renderTransactions(transactionsRepository.lastTransactions());
     }
+
+    @Override
+    public void onDestroy() {
+        transactionsRepository.destroy();
+    }
 }

@@ -20,7 +20,9 @@ public class SettingsPresenter implements SettingsContract.Presenter {
     }
 
     @Override
-    public void start() { }
+    public void onDestroy() {
+        settingsRepository.onDestroy();
+    }
 
     @Override
     public void loadSettings() {

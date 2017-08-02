@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import io.realm.Realm;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
 import io.realm.Sort;
@@ -19,16 +18,7 @@ import io.realm.Sort;
  *
  * Created by giovanni on 6/05/17.
  */
-public class TransactionCategoriesRepository {
-    private Realm realm;
-
-    public TransactionCategoriesRepository() {
-        realm = Realm.getDefaultInstance();
-    }
-
-    public void onDestroy() {
-        realm.close();
-    }
+public class TransactionCategoriesRepository extends RealmRepository {
 
     /**
      * Returns all categories of given type sorted by name

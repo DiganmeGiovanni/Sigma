@@ -1,5 +1,6 @@
 package org.assistant.sigma.transactions.list;
 
+import org.assistant.sigma.BasePresenter;
 import org.assistant.sigma.BaseView;
 import org.assistant.sigma.model.entities.Transaction;
 
@@ -11,7 +12,7 @@ import io.realm.RealmResults;
  */
 public interface TransactionsListContract {
 
-    interface Presenter {
+    interface Presenter extends BasePresenter {
 
         void loadLastTransactions();
     }

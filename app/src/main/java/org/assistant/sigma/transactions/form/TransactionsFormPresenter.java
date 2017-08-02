@@ -24,9 +24,6 @@ public class TransactionsFormPresenter implements TransactionsFormContract.Prese
     }
 
     @Override
-    public void start() { }
-
-    @Override
     public void onDestroy() {
         accountsRepository.destroy();
         transactionsRepository.destroy();

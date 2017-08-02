@@ -26,7 +26,10 @@ public class AccountsListPresenter implements AccountsListContract.Presenter {
     }
 
     @Override
-    public void start() { }
+    public void onDestroy() {
+        accountsRepository.destroy();
+        usersRepository.onDestroy();
+    }
 
     @Override
     public void loadAccounts() {
