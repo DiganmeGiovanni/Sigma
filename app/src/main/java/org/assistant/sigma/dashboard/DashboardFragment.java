@@ -36,14 +36,21 @@ public class DashboardFragment extends Fragment implements DashboardContract.Vie
         viewBinding = FragDashboardBinding.bind(rootView);
 
         if (mPresenter != null) {
-            mPresenter.loadSpentPeriodLg(getExcludedCategoriesForLgAmount());
-            mPresenter.loadSpentPeriodSm();
-            mPresenter.loadLastTransactionTime();
-
             showShortPeriodLabel();
         }
 
         return rootView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (mPresenter != null) {
+            mPresenter.loadSpentPeriodLg(getExcludedCategoriesForLgAmount());
+            mPresenter.loadSpentPeriodSm();
+            mPresenter.loadLastTransactionTime();
+        }
     }
 
     @Override
@@ -63,41 +70,47 @@ public class DashboardFragment extends Fragment implements DashboardContract.Vie
     }
 
     @Override
-    public void showSpentPeriodLg(double spent, double beforeLimit, int WARNING_LEVEL) {
-        viewBinding.dpSpentLargePeriod.setText(TextUtils.asMoney(spent));
-        viewBinding.dpSpentLargePeriod.setMax((int) (spent + beforeLimit));
-        if (beforeLimit < 0) {
-            viewBinding.dpSpentLargePeriod.setProgress((float) (spent + beforeLimit));
-        } else {
-            viewBinding.dpSpentLargePeriod.setProgress((float) spent);
-        }
+    public void showSpentPeriodLg(final double spent, final double beforeLimit,
+                                  final int WARNING_LEVEL) {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                viewBinding.dpSpentLargePeriod.setText(TextUtils.asMoney(spent));
+                viewBinding.dpSpentLargePeriod.setMax((int) (spent + beforeLimit));
+                if (beforeLimit < 0) {
+                    viewBinding.dpSpentLargePeriod.setProgress((float) (spent + beforeLimit));
+                } else {
+                    viewBinding.dpSpentLargePeriod.setProgress((float) spent);
+                }
 
-        switch (WARNING_LEVEL) {
-            case Warning.LEVEL_NORMAL:
-                viewBinding
-                        .dpSpentLargePeriod
-                        .setFinishedStrokeColor(ContextCompat.getColor(
-                                getContext(),
-                                R.color.blueWhite
-                        ));
-                break;
-            case Warning.LEVEL_WARNING:
-                viewBinding
-                        .dpSpentLargePeriod
-                        .setFinishedStrokeColor(ContextCompat.getColor(
-                                getContext(),
-                                R.color.textColorWarning
-                        ));
-                break;
-            case Warning.LEVEL_DANGER:
-                viewBinding
-                        .dpSpentLargePeriod
-                        .setFinishedStrokeColor(ContextCompat.getColor(
-                                getContext(),
-                                R.color.textColorDanger
-                        ));
-                break;
-        }
+                switch (WARNING_LEVEL) {
+                    case Warning.LEVEL_NORMAL:
+                        viewBinding
+                                .dpSpentLargePeriod
+                                .setFinishedStrokeColor(ContextCompat.getColor(
+                                        getContext(),
+                                        R.color.blueWhite
+                                ));
+                        break;
+                    case Warning.LEVEL_WARNING:
+                        viewBinding
+                                .dpSpentLargePeriod
+                                .setFinishedStrokeColor(ContextCompat.getColor(
+                                        getContext(),
+                                        R.color.textColorWarning
+                                ));
+                        break;
+                    case Warning.LEVEL_DANGER:
+                        viewBinding
+                                .dpSpentLargePeriod
+                                .setFinishedStrokeColor(ContextCompat.getColor(
+                                        getContext(),
+                                        R.color.textColorDanger
+                                ));
+                        break;
+                }
+            }
+        });
     }
 
     @Override
@@ -121,8 +134,13 @@ public class DashboardFragment extends Fragment implements DashboardContract.Vie
     }
 
     @Override
-    public void showSpentPeriodSm(double periodSmSpent, int WARNING_LEVEL) {
-        viewBinding.tvSpentShortPeriod.setText(TextUtils.asMoney(periodSmSpent));
+    public void showSpentPeriodSm(final double periodSmSpent, int WARNING_LEVEL) {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                viewBinding.tvSpentShortPeriod.setText(TextUtils.asMoney(periodSmSpent));
+            }
+        });
     }
 
     private String[] getExcludedCategoriesForLgAmount() {
