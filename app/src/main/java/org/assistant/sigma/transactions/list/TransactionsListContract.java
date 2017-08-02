@@ -21,6 +21,8 @@ public interface TransactionsListContract {
 
         void toggleLoadingAnimation(boolean isLoading);
 
+        void notifyTransactionsChanged();
+
         void renderTransactions(RealmResults<Transaction> transactions);
     }
 }

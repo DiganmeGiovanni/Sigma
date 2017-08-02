@@ -26,6 +26,8 @@ public class TransactionsListFragment extends Fragment implements TransactionsLi
     private FragTransactionsBinding viewBinding;
     private TransactionsListContract.Presenter mPresenter;
 
+    private TransactionsAdapter transactionsAdapter;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
@@ -49,10 +51,17 @@ public class TransactionsListFragment extends Fragment implements TransactionsLi
     }
 
     @Override
+    public void notifyTransactionsChanged() {
+        if (transactionsAdapter != null) {
+            transactionsAdapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
     public void renderTransactions(RealmResults<Transaction> transactions) {
         if (transactions.size() > 0) {
-            TransactionsAdapter adapter = new TransactionsAdapter(getContext(), transactions);
-            viewBinding.rvTransactions.setAdapter(adapter);
+            transactionsAdapter = new TransactionsAdapter(getContext(), transactions);
+            viewBinding.rvTransactions.setAdapter(transactionsAdapter);
 
             viewBinding.tvWithoutTransactions.setVisibility(View.GONE);
             viewBinding.rvTransactions.setVisibility(View.VISIBLE);
@@ -60,7 +69,6 @@ public class TransactionsListFragment extends Fragment implements TransactionsLi
             viewBinding.rvTransactions.setVisibility(View.GONE);
             viewBinding.tvWithoutTransactions.setVisibility(View.VISIBLE);
         }
-
     }
 
     private void setupRVTransactions() {

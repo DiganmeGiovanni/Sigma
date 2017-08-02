@@ -1,6 +1,10 @@
 package org.assistant.sigma.transactions.list;
 
+import org.assistant.sigma.model.entities.Transaction;
 import org.assistant.sigma.model.repositories.TransactionsRepository;
+
+import io.realm.RealmChangeListener;
+import io.realm.RealmResults;
 
 /**
  *
@@ -9,7 +13,6 @@ import org.assistant.sigma.model.repositories.TransactionsRepository;
 public class TransactionsListPresenter implements TransactionsListContract.Presenter {
 
     private TransactionsListContract.View mTransactionsListView;
-
     private TransactionsRepository transactionsRepository;
 
     public TransactionsListPresenter(TransactionsListContract.View mTransactionsListView) {
@@ -21,7 +24,15 @@ public class TransactionsListPresenter implements TransactionsListContract.Prese
 
     @Override
     public void loadLastTransactions() {
-        mTransactionsListView.renderTransactions(transactionsRepository.lastTransactions());
+        RealmResults<Transaction> transactions = transactionsRepository.lastTransactions();
+        mTransactionsListView.renderTransactions(transactions);
+
+        transactions.addChangeListener(new RealmChangeListener<RealmResults<Transaction>>() {
+            @Override
+            public void onChange(RealmResults<Transaction> element) {
+                mTransactionsListView.notifyTransactionsChanged();
+            }
+        });
     }
 
     @Override
