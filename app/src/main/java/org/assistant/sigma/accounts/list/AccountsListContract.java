@@ -22,6 +22,8 @@ interface AccountsListContract {
 
         void goToNewAccount();
 
+        void notifyAccountsListChanged();
+
         void updateAccountsList(RealmList<Account> accounts);
     }
 }

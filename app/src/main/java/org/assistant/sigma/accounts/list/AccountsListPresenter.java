@@ -5,6 +5,7 @@ import org.assistant.sigma.model.entities.User;
 import org.assistant.sigma.model.repositories.AccountsRepository;
 import org.assistant.sigma.model.repositories.UsersRepository;
 
+import io.realm.RealmChangeListener;
 import io.realm.RealmList;
 
 /**
@@ -35,6 +36,12 @@ public class AccountsListPresenter implements AccountsListContract.Presenter {
     public void loadAccounts() {
         User user = usersRepository.activeUser();
         RealmList<Account> accounts = accountsRepository.userAccounts(user);
+        accounts.addChangeListener(new RealmChangeListener<RealmList<Account>>() {
+            @Override
+            public void onChange(RealmList<Account> sameAccounts) {
+                mAccountsListView.notifyAccountsListChanged();
+            }
+        });
 
         mAccountsListView.updateAccountsList(accounts);
     }

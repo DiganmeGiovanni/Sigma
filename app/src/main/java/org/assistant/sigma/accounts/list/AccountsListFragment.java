@@ -25,6 +25,8 @@ public class AccountsListFragment extends Fragment implements AccountsListContra
     private FragAccountsListBinding viewBinding;
     private AccountsListContract.Presenter mPresenter;
 
+    private AccountsAdapter accountsAdapter;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
@@ -60,8 +62,15 @@ public class AccountsListFragment extends Fragment implements AccountsListContra
     }
 
     @Override
+    public void notifyAccountsListChanged() {
+        if (accountsAdapter != null) {
+            accountsAdapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
     public void updateAccountsList(RealmList<Account> accounts) {
-        AccountsAdapter accountsAdapter = new AccountsAdapter(getContext(), accounts);
+        accountsAdapter = new AccountsAdapter(getContext(), accounts);
         viewBinding.lvAccounts.setAdapter(accountsAdapter);
     }
 
