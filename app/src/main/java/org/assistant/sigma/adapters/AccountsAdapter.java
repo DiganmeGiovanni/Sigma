@@ -1,4 +1,4 @@
-package org.assistant.sigma.accounts.adapters;
+package org.assistant.sigma.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;

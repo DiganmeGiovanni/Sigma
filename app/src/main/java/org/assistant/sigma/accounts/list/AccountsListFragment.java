@@ -8,9 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import org.assistant.sigma.R;
-import org.assistant.sigma.accounts.adapters.AccountsAdapter;
 import org.assistant.sigma.accounts.form.AccountsFormFragment;
 import org.assistant.sigma.accounts.form.AccountsFormPresenter;
+import org.assistant.sigma.adapters.AccountsAdapter;
 import org.assistant.sigma.databinding.FragAccountsListBinding;
 import org.assistant.sigma.model.entities.Account;
 import org.assistant.sigma.utils.ActivityUtils;
