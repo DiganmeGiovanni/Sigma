@@ -13,7 +13,6 @@ import org.assistant.sigma.accounts.form.AccountsFormPresenter;
 import org.assistant.sigma.adapters.AccountsAdapter;
 import org.assistant.sigma.databinding.FragAccountsListBinding;
 import org.assistant.sigma.model.entities.Account;
-import org.assistant.sigma.utils.ActivityUtils;
 
 import io.realm.RealmList;
 
@@ -55,16 +54,9 @@ public class AccountsListFragment extends Fragment implements AccountsListContra
     @Override
     public void goToNewAccount() {
         AccountsFormFragment accountsFormFragment = new AccountsFormFragment();
-
-        ActivityUtils.replaceFragmentInActivity(
-                getFragmentManager(),
-                accountsFormFragment,
-                R.id.content,
-                "accountsForm"
-        );
-
-        // Initialize presenter
         new AccountsFormPresenter(accountsFormFragment);
+
+        accountsFormFragment.show(getFragmentManager(), "accountsForm");
     }
 
     @Override

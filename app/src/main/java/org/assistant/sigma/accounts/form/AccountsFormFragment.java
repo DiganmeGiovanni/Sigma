@@ -1,14 +1,18 @@
 package org.assistant.sigma.accounts.form;
 
+import android.app.Dialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.DialogFragment;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 
 import org.assistant.sigma.R;
 import org.assistant.sigma.databinding.FragAccountsFormBinding;
@@ -20,10 +24,22 @@ import java.util.Date;
  *
  * Created by giovanni on 5/05/17.
  */
-public class AccountsFormFragment extends Fragment implements AccountsFormContract.View {
+public class AccountsFormFragment extends DialogFragment implements AccountsFormContract.View {
 
     private FragAccountsFormBinding viewBinding;
     private AccountsFormContract.Presenter mPresenter;
+
+    @NonNull
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        Dialog dialog = super.onCreateDialog(savedInstanceState);
+
+        if (dialog.getWindow() != null) {
+            dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        }
+
+        return dialog;
+    }
 
     @Nullable
     @Override
@@ -35,6 +51,19 @@ public class AccountsFormFragment extends Fragment implements AccountsFormContra
         setupSaveBtn();
         setupETCard();
         return rootView;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        Window window = getDialog().getWindow();
+        if (window != null) {
+            window.setLayout(
+                    WindowManager.LayoutParams.MATCH_PARENT,
+                    WindowManager.LayoutParams.WRAP_CONTENT
+            );
+        }
     }
 
     @Override
@@ -78,7 +107,7 @@ public class AccountsFormFragment extends Fragment implements AccountsFormContra
                     account.setCreatedAt(new Date());
 
                     mPresenter.saveAccount(account);
-                    getFragmentManager().popBackStack();
+                    dismiss();
                 }
             }
         });
