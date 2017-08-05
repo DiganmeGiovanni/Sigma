@@ -23,10 +23,12 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
 
     private RealmResults<Transaction> transactions;
     private CategoryIconProvider categoryIconProvider;
+    private Context mContext;
 
     private int paddingTopAsPixels16 = 0;
 
     public TransactionsAdapter(Context mContext, RealmResults<Transaction> transactions) {
+        this.mContext = mContext;
         this.transactions = transactions;
         categoryIconProvider = new CategoryIconProvider(mContext, R.color.colorPrimary);
 
@@ -50,7 +52,7 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
     public void onBindViewHolder(ViewHolder holder, int position) {
         Transaction transaction = transactions.get(position);
         holder.tvAccount.setText(transaction.getAccount().getName());
-        holder.tvCategory.setText(transaction.getTransactionCategory().getName());
+        holder.tvTime.setText(TextUtils.relativeTime(mContext, transaction.getCreatedAt().getTime()));
         holder.tvQuantity.setText(TextUtils.asMoney(Math.abs(transaction.getQuantity())));
 
         // Set padding top if is first item
@@ -71,7 +73,7 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
     class ViewHolder extends RecyclerView.ViewHolder {
         ImageView ivIconCategory;
         TextView tvAccount;
-        TextView tvCategory;
+        TextView tvTime;
         TextView tvQuantity;
 
         ViewHolder(View itemView) {
@@ -79,7 +81,7 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
 
             ivIconCategory = (ImageView) itemView.findViewById(R.id.iv_icon_category);
             tvAccount = (TextView) itemView.findViewById(R.id.tv_account);
-            tvCategory = (TextView) itemView.findViewById(R.id.tv_category);
+            tvTime = (TextView) itemView.findViewById(R.id.tv_time);
             tvQuantity = (TextView) itemView.findViewById(R.id.tv_quantity);
         }
     }
