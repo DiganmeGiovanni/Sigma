@@ -80,6 +80,12 @@ public class CategoryPickerDFragment extends DialogFragment
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        dismiss();
+    }
+
+    @Override
     public void onStop() {
         super.onStop();
         mPresenter.onDestroy();
