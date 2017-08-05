@@ -55,6 +55,8 @@ public class TransactionsFormActivity extends AppCompatActivity {
             actionBar.setHomeAsUpIndicator(R.drawable.ic_close_24dp);
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowHomeEnabled(true);
+
+            actionBar.setTitle(R.string.add_transaction);
         }
     }
 }

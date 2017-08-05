@@ -99,9 +99,10 @@
     <string name="cancel">Cancelar</string>
     <string name="stats">Estadísticas</string>
     <string name="choose_category">Elije una categoría</string>
-    <string name="dots">...</string>
+    <string name="dots">…</string>
     <string name="error_category_required_title">Elije una categoría</string>
     <string name="error_category_required">Debes elejir una categoría para esta transacción</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
     <string name="add_account">Add account</string>
+    <string name="add_transaction">Add transaction</string>
 </resources>
