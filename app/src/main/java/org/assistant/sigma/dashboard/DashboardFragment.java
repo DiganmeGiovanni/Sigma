@@ -35,11 +35,14 @@ public class DashboardFragment extends Fragment implements DashboardContract.Vie
         View rootView = inflater.inflate(R.layout.frag_dashboard, container, false);
         viewBinding = FragDashboardBinding.bind(rootView);
 
-        if (mPresenter != null) {
-            showShortPeriodLabel();
-        }
-
+        showShortPeriodLabel();
         return rootView;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mPresenter.onDestroy();
     }
 
     @Override

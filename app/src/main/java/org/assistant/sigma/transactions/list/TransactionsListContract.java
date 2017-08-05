@@ -10,7 +10,7 @@ import io.realm.RealmResults;
  *
  * Created by giovanni on 21/05/17.
  */
-public interface TransactionsListContract {
+interface TransactionsListContract {
 
     interface Presenter extends BasePresenter {
 

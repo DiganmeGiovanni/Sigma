@@ -41,6 +41,12 @@ public class TransactionsListFragment extends Fragment implements TransactionsLi
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mPresenter.onDestroy();
+    }
+
+    @Override
     public void setPresenter(TransactionsListContract.Presenter mPresenter) {
         this.mPresenter = mPresenter;
     }

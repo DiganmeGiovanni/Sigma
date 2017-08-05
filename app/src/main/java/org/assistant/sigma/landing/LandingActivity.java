@@ -60,25 +60,35 @@ public class LandingActivity extends DrawerActivity {
     }
 
     private void loadDashboardFragment() {
-        DashboardFragment dashboardFragment = new DashboardFragment();
-        dashboardPresenter = new DashboardPresenter(dashboardFragment);
+        DashboardFragment dashboardFragment = (DashboardFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.header_content_frame);
 
-        ActivityUtils.addFragmentToActivity(
-                getSupportFragmentManager(),
-                dashboardFragment,
-                R.id.header_content_frame
-        );
+        if (dashboardFragment == null) {
+            dashboardFragment = new DashboardFragment();
+            ActivityUtils.addFragmentToActivity(
+                    getSupportFragmentManager(),
+                    dashboardFragment,
+                    R.id.header_content_frame
+            );
+        }
+
+        dashboardPresenter = new DashboardPresenter(dashboardFragment);
     }
 
     private void loadTransactionsListFragment() {
-        TransactionsListFragment listFragment = new TransactionsListFragment();
-        new TransactionsListPresenter(listFragment);
+        TransactionsListFragment listFragment  = (TransactionsListFragment)
+                getSupportFragmentManager().findFragmentById(R.id.body_content_frame);
 
-        ActivityUtils.addFragmentToActivity(
-                getSupportFragmentManager(),
-                listFragment,
-                R.id.body_content_frame
-        );
+        if (listFragment == null) {
+            listFragment = new TransactionsListFragment();
+            ActivityUtils.addFragmentToActivity(
+                    getSupportFragmentManager(),
+                    listFragment,
+                    R.id.body_content_frame
+            );
+        }
+
+        new TransactionsListPresenter(listFragment);
     }
 
     private void setupAddButton() {

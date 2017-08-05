@@ -17,9 +17,14 @@ public class TransactionsListPresenter implements TransactionsListContract.Prese
 
     public TransactionsListPresenter(TransactionsListContract.View mTransactionsListView) {
         this.mTransactionsListView = mTransactionsListView;
-        mTransactionsListView.setPresenter(this);
+        this.mTransactionsListView.setPresenter(this);
 
         transactionsRepository = new TransactionsRepository();
+    }
+
+    @Override
+    public void onDestroy() {
+        transactionsRepository.destroy();
     }
 
     @Override
@@ -33,10 +38,5 @@ public class TransactionsListPresenter implements TransactionsListContract.Prese
                 mTransactionsListView.notifyTransactionsChanged();
             }
         });
-    }
-
-    @Override
-    public void onDestroy() {
-        transactionsRepository.destroy();
     }
 }
