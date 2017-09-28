@@ -46,6 +46,27 @@ public class TransactionsRepository {
         realm.commitTransaction();
     }
 
+    public void update(Transaction transaction) {
+        realm.beginTransaction();
+        realm.copyToRealmOrUpdate(transaction);
+        realm.commitTransaction();
+    }
+
+    public Transaction find(String transactionId) {
+        return realm.where(Transaction.class)
+                .equalTo("id", transactionId).
+                        findFirst();
+    }
+
+    public void delete(String transactionId) {
+        Transaction transaction = find(transactionId);
+        if (transaction != null) {
+            realm.beginTransaction();
+            transaction.deleteFromRealm();
+            realm.commitTransaction();
+        }
+    }
+
     public RealmResults<Transaction> lastTransactions() {
         return realm.where(Transaction.class).findAllSorted("createdAt", Sort.DESCENDING);
     }

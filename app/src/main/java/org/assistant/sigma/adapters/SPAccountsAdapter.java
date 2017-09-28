@@ -55,4 +55,14 @@ public class SPAccountsAdapter extends BaseAdapter {
 
         return containerView;
     }
+
+    public int getPosition(Account account) {
+        for (int i = 0; i < accounts.size(); i++) {
+            if (accounts.get(i).getId().equals(account.getId())) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
 }

@@ -3,6 +3,7 @@ package org.assistant.sigma.transactions.form;
 import org.assistant.sigma.model.entities.Transaction;
 import org.assistant.sigma.model.repositories.AccountsRepository;
 import org.assistant.sigma.model.repositories.TransactionsRepository;
+import org.assistant.sigma.utils.callbacks.CBGeneric;
 
 /**
  *
@@ -40,5 +41,19 @@ public class TransactionsFormPresenter implements TransactionsFormContract.Prese
         transaction.setCurrentAccountBalance(balance + transaction.getQuantity());
 
         transactionsRepository.insert(transaction);
+    }
+
+    @Override
+    public void updateTransaction(Transaction transaction, CBGeneric<Boolean> callback) {
+        transactionsRepository.update(transaction);
+        accountsRepository.recalculateBalance(transaction.getAccount().getId(), callback);
+    }
+
+    @Override
+    public void loadTransaction(String transactionId) {
+        Transaction transaction = transactionsRepository.find(transactionId);
+        if (transaction != null) {
+            mTransactionsFormView.preloadTransaction(transaction);
+        }
     }
 }

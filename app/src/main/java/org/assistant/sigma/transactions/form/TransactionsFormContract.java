@@ -4,6 +4,7 @@ import org.assistant.sigma.BasePresenter;
 import org.assistant.sigma.BaseView;
 import org.assistant.sigma.model.entities.Account;
 import org.assistant.sigma.model.entities.Transaction;
+import org.assistant.sigma.utils.callbacks.CBGeneric;
 
 import io.realm.RealmResults;
 
@@ -20,6 +21,10 @@ interface TransactionsFormContract {
         void loadAccounts();
 
         void saveTransaction(Transaction transaction);
+
+        void updateTransaction(Transaction transaction, CBGeneric<Boolean> callback);
+
+        void loadTransaction(String transactionId);
     }
 
     interface View extends BaseView<Presenter> {
@@ -33,5 +38,7 @@ interface TransactionsFormContract {
         void onSaveBtnClicked();
 
         boolean validateForm();
+
+        void preloadTransaction(Transaction transaction);
     }
 }

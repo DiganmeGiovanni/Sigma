@@ -1,5 +1,6 @@
 package org.assistant.sigma.transactions.list;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,7 @@ import org.assistant.sigma.R;
 import org.assistant.sigma.adapters.TransactionsAdapter;
 import org.assistant.sigma.databinding.FragTransactionsBinding;
 import org.assistant.sigma.model.entities.Transaction;
+import org.assistant.sigma.transactions.details.TransactionDetailsActivity;
 
 import io.realm.RealmResults;
 
@@ -66,7 +68,22 @@ public class TransactionsListFragment extends Fragment implements TransactionsLi
     @Override
     public void renderTransactions(RealmResults<Transaction> transactions) {
         if (transactions.size() > 0) {
-            transactionsAdapter = new TransactionsAdapter(getContext(), transactions);
+            transactionsAdapter = new TransactionsAdapter(
+                    getContext(),
+                    transactions,
+                    new TransactionsAdapter.OnTransactionClickListener() {
+                        @Override
+                        public void onTransactionClicked(Transaction transaction) {
+                            Intent intent = new Intent(getContext(), TransactionDetailsActivity.class);
+                            intent.putExtra(
+                                    TransactionDetailsActivity.TRANSACTION_ID,
+                                    transaction.getId()
+                            );
+
+                            startActivity(intent);
+                        }
+                    }
+            );
             viewBinding.rvTransactions.setAdapter(transactionsAdapter);
 
             viewBinding.tvWithoutTransactions.setVisibility(View.GONE);
@@ -75,6 +92,8 @@ public class TransactionsListFragment extends Fragment implements TransactionsLi
             viewBinding.rvTransactions.setVisibility(View.GONE);
             viewBinding.tvWithoutTransactions.setVisibility(View.VISIBLE);
         }
+
+
     }
 
     private void setupRVTransactions() {

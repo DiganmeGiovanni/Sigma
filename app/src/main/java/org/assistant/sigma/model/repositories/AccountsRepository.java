@@ -95,4 +95,12 @@ public class AccountsRepository {
             }
         });
     }
+
+    /**
+     * TODO
+     * Recalculate the balance for given transaction and subsequent
+     * @param transaction This and subsequent will be updated
+     * @param callback Is executed when update operations has finished
+     */
+    public void recalculateBalance(Transaction transaction, final CBGeneric<Boolean> callback) { }
 }

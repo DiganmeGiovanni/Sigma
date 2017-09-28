@@ -24,6 +24,7 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
     private RealmResults<Transaction> transactions;
     private CategoryIconProvider categoryIconProvider;
     private Context mContext;
+    private OnTransactionClickListener onClickListener;
 
     private int paddingTopAsPixels16 = 0;
 
@@ -35,6 +36,12 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
         // Calculate the top 16dp for first item
         float scale = mContext.getResources().getDisplayMetrics().density;
         paddingTopAsPixels16 = (int) (16 * scale + 0.5f);
+    }
+
+    public TransactionsAdapter(Context mContext, RealmResults<Transaction> transactions,
+                               OnTransactionClickListener onClickListener) {
+        this(mContext, transactions);
+        this.onClickListener = onClickListener;
     }
 
     @Override
@@ -50,7 +57,7 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Transaction transaction = transactions.get(position);
+        final Transaction transaction = transactions.get(position);
         holder.tvAccount.setText(transaction.getAccount().getName());
         holder.tvTime.setText(TextUtils.relativeTime(mContext, transaction.getCreatedAt().getTime()));
         holder.tvQuantity.setText(TextUtils.asMoney(Math.abs(transaction.getQuantity())));
@@ -63,6 +70,15 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
         }
 
         categoryIconProvider.setIcon(holder.ivIconCategory, transaction.getTransactionCategory());
+
+        if (onClickListener != null) {
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onClickListener.onTransactionClicked(transaction);
+                }
+            });
+        }
     }
 
     @Override
@@ -84,5 +100,10 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
             tvTime = (TextView) itemView.findViewById(R.id.tv_time);
             tvQuantity = (TextView) itemView.findViewById(R.id.tv_quantity);
         }
+    }
+
+    public interface OnTransactionClickListener {
+
+        void onTransactionClicked(Transaction transaction);
     }
 }

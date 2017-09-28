@@ -1,4 +1,4 @@
-package org.assistant.sigma.transactions.form;
+package org.assistant.sigma.transactions.details;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -11,11 +11,11 @@ import org.assistant.sigma.databinding.ActToolbarBinding;
 import org.assistant.sigma.utils.ActivityUtils;
 
 /**
- * Created by giovanni on 22/07/17.
+ * Created by giovanni on 27/09/17.
  *
  */
-public class TransactionsFormActivity extends AppCompatActivity {
-    public static final String TRANSACTION_ID = "TRAN_ID";
+public class TransactionDetailsActivity extends AppCompatActivity {
+    public static final String TRANSACTION_ID = "TRANSACTION_ID";
 
     private ActToolbarBinding viewBinding;
 
@@ -25,30 +25,24 @@ public class TransactionsFormActivity extends AppCompatActivity {
         viewBinding = DataBindingUtil.setContentView(this, R.layout.act_toolbar);
         setupToolbar();
 
-        // Load transactions form fragment
-        TransactionsFormFragment formFragment = (TransactionsFormFragment) getSupportFragmentManager()
+        // Load details fragment
+        TransactionDetailsFragment detailsFragment = (TransactionDetailsFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.content);
-        if (formFragment == null) {
-            formFragment = new TransactionsFormFragment();
+        if (detailsFragment == null) {
+            detailsFragment = new TransactionDetailsFragment();
 
-            // Retrieve transaction to edit
-            if (getIntent().getExtras() != null && getIntent().hasExtra(TRANSACTION_ID)) {
-                String transactionId = getIntent().getStringExtra(TRANSACTION_ID);
-
-                Bundle params = new Bundle();
-                params.putString(TRANSACTION_ID, transactionId);
-                formFragment.setArguments(params);
-            }
+            Bundle args = new Bundle();
+            args.putString(TRANSACTION_ID, getIntent().getStringExtra(TRANSACTION_ID));
+            detailsFragment.setArguments(args);
 
             ActivityUtils.addFragmentToActivity(
                     getSupportFragmentManager(),
-                    formFragment,
+                    detailsFragment,
                     R.id.content
             );
         }
 
-        // Init presenter
-        new TransactionsFormPresenter(formFragment);
+        new TransactionDetailsPresenter(detailsFragment);
     }
 
     @Override
@@ -66,11 +60,7 @@ public class TransactionsFormActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowHomeEnabled(true);
 
-            if (getIntent().getExtras() != null && getIntent().hasExtra(TRANSACTION_ID)) {
-                actionBar.setTitle(R.string.edit_transaction);
-            } else {
-                actionBar.setTitle(R.string.add_transaction);
-            }
+            actionBar.setTitle(R.string.transaction_details);
         }
     }
 }

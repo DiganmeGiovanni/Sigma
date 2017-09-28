@@ -26,20 +26,22 @@ import org.assistant.sigma.model.entities.Account;
 import org.assistant.sigma.model.entities.Transaction;
 import org.assistant.sigma.model.entities.TransactionCategory;
 import org.assistant.sigma.utils.TextUtils;
+import org.assistant.sigma.utils.callbacks.CBGeneric;
 
 import java.util.Calendar;
 
 import io.realm.RealmResults;
 
 /**
- *
  * Created by giovanni on 6/05/17.
+ *
  */
 public class TransactionsFormFragment extends Fragment implements TransactionsFormContract.View,
         DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
     private FragTransactionsFormBinding viewBinding;
     private TransactionsFormContract.Presenter mPresenter;
+    private SPAccountsAdapter accountsAdapter;
 
     private Calendar transactionDate;
     private Account account;
@@ -59,6 +61,13 @@ public class TransactionsFormFragment extends Fragment implements TransactionsFo
         viewBinding = FragTransactionsFormBinding.bind(rootView);
 
         setupForm();
+
+        // Preload transaction to edit if necessary
+        if (getArguments() != null && getArguments().containsKey(TransactionsFormActivity.TRANSACTION_ID)) {
+            String transactionId = getArguments()
+                    .getString(TransactionsFormActivity.TRANSACTION_ID);
+            mPresenter.loadTransaction(transactionId);
+        }
         return rootView;
     }
 
@@ -111,8 +120,8 @@ public class TransactionsFormFragment extends Fragment implements TransactionsFo
 
     @Override
     public void updateAccountsSpinner(final RealmResults<Account> accounts) {
-        SPAccountsAdapter adapter = new SPAccountsAdapter(getContext(), accounts);
-        viewBinding.spAccount.setAdapter(adapter);
+        accountsAdapter = new SPAccountsAdapter(getContext(), accounts);
+        viewBinding.spAccount.setAdapter(accountsAdapter);
         viewBinding.spAccount.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -168,8 +177,22 @@ public class TransactionsFormFragment extends Fragment implements TransactionsFo
             transaction.setTransactionCategory(category);
             transaction.setAccount(account);
 
-            mPresenter.saveTransaction(transaction);
-            getActivity().finish();
+            Bundle args = getArguments();
+            if (args != null && args.containsKey(TransactionsFormActivity.TRANSACTION_ID)) {
+                transaction.setId(args.getString(TransactionsFormActivity.TRANSACTION_ID));
+
+                // TODO Show progress dialog
+                mPresenter.updateTransaction(transaction, new CBGeneric<Boolean>() {
+                    @Override
+                    public void onResponse(Boolean response) {
+                        // TODO Hide progress dialog
+                        getActivity().finish();
+                    }
+                });
+            } else {
+                mPresenter.saveTransaction(transaction);
+                getActivity().finish();
+            }
         }
     }
 
@@ -230,5 +253,25 @@ public class TransactionsFormFragment extends Fragment implements TransactionsFo
         transactionDate.set(Calendar.MINUTE, minute);
 
         viewBinding.etDate.setText(TextUtils.forHumans(transactionDate));
+    }
+
+    @Override
+    public void preloadTransaction(Transaction transaction) {
+        category = transaction.getTransactionCategory();
+        viewBinding.tvCategory.setText(category.getName());
+
+        if (transaction.getQuantity() < 0) {
+            viewBinding.etQuantity.setText(String.valueOf(transaction.getQuantity() * -1));
+        } else {
+            viewBinding.etQuantity.setText(String.valueOf(transaction.getQuantity()));
+        }
+        viewBinding.etDate.setText(TextUtils.forHumans(transaction.getCreatedAt()));
+        viewBinding.etDescription.setText(transaction.getDescription());
+
+        int accountPos = accountsAdapter.getPosition(transaction.getAccount());
+        viewBinding.spAccount.setSelection(accountPos);
+
+        transactionDate.setTime(transaction.getCreatedAt());
+        account = transaction.getAccount();
     }
 }
