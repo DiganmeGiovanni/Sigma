@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.MaterialIcons;
 
-import org.assistant.sigma.R;
+import org.assistant.sigma.model.catalogs.DefaultTransactionCategories;
 import org.assistant.sigma.model.entities.TransactionCategory;
 
 /**
@@ -67,19 +67,19 @@ public class CategoryIconProvider {
     private Drawable drawableForCategory(TransactionCategory category) {
         String categoryName = category.getName();
 
-        if (categoryName.equals(mContext.getString(R.string.category_name_transport))) {
+        if (category.getId() == DefaultTransactionCategories.ID_TRANSPORT) {
             return dTransport;
-        } else if (categoryName.equals(mContext.getString(R.string.category_name_provisions))) {
+        } else if (category.getId() == DefaultTransactionCategories.ID_PROVISIONS) {
             return dMarket;
-        } else if (categoryName.equals(mContext.getString(R.string.category_name_clothes_shoes))) {
+        } else if (category.getId() == DefaultTransactionCategories.ID_CLOTHES) {
             return dClothing;
-        } else if (categoryName.equals(mContext.getString(R.string.category_name_home))) {
+        } else if (category.getId() == DefaultTransactionCategories.ID_HOME) {
             return dHome;
-        } else if (categoryName.equals(mContext.getString(R.string.category_name_restaurants))) {
+        } else if (category.getId() == DefaultTransactionCategories.ID_RESTAURANT) {
             return dRestaurant;
-        } else if (categoryName.equals(mContext.getString(R.string.category_name_bar))) {
+        } else if (category.getId() == DefaultTransactionCategories.ID_BAR) {
             return dBar;
-        } else if (categoryName.equals(mContext.getString(R.string.category_name_salary))) {
+        } else if (category.getId() == DefaultTransactionCategories.ID_SALARY) {
             return dWallet;
         } else {
             return dOther;
