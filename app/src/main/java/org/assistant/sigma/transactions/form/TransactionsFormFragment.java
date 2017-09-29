@@ -26,6 +26,7 @@ import org.assistant.sigma.model.entities.Transaction;
 import org.assistant.sigma.model.entities.TransactionCategory;
 import org.assistant.sigma.utils.TextUtils;
 import org.assistant.sigma.utils.callbacks.CBGeneric;
+import org.assistant.sigma.utils.services.CategoryIconProvider;
 
 import java.util.Calendar;
 
@@ -45,6 +46,7 @@ public class TransactionsFormFragment extends Fragment implements TransactionsFo
     private Calendar transactionDate;
     private Account account;
     private TransactionCategory category;
+    private CategoryIconProvider categoryIconProvider;
 
     @Nullable
     @Override
@@ -53,6 +55,9 @@ public class TransactionsFormFragment extends Fragment implements TransactionsFo
         View rootView = inflater.inflate(R.layout.frag_transactions_form, container, false);
         viewBinding = FragTransactionsFormBinding.bind(rootView);
         setupForm();
+
+        // Init icon provider
+        categoryIconProvider = new CategoryIconProvider(getContext(), R.color.blue_dark, 16);
 
         // Setup save FAB button
         IconDrawable iconEdit = new IconDrawable(getContext(), MaterialIcons.md_done)
@@ -99,6 +104,7 @@ public class TransactionsFormFragment extends Fragment implements TransactionsFo
                     public void onCategorySelected(TransactionCategory category) {
                         TransactionsFormFragment.this.category = category;
                         viewBinding.tvCategory.setText(category.getName());
+                        categoryIconProvider.setCompoundIcon(viewBinding.tvCategory, category);
                     }
                 });
                 dFragment.show(getFragmentManager(), "categoryPicker");
@@ -261,6 +267,7 @@ public class TransactionsFormFragment extends Fragment implements TransactionsFo
     public void preloadTransaction(Transaction transaction) {
         category = transaction.getTransactionCategory();
         viewBinding.tvCategory.setText(category.getName());
+        categoryIconProvider.setCompoundIcon(viewBinding.tvCategory, category);
 
         if (transaction.getQuantity() < 0) {
             viewBinding.etQuantity.setText(String.valueOf(transaction.getQuantity() * -1));

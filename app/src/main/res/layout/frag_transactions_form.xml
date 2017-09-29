@@ -55,6 +55,7 @@
                     android:text="@string/category"/>
                 <TextView
                     android:id="@+id/tv_category"
+                    android:drawablePadding="8dp"
                     android:background="@drawable/background_category"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
