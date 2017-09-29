@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
+import com.joanzapata.iconify.IconDrawable;
+import com.joanzapata.iconify.fonts.MaterialIcons;
+
 import org.assistant.sigma.DrawerActivity;
 import org.assistant.sigma.R;
 import org.assistant.sigma.accounts.AccountsActivity;
@@ -92,6 +95,10 @@ public class LandingActivity extends DrawerActivity {
     }
 
     private void setupAddButton() {
+        IconDrawable iconAdd = new IconDrawable(this, MaterialIcons.md_add)
+                .colorRes(R.color.gray_light)
+                .sizeDp(24);
+        viewBinding.btnAdd.setImageDrawable(iconAdd);
         viewBinding.btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

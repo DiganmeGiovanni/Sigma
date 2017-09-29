@@ -58,7 +58,6 @@
                 app:layout_anchor="@id/app_bar"
                 app:layout_anchorGravity="bottom|end"
                 app:fabSize="normal"
-                app:srcCompat="@drawable/ic_add_1x"
                 app:useCompatPadding="true" />
         </android.support.design.widget.CoordinatorLayout>
 
