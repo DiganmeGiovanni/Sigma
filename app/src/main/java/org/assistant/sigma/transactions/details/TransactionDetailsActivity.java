@@ -6,6 +6,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 
+import com.joanzapata.iconify.IconDrawable;
+import com.joanzapata.iconify.fonts.MaterialIcons;
+
 import org.assistant.sigma.R;
 import org.assistant.sigma.databinding.ActToolbarBinding;
 import org.assistant.sigma.utils.ActivityUtils;
@@ -56,7 +59,10 @@ public class TransactionDetailsActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setHomeAsUpIndicator(R.drawable.ic_close_24dp);
+            IconDrawable iconBack = new IconDrawable(this, MaterialIcons.md_arrow_back)
+                    .colorRes(R.color.gray_light)
+                    .actionBarSize();
+            actionBar.setHomeAsUpIndicator(iconBack);
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowHomeEnabled(true);
 
