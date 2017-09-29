@@ -58,6 +58,16 @@ public class TransactionsRepository {
                         findFirst();
     }
 
+    public Transaction findLatest() {
+        RealmResults<Transaction> all = realm.where(Transaction.class)
+                .findAllSorted("createdAt", Sort.DESCENDING);
+        if (all.size() > 0) {
+            return all.get(0);
+        }
+
+        return null;
+    }
+
     public void delete(String transactionId) {
         Transaction transaction = find(transactionId);
         if (transaction != null) {

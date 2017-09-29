@@ -25,6 +25,10 @@ interface TransactionsFormContract {
         void updateTransaction(Transaction transaction, CBGeneric<Boolean> callback);
 
         void loadTransaction(String transactionId);
+
+        Transaction lastTransaction();
+
+        boolean hasEnoughFunds(Account account, double quantity);
     }
 
     interface View extends BaseView<Presenter> {

@@ -1,5 +1,6 @@
 package org.assistant.sigma.transactions.form;
 
+import org.assistant.sigma.model.entities.Account;
 import org.assistant.sigma.model.entities.Transaction;
 import org.assistant.sigma.model.repositories.AccountsRepository;
 import org.assistant.sigma.model.repositories.TransactionsRepository;
@@ -55,5 +56,16 @@ public class TransactionsFormPresenter implements TransactionsFormContract.Prese
         if (transaction != null) {
             mTransactionsFormView.preloadTransaction(transaction);
         }
+    }
+
+    @Override
+    public Transaction lastTransaction() {
+        return transactionsRepository.lastTransaction();
+    }
+
+    @Override
+    public boolean hasEnoughFunds(Account account, double quantity) {
+        double currentBalance = accountsRepository.currentBalance(account);
+        return currentBalance - quantity >= 0;
     }
 }

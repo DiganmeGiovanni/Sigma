@@ -120,7 +120,14 @@ public class TransactionsFormFragment extends Fragment implements TransactionsFo
             public void onNothingSelected(AdapterView<?> adapterView) { }
         });
 
-        account = accounts.get(0);
+        Transaction lastTransaction = mPresenter.lastTransaction();
+        if (lastTransaction != null) {
+            int pos = accountsAdapter.getPosition(lastTransaction.getAccount());
+            viewBinding.spAccount.setSelection(pos);
+            account = lastTransaction.getAccount();
+        } else {
+            account = accounts.get(0);
+        }
     }
 
     @Override
@@ -155,6 +162,13 @@ public class TransactionsFormFragment extends Fragment implements TransactionsFo
         if (validateForm()) {
             double qty = Double.parseDouble(viewBinding.etQuantity.getText().toString());
             if (!category.isIncomeCategory()) {
+
+                // Validate account funds before create transaction
+                if (!mPresenter.hasEnoughFunds(account, qty)) {
+                    // TODO Show alert dialog
+                    return;
+                }
+
                 qty = qty * -1;
             }
 

@@ -3,7 +3,7 @@
     <string name="facebook_app_id">1392316410853307</string>
     <string name="fb_login_protocol_scheme">fb1392316410853307</string>
 
-    <string name="login_fb">Login with Facebook</string>
+    <string name="login_fb">Entrar con Facebook</string>
     <string name="transactions_count">Conteo de transacciones</string>
     <string name="transactions_today">Transacciones hoy</string>
     <string name="incomes_today">Ingresos hoy</string>
@@ -103,9 +103,9 @@
     <string name="error_category_required_title">Elije una categoría</string>
     <string name="error_category_required">Debes elejir una categoría para esta transacción</string>
     <string name="ok">OK</string>
-    <string name="add_account">Add account</string>
-    <string name="add_transaction">Add transaction</string>
-    <string name="edit_transaction">Edit transaction</string>
-    <string name="transaction_details">Transaction details</string>
-    <string name="delete">Delete</string>
+    <string name="add_account">Agregar cuenta</string>
+    <string name="add_transaction">Nueva transacción</string>
+    <string name="edit_transaction">Editar transacción</string>
+    <string name="transaction_details">Transacción</string>
+    <string name="delete">Eliminar</string>
 </resources>
