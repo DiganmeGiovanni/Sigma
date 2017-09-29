@@ -78,12 +78,14 @@ public class DBInitializer {
         salary.setIncomeCategory(true);
         salary.setName(mContext.getString(R.string.category_name_salary));
         salary.setDescription(mContext.getString(R.string.category_description_salary));
+        categories.add(salary);
 
         TransactionCategory otherIncome = new TransactionCategory();
         otherIncome.setId(DefaultTransactionCategories.ID_OTHER_INCOME);
         otherIncome.setIncomeCategory(true);
         otherIncome.setName(mContext.getString(R.string.category_name_other));
         otherIncome.setDescription(mContext.getString(R.string.category_description_other));
+        categories.add(otherIncome);
 
         // Upsert categories
         TransactionCategoriesRepository categoriesRepository = new TransactionCategoriesRepository();
