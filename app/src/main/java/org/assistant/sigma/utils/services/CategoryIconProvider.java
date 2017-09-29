@@ -65,8 +65,6 @@ public class CategoryIconProvider {
     }
 
     private Drawable drawableForCategory(TransactionCategory category) {
-        String categoryName = category.getName();
-
         if (category.getId() == DefaultTransactionCategories.ID_TRANSPORT) {
             return dTransport;
         } else if (category.getId() == DefaultTransactionCategories.ID_PROVISIONS) {
