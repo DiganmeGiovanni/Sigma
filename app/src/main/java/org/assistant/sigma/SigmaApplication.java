@@ -7,6 +7,8 @@ import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.MaterialModule;
 import com.uphyca.stetho_realm.RealmInspectorModulesProvider;
 
+import org.assistant.sigma.utils.services.DBInitializer;
+
 import io.realm.Realm;
 
 /**
@@ -28,5 +30,8 @@ public class SigmaApplication extends Application {
         );
 
         Iconify.with(new MaterialModule());
+
+        // Init/Verify database
+        DBInitializer.init(this);
     }
 }

@@ -1,28 +1,26 @@
 package org.assistant.sigma.model.entities;
 
-import java.util.UUID;
-
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
 /**
- *
  * Created by giovanni on 5/05/17.
+ *
  */
 public class TransactionCategory extends RealmObject {
 
     @PrimaryKey
-    private String id = UUID.randomUUID().toString();
+    private int id;
     private boolean incomeCategory;
     private String name;
     private String description;
 
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
