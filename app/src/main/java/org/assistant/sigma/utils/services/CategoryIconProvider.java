@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorRes;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.MaterialIcons;
@@ -21,55 +22,105 @@ public class CategoryIconProvider {
 
     @ColorRes
     private int color;
+    private int size = 0;
 
-    private Drawable dTransport;
-    private Drawable dMarket;
-    private Drawable dClothing;
-    private Drawable dHome;
-    private Drawable dRestaurant;
-    private Drawable dBar;
-    private Drawable dOther;
-    private Drawable dWallet;
+    private IconDrawable dTransport;
+    private IconDrawable dMarket;
+    private IconDrawable dClothing;
+    private IconDrawable dHome;
+    private IconDrawable dRestaurant;
+    private IconDrawable dBar;
+    private IconDrawable dOther;
+    private IconDrawable dWallet;
 
 
-    public CategoryIconProvider(Context mContext, int color) {
+    public CategoryIconProvider(Context mContext, @ColorRes int color) {
         this.mContext = mContext;
         this.color = color;
 
-        tintDrawables();
+        initIcons();
+    }
+
+    public CategoryIconProvider(Context mContext, @ColorRes int color, int size) {
+        this.mContext = mContext;
+        this.color = color;
+        this.size = size;
+
+        initIcons();
     }
 
     public void setIcon(ImageView imageView, TransactionCategory transactionCategory) {
 
         // Set category icon
-        String categoryName = transactionCategory.getName();
+        imageView.setImageDrawable(drawableForCategory(transactionCategory));
+    }
+
+    public void setCompoundIcon(TextView tvCategory, TransactionCategory category) {
+        tvCategory.setCompoundDrawablesWithIntrinsicBounds(
+                drawableForCategory(category),
+                null,
+                null,
+                null
+        );
+    }
+
+    private Drawable drawableForCategory(TransactionCategory category) {
+        String categoryName = category.getName();
+
         if (categoryName.equals(mContext.getString(R.string.category_name_transport))) {
-            imageView.setImageDrawable(dTransport);
+            return dTransport;
         } else if (categoryName.equals(mContext.getString(R.string.category_name_provisions))) {
-            imageView.setImageDrawable(dMarket);
+            return dMarket;
         } else if (categoryName.equals(mContext.getString(R.string.category_name_clothes_shoes))) {
-            imageView.setImageDrawable(dClothing);
+            return dClothing;
         } else if (categoryName.equals(mContext.getString(R.string.category_name_home))) {
-            imageView.setImageDrawable(dHome);
+            return dHome;
         } else if (categoryName.equals(mContext.getString(R.string.category_name_restaurants))) {
-            imageView.setImageDrawable(dRestaurant);
+            return dRestaurant;
         } else if (categoryName.equals(mContext.getString(R.string.category_name_bar))) {
-            imageView.setImageDrawable(dBar);
+            return dBar;
         } else if (categoryName.equals(mContext.getString(R.string.category_name_salary))) {
-            imageView.setImageDrawable(dWallet);
-        } else if (categoryName.equals(mContext.getString(R.string.category_name_other))) {
-            imageView.setImageDrawable(dOther);
+            return dWallet;
+        } else {
+            return dOther;
+        }
+    }
+
+    private void initIcons() {
+        dTransport = new IconDrawable(mContext, MaterialIcons.md_directions_bus);
+        dMarket = new IconDrawable(mContext, MaterialIcons.md_local_mall);
+        dClothing = new IconDrawable(mContext, MaterialIcons.md_local_offer);
+        dHome = new IconDrawable(mContext, MaterialIcons.md_home);
+        dRestaurant = new IconDrawable(mContext, MaterialIcons.md_restaurant_menu);
+        dBar = new IconDrawable(mContext, MaterialIcons.md_local_bar);
+        dWallet = new IconDrawable(mContext, MaterialIcons.md_account_balance_wallet);
+        dOther = new IconDrawable(mContext, MaterialIcons.md_help_outline);
+
+        tintDrawables();
+        if (size > 0) {
+            setupSizes();
         }
     }
 
     private void tintDrawables() {
-        dTransport = new IconDrawable(mContext, MaterialIcons.md_directions_bus).color(color);
-        dMarket = new IconDrawable(mContext, MaterialIcons.md_local_mall).color(color);
-        dClothing = new IconDrawable(mContext, MaterialIcons.md_local_offer).color(color);
-        dHome = new IconDrawable(mContext, MaterialIcons.md_home).color(color);
-        dRestaurant = new IconDrawable(mContext, MaterialIcons.md_restaurant_menu).color(color);
-        dBar = new IconDrawable(mContext, MaterialIcons.md_local_bar).color(color);
-        dWallet = new IconDrawable(mContext, MaterialIcons.md_account_balance_wallet).color(color);
-        dOther = new IconDrawable(mContext, MaterialIcons.md_help_outline).color(color);
+        dTransport.color(color);
+        dMarket.color(color);
+        dClothing.color(color);
+        dHome.color(color);
+        dRestaurant.color(color);
+        dBar.color(color);
+        dWallet.color(color);
+        dOther.color(color);
+    }
+
+    private void setupSizes() {
+        dTransport.sizeDp(size);
+        dMarket.sizeDp(size);
+        dClothing.sizeDp(size);
+        dHome.sizeDp(size);
+        dRestaurant.sizeDp(size);
+        dBar.sizeDp(size);
+        dWallet.sizeDp(size);
+        dOther.sizeDp(size);
     }
 }

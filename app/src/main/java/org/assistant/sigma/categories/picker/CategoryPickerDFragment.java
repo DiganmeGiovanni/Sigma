@@ -21,6 +21,7 @@ import com.google.android.flexbox.FlexboxLayout;
 import org.assistant.sigma.R;
 import org.assistant.sigma.databinding.FragCategoryPickerBinding;
 import org.assistant.sigma.model.entities.TransactionCategory;
+import org.assistant.sigma.utils.services.CategoryIconProvider;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +36,7 @@ public class CategoryPickerDFragment extends DialogFragment
     private CategoryPickerPresenter mPresenter;
     private FragCategoryPickerBinding viewBinding;
 
+    private CategoryIconProvider categoryIconProvider;
     private OnCategorySelectedListener onCategorySelectedListener;
 
     @NonNull
@@ -55,6 +57,9 @@ public class CategoryPickerDFragment extends DialogFragment
                              @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.frag_category_picker, container, false);
         viewBinding = FragCategoryPickerBinding.bind(rootView);
+
+        // Init icon provider
+        categoryIconProvider = new CategoryIconProvider(getContext(), R.color.blue_dark, 16);
 
         // Load default categories
         loadSpendCategories();
@@ -151,6 +156,10 @@ public class CategoryPickerDFragment extends DialogFragment
                     onCategorySelected(category, textView);
                 }
             });
+
+            // Set category icon
+            textView.setCompoundDrawablePadding(8);
+            categoryIconProvider.setCompoundIcon(textView, category);
 
             viewBinding.fblCategories.addView(textView);
         }
