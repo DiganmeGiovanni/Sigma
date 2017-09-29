@@ -20,6 +20,7 @@ import org.assistant.sigma.model.entities.Transaction;
 import org.assistant.sigma.transactions.form.TransactionsFormActivity;
 import org.assistant.sigma.utils.TextUtils;
 import org.assistant.sigma.utils.callbacks.CBGeneric;
+import org.assistant.sigma.utils.services.CategoryIconProvider;
 
 /**
  * Created by giovanni on 27/09/17.
@@ -28,8 +29,9 @@ import org.assistant.sigma.utils.callbacks.CBGeneric;
 public class TransactionDetailsFragment extends Fragment implements TransactionDetailsContract.View {
     private TransactionDetailsContract.Presenter mPresenter;
 
-    private String transactionId;
     private FragTransactionDetailsBinding viewBinding;
+    private String transactionId;
+    private CategoryIconProvider categoryIconProvider;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,6 +45,9 @@ public class TransactionDetailsFragment extends Fragment implements TransactionD
                              @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.frag_transaction_details, container, false);
         viewBinding = FragTransactionDetailsBinding.bind(rootView);
+
+        // Init icon provider
+        categoryIconProvider = new CategoryIconProvider(getContext(), R.color.blue_dark, 16);
 
         // Load transaction details
         transactionId = getArguments().getString(TransactionDetailsActivity.TRANSACTION_ID);
@@ -100,6 +105,11 @@ public class TransactionDetailsFragment extends Fragment implements TransactionD
         }
 
         viewBinding.tvCategory.setText(transaction.getTransactionCategory().getName());
+        categoryIconProvider.setCompoundIcon(
+                viewBinding.tvCategory,
+                transaction.getTransactionCategory()
+        );
+
         viewBinding.tvDateTime.setText(TextUtils.forHumans(transaction.getCreatedAt()));
         viewBinding.tvDescription.setText(transaction.getDescription());
     }
