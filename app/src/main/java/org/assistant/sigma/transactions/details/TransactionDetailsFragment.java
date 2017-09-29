@@ -11,6 +11,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.joanzapata.iconify.IconDrawable;
+import com.joanzapata.iconify.fonts.MaterialIcons;
+
 import org.assistant.sigma.R;
 import org.assistant.sigma.databinding.FragTransactionDetailsBinding;
 import org.assistant.sigma.model.entities.Transaction;
@@ -46,6 +49,10 @@ public class TransactionDetailsFragment extends Fragment implements TransactionD
         mPresenter.loadTransaction(transactionId);
 
         // Setup fab
+        IconDrawable iconEdit = new IconDrawable(getContext(), MaterialIcons.md_edit)
+                .colorRes(R.color.gray_light)
+                .sizeDp(24);
+        viewBinding.btnEdit.setImageDrawable(iconEdit);
         viewBinding.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

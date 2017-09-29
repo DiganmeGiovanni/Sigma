@@ -96,7 +96,6 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             app:fabSize="normal"
-            app:srcCompat="@drawable/ic_add_1x"
             app:useCompatPadding="true" />
     </RelativeLayout>
 </layout>

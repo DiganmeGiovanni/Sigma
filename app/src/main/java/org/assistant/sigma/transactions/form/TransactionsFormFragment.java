@@ -5,14 +5,13 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
+import com.joanzapata.iconify.IconDrawable;
+import com.joanzapata.iconify.fonts.MaterialIcons;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
@@ -47,20 +46,25 @@ public class TransactionsFormFragment extends Fragment implements TransactionsFo
     private Account account;
     private TransactionCategory category;
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.frag_transactions_form, container, false);
         viewBinding = FragTransactionsFormBinding.bind(rootView);
-
         setupForm();
+
+        // Setup save FAB button
+        IconDrawable iconEdit = new IconDrawable(getContext(), MaterialIcons.md_done)
+                .colorRes(R.color.gray_light)
+                .sizeDp(24);
+        viewBinding.btnSave.setImageDrawable(iconEdit);
+        viewBinding.btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onSaveBtnClicked();
+            }
+        });
 
         // Preload transaction to edit if necessary
         if (getArguments() != null && getArguments().containsKey(TransactionsFormActivity.TRANSACTION_ID)) {
@@ -69,22 +73,6 @@ public class TransactionsFormFragment extends Fragment implements TransactionsFo
             mPresenter.loadTransaction(transactionId);
         }
         return rootView;
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.toolbar_btn_save, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.btn_save) {
-            onSaveBtnClicked();
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -265,6 +253,8 @@ public class TransactionsFormFragment extends Fragment implements TransactionsFo
         } else {
             viewBinding.etQuantity.setText(String.valueOf(transaction.getQuantity()));
         }
+        viewBinding.etQuantity.selectAll();
+
         viewBinding.etDate.setText(TextUtils.forHumans(transaction.getCreatedAt()));
         viewBinding.etDescription.setText(transaction.getDescription());
 

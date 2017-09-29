@@ -67,4 +67,7 @@ dependencies {
 
     // Circular progress bar
     compile 'com.github.lzyzsd:circleprogress:1.2.1'
+
+    // Iconify
+    compile 'com.joanzapata.iconify:android-iconify-material:2.2.2' // (v2.0.0)
 }

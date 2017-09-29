@@ -1,99 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="16dp"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:paddingTop="24dp">
+
+                <!-- Account -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/account"/>
+                <Spinner style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                    android:id="@+id/sp_account"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <!-- Quantity -->
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/til_quantity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:errorTextAppearance="@style/til_error_appearance">
+
+                    <EditText
+                        android:id="@+id/et_quantity"
+                        android:ems="10"
+                        android:imeOptions="actionDone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/quantity"
+                        android:inputType="numberDecimal"
+                        android:textColor="@color/textColorLightSecondary"/>
+                </android.support.design.widget.TextInputLayout>
+
+                <!-- Category selection -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/category"/>
+                <TextView
+                    android:id="@+id/tv_category"
+                    android:background="@drawable/background_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:padding="8dp"
+                    android:text="@string/choose_category"/>
+
+                <!-- Time -->
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/til_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:errorTextAppearance="@style/til_error_appearance">
+
+                    <EditText
+                        android:id="@+id/et_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/date_time"
+                        android:inputType="datetime"
+                        android:textColor="@color/textColorLightSecondary"/>
+                </android.support.design.widget.TextInputLayout>
+
+                <!-- Description -->
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/til_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:errorTextAppearance="@style/til_error_appearance">
+
+                    <EditText
+                        android:id="@+id/et_description"
+                        android:imeOptions="actionDone"
+                        android:gravity="top|start"
+                        android:hint="@string/description"
+                        android:inputType="textCapSentences"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/textColorLightSecondary"/>
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/btn_save"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingBottom="16dp"
-            android:paddingEnd="16dp"
-            android:paddingStart="16dp"
-            android:paddingTop="24dp">
-
-            <!-- Account -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/account"/>
-            <Spinner style="@style/Base.Widget.AppCompat.Spinner.Underlined"
-                android:id="@+id/sp_account"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <!-- Quantity -->
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/til_quantity"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:errorTextAppearance="@style/til_error_appearance">
-
-                <EditText
-                    android:id="@+id/et_quantity"
-                    android:ems="10"
-                    android:imeOptions="actionDone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/quantity"
-                    android:inputType="numberDecimal"
-                    android:textColor="@color/textColorLightSecondary"/>
-            </android.support.design.widget.TextInputLayout>
-
-            <!-- Category selection -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/category"/>
-            <TextView
-                android:id="@+id/tv_category"
-                android:background="@drawable/background_category"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:padding="8dp"
-                android:text="@string/choose_category"/>
-
-            <!-- Time -->
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/til_date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:errorTextAppearance="@style/til_error_appearance">
-
-                <EditText
-                    android:id="@+id/et_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="@string/date_time"
-                    android:inputType="datetime"
-                    android:textColor="@color/textColorLightSecondary"/>
-            </android.support.design.widget.TextInputLayout>
-
-            <!-- Description -->
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/til_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:errorTextAppearance="@style/til_error_appearance">
-
-                <EditText
-                    android:id="@+id/et_description"
-                    android:imeOptions="actionDone"
-                    android:gravity="top|start"
-                    android:hint="@string/description"
-                    android:inputType="textCapSentences"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/textColorLightSecondary"/>
-            </android.support.design.widget.TextInputLayout>
-        </LinearLayout>
-    </ScrollView>
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            app:fabSize="normal"
+            app:useCompatPadding="true" />
+    </RelativeLayout>
 </layout>
