@@ -1,7 +1,6 @@
 package org.assistant.sigma;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
@@ -16,10 +15,11 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.joanzapata.iconify.IconDrawable;
+import com.joanzapata.iconify.fonts.MaterialIcons;
 
 import org.assistant.sigma.accounts.AccountsActivity;
 import org.assistant.sigma.model.entities.User;
-import org.assistant.sigma.utils.DrawableUtils;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -36,7 +36,10 @@ public class DrawerActivity extends AppCompatActivity {
 
     public void setupToolbar(@NonNull Toolbar toolbar, @NonNull DrawerLayout mDrawerLayout,
                              @NonNull User user, @IdRes int activeItem) {
-        toolbar.setNavigationIcon(R.drawable.ic_menu);
+        IconDrawable iconMenu = new IconDrawable(this, MaterialIcons.md_menu)
+                .colorRes(R.color.gray_light)
+                .actionBarSize();
+        toolbar.setNavigationIcon(iconMenu);
         setSupportActionBar(toolbar);
 
         if (getActionBar() != null) {
@@ -77,13 +80,11 @@ public class DrawerActivity extends AppCompatActivity {
 
         //
         // Transactions menu entry
-        Drawable moneyDrawable = DrawableUtils.setColorFilter(
-                this,
-                R.drawable.ic_money_1x,
-                R.color.textColorSecondary
-        );
+        IconDrawable iconMoney = new IconDrawable(this, MaterialIcons.md_attach_money)
+                .colorRes(R.color.textColorSecondary)
+                .sizeDp(24);
         TextView tvTransactions = (TextView) findViewById(R.id.tv_transactions);
-        tvTransactions.setCompoundDrawablesWithIntrinsicBounds(moneyDrawable, null, null, null);
+        tvTransactions.setCompoundDrawablesWithIntrinsicBounds(iconMoney, null, null, null);
         if (activeItem == R.id.tv_transactions) {
             tvTransactions.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_background));
         } else {
@@ -97,13 +98,11 @@ public class DrawerActivity extends AppCompatActivity {
 
         //
         // Accounts menu entry
-        Drawable accountsDrawable = DrawableUtils.setColorFilter(
-                this,
-                R.drawable.ic_accounts_1x,
-                R.color.textColorSecondary
-        );
+        IconDrawable iconAccounts = new IconDrawable(this, MaterialIcons.md_account_balance)
+                .colorRes(R.color.textColorSecondary)
+                .sizeDp(24);
         TextView tvAccounts = (TextView) findViewById(R.id.tv_accounts);
-        tvAccounts.setCompoundDrawablesWithIntrinsicBounds(accountsDrawable, null, null, null);
+        tvAccounts.setCompoundDrawablesWithIntrinsicBounds(iconAccounts, null, null, null);
         if (activeItem == R.id.tv_accounts) {
             tvAccounts.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_background));
         } else {
@@ -120,33 +119,27 @@ public class DrawerActivity extends AppCompatActivity {
 
         //
         // Scheduled transactions menu entry
-        Drawable scheduleDrawable = DrawableUtils.setColorFilter(
-                this,
-                R.drawable.ic_schedule_1x,
-                R.color.textColorSecondary
-        );
+        IconDrawable iconClock = new IconDrawable(this, MaterialIcons.md_timer)
+                .colorRes(R.color.textColorSecondary)
+                .sizeDp(24);
         TextView tvSchedule = (TextView) findViewById(R.id.tv_scheduled_transactions);
-        tvSchedule.setCompoundDrawablesWithIntrinsicBounds(scheduleDrawable, null, null, null);
+        tvSchedule.setCompoundDrawablesWithIntrinsicBounds(iconClock, null, null, null);
 
         //
         // Charts menu entry
-        Drawable chartDrawable = DrawableUtils.setColorFilter(
-                this,
-                R.drawable.ic_chart_1x,
-                R.color.textColorSecondary
-        );
+        IconDrawable iconChart = new IconDrawable(this, MaterialIcons.md_insert_chart)
+                .colorRes(R.color.textColorSecondary)
+                .sizeDp(24);
         TextView tvCharts = (TextView) findViewById(R.id.tv_charts);
-        tvCharts.setCompoundDrawablesWithIntrinsicBounds(chartDrawable, null, null, null);
+        tvCharts.setCompoundDrawablesWithIntrinsicBounds(iconChart, null, null, null);
 
         //
         // Preferences menu entry
-        Drawable settingsDrawable = DrawableUtils.setColorFilter(
-                this,
-                R.drawable.ic_settings_1x,
-                R.color.textColorSecondary
-        );
+        IconDrawable iconSettings = new IconDrawable(this, MaterialIcons.md_settings)
+                .colorRes(R.color.textColorSecondary)
+                .sizeDp(24);
         TextView tvPreferences = (TextView) findViewById(R.id.tv_preferences);
-        tvPreferences.setCompoundDrawablesWithIntrinsicBounds(settingsDrawable, null, null, null);
+        tvPreferences.setCompoundDrawablesWithIntrinsicBounds(iconSettings, null, null, null);
         tvPreferences.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
