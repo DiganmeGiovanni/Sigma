@@ -5,9 +5,11 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorRes;
 import android.widget.ImageView;
 
+import com.joanzapata.iconify.IconDrawable;
+import com.joanzapata.iconify.fonts.MaterialIcons;
+
 import org.assistant.sigma.R;
 import org.assistant.sigma.model.entities.TransactionCategory;
-import org.assistant.sigma.utils.DrawableUtils;
 
 /**
  *
@@ -61,45 +63,13 @@ public class CategoryIconProvider {
     }
 
     private void tintDrawables() {
-        dTransport = DrawableUtils.setColorFilter(
-                mContext,
-                R.drawable.ic_category_transport_2x,
-                color
-        );
-        dMarket = DrawableUtils.setColorFilter(
-                mContext,
-                R.drawable.ic_local_mall_2x,
-                color
-        );
-        dClothing = DrawableUtils.setColorFilter(
-                mContext,
-                R.drawable.ic_category_clothes_2x,
-                color
-        );
-        dHome = DrawableUtils.setColorFilter(
-                mContext,
-                R.drawable.ic_category_home_2x,
-                color
-        );
-        dRestaurant = DrawableUtils.setColorFilter(
-                mContext,
-                R.drawable.ic_category_restaurant_2x,
-                color
-        );
-        dBar = DrawableUtils.setColorFilter(
-                mContext,
-                R.drawable.ic_category_bar_2x,
-                color
-        );
-        dWallet = DrawableUtils.setColorFilter(
-                mContext,
-                R.drawable.ic_wallet_2x,
-                color
-        );
-        dOther = DrawableUtils.setColorFilter(
-                mContext,
-                R.drawable.ic_category_other_2x,
-                color
-        );
+        dTransport = new IconDrawable(mContext, MaterialIcons.md_directions_bus).color(color);
+        dMarket = new IconDrawable(mContext, MaterialIcons.md_local_mall).color(color);
+        dClothing = new IconDrawable(mContext, MaterialIcons.md_local_offer).color(color);
+        dHome = new IconDrawable(mContext, MaterialIcons.md_home).color(color);
+        dRestaurant = new IconDrawable(mContext, MaterialIcons.md_restaurant_menu).color(color);
+        dBar = new IconDrawable(mContext, MaterialIcons.md_local_bar).color(color);
+        dWallet = new IconDrawable(mContext, MaterialIcons.md_account_balance_wallet).color(color);
+        dOther = new IconDrawable(mContext, MaterialIcons.md_help_outline).color(color);
     }
 }
