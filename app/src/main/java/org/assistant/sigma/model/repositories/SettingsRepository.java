@@ -41,7 +41,7 @@ public class SettingsRepository extends RealmRepository {
             settings.setLargePeriod(Periods.LG_FORTNIGHT);
             settings.setStartDayHour(6);
             settings.setIncludeHomeSpentForLimit(false);
-            settings.setSpentLimitLarge(800);
+            settings.setSpentLimitLarge(1400);
             settings.setReminder1(15);
             settings.setReminder2(22);
             user.setSettings(settings);
