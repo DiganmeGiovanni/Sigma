@@ -7,6 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.joanzapata.iconify.IconDrawable;
+import com.joanzapata.iconify.fonts.MaterialIcons;
+
 import org.assistant.sigma.R;
 import org.assistant.sigma.accounts.form.AccountsFormFragment;
 import org.assistant.sigma.accounts.form.AccountsFormPresenter;
@@ -17,8 +20,8 @@ import org.assistant.sigma.model.entities.Account;
 import io.realm.RealmList;
 
 /**
- *
  * Created by giovanni on 5/05/17.
+ *
  */
 public class AccountsListFragment extends Fragment implements AccountsListContract.View {
 
@@ -75,6 +78,10 @@ public class AccountsListFragment extends Fragment implements AccountsListContra
     }
 
     private void setupAddAccountBtn() {
+        IconDrawable iconAdd = new IconDrawable(getContext(), MaterialIcons.md_add)
+                .colorRes(R.color.gray_light)
+                .sizeDp(24);
+        viewBinding.btnAddAccount.setImageDrawable(iconAdd);
         viewBinding.btnAddAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
