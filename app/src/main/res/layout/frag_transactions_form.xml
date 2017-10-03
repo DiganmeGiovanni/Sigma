@@ -70,7 +70,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:padding="8dp"
-                    android:text="@string/exclude_from_spent_resume"/>
+                    android:text="@string/exclude_from_spent_resume"
+                    android:textColor="@color/textColorSecondary"/>
 
                 <!-- Time -->
                 <android.support.design.widget.TextInputLayout
