@@ -18,6 +18,7 @@ public class Transaction extends RealmObject {
     private double quantity;
     private String description;
     private double currentAccountBalance;
+    private boolean excludeFromSpentResume;
 
     private TransactionCategory transactionCategory;
     private Account account;
@@ -76,5 +77,13 @@ public class Transaction extends RealmObject {
 
     public void setCurrentAccountBalance(double currentAccountBalance) {
         this.currentAccountBalance = currentAccountBalance;
+    }
+
+    public boolean isExcludeFromSpentResume() {
+        return excludeFromSpentResume;
+    }
+
+    public void setExcludeFromSpentResume(boolean excludeFromSpentResume) {
+        this.excludeFromSpentResume = excludeFromSpentResume;
     }
 }

@@ -182,6 +182,7 @@ public class TransactionsFormFragment extends Fragment implements TransactionsFo
             transaction.setCreatedAt(transactionDate.getTime());
             transaction.setQuantity(qty);
             transaction.setDescription(viewBinding.etDescription.getText().toString());
+            transaction.setExcludeFromSpentResume(viewBinding.cbExcludeFromSpentResume.isChecked());
             transaction.setTransactionCategory(category);
             transaction.setAccount(account);
 
@@ -278,6 +279,7 @@ public class TransactionsFormFragment extends Fragment implements TransactionsFo
 
         viewBinding.etDate.setText(TextUtils.forHumans(transaction.getCreatedAt()));
         viewBinding.etDescription.setText(transaction.getDescription());
+        viewBinding.cbExcludeFromSpentResume.setChecked(transaction.isExcludeFromSpentResume());
 
         int accountPos = accountsAdapter.getPosition(transaction.getAccount());
         viewBinding.spAccount.setSelection(accountPos);

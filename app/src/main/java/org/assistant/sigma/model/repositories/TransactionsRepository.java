@@ -89,8 +89,15 @@ public class TransactionsRepository {
         return null;
     }
 
-    public void spentSince(final Date startDate, final String[] excludedCategoriesNames,
-                           final CBGeneric<Double> callback) {
+    /**
+     * Calculates the spent amount since a given date
+     * @param startDate Date which start calculation
+     * @param includeExcludedTransactions If true, even transaction marked for exclude in spent
+     *                                    resumes will be included in calculation
+     * @param callback A funcion to exec after compute has finished
+     */
+    public void spentAmountSince(final Date startDate, final boolean includeExcludedTransactions,
+                                 final CBGeneric<Double> callback) {
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
@@ -99,8 +106,8 @@ public class TransactionsRepository {
                         .greaterThan("createdAt", startDate)
                         .lessThan("quantity", (double) 0);
 
-                if (excludedCategoriesNames != null && excludedCategoriesNames.length > 0) {
-                    query.not().in("transactionCategory.name", excludedCategoriesNames);
+                if (!includeExcludedTransactions) {
+                    query.equalTo("excludeFromSpentResume", false);
                 }
 
                 double spent = query.sum("quantity").doubleValue();

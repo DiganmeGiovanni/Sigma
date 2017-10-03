@@ -14,8 +14,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- *
  * Created by giovanni on 5/05/17.
+ *
  */
 public class DashboardPresenter implements Presenter {
 
@@ -62,9 +62,9 @@ public class DashboardPresenter implements Presenter {
     @Override
     public void loadSpentPeriodLg(String... excludedCategoriesNames) {
         final double spentLimit = usersRepository.activeUser().getSettings().getSpentLimitLarge();
-        transactionsRepository.spentSince(
+        transactionsRepository.spentAmountSince(
                 largePeriodStartDate(),
-                excludedCategoriesNames,
+                false,
                 new CBGeneric<Double>() {
                     @Override
                     public void onResponse(Double spent) {
@@ -83,7 +83,7 @@ public class DashboardPresenter implements Presenter {
 
     @Override
     public void loadSpentPeriodSm() {
-        transactionsRepository.spentSince(shortPeriodStartDate(), null, new CBGeneric<Double>() {
+        transactionsRepository.spentAmountSince(shortPeriodStartDate(), false, new CBGeneric<Double>() {
             @Override
             public void onResponse(Double spent) {
                 mDashboardView.showSpentPeriodSm(spent, Warning.LEVEL_NORMAL);

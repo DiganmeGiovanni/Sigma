@@ -7,9 +7,11 @@ import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.MaterialModule;
 import com.uphyca.stetho_realm.RealmInspectorModulesProvider;
 
+import org.assistant.sigma.model.migrations.MigrationV2;
 import org.assistant.sigma.utils.services.DBInitializer;
 
 import io.realm.Realm;
+import io.realm.RealmConfiguration;
 
 /**
  * Created by giovanni on 4/05/17.
@@ -21,6 +23,11 @@ public class SigmaApplication extends Application {
     public void onCreate() {
         super.onCreate();
         Realm.init(this);
+        RealmConfiguration config = new RealmConfiguration.Builder()
+                .schemaVersion(2)
+                .migration(new MigrationV2())
+                .build();
+        Realm.setDefaultConfiguration(config);
 
         Stetho.initialize(
                 Stetho.newInitializerBuilder(this)

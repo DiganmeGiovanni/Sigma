@@ -108,4 +108,5 @@
     <string name="edit_transaction">Editar transacción</string>
     <string name="transaction_details">Transacción</string>
     <string name="delete">Eliminar</string>
+    <string name="exclude_from_spent_resume">¿Excluir de resumen de gastos?</string>
 </resources>
