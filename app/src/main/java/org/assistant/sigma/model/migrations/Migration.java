@@ -56,5 +56,13 @@ public class Migration implements RealmMigration {
 
             oldVersion = 4;
         }
+
+        // By error tuesday was ignored on migration to v4 (Add this field)
+        if (oldVersion == 4) {
+            schema.get("ScheduledTransactionWeekly")
+                    .addField("onTuesday", boolean.class);
+
+            oldVersion++;
+        }
     }
 }
