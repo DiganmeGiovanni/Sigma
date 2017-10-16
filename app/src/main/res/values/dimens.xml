@@ -14,4 +14,6 @@
 
     <dimen name="dp10">10dp</dimen>
     <dimen name="dp16">16dp</dimen>
+
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

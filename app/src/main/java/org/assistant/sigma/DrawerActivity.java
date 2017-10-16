@@ -20,6 +20,7 @@ import com.joanzapata.iconify.fonts.MaterialIcons;
 
 import org.assistant.sigma.accounts.AccountsActivity;
 import org.assistant.sigma.model.entities.User;
+import org.assistant.sigma.ui.scheduled_transactions.ScheduledTransactionsActivity;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -124,6 +125,19 @@ public class DrawerActivity extends AppCompatActivity {
                 .sizeDp(24);
         TextView tvSchedule = (TextView) findViewById(R.id.tv_scheduled_transactions);
         tvSchedule.setCompoundDrawablesWithIntrinsicBounds(iconClock, null, null, null);
+        if (activeItem == R.id.tv_scheduled_transactions) {
+            tvSchedule.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_background));
+        } else {
+            tvSchedule.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mDrawerLayout.closeDrawer(Gravity.START);
+
+                    Intent intent = new Intent(DrawerActivity.this, ScheduledTransactionsActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
 
         //
         // Charts menu entry

@@ -1,5 +1,6 @@
 package org.assistant.sigma.model.entities;
 
+import java.util.Date;
 import java.util.UUID;
 
 import io.realm.RealmObject;
@@ -13,6 +14,7 @@ public class ScheduledTransaction extends RealmObject {
 
     @PrimaryKey
     private String id = UUID.randomUUID().toString();
+    private Date createdAt;
     private int hourOfDay;
     private int minute;
     private double quantity;
@@ -84,5 +86,13 @@ public class ScheduledTransaction extends RealmObject {
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 }

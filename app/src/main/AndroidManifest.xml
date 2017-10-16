@@ -2,42 +2,50 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.assistant.sigma">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".SigmaApplication"
         android:allowBackup="true"
         android:icon="@drawable/money"
         android:label="@string/app_name"
-        android:name=".SigmaApplication"
         android:roundIcon="@drawable/money"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".login.LoginActivity" android:theme="@style/AppTheme.NoActionBar">
+        <activity
+            android:name=".login.LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".landing.LandingActivity" />
         <activity android:name=".dashboard.DashboardActivity" />
         <activity android:name=".accounts.AccountsActivity" />
-        <activity android:name=".transactions.form.TransactionsFormActivity"/>
-        <activity android:name=".transactions.details.TransactionDetailsActivity"/>
-
+        <activity android:name=".transactions.form.TransactionsFormActivity" />
+        <activity android:name=".transactions.details.TransactionDetailsActivity" />
+        <activity android:name=".ui.scheduled_transactions.ScheduledTransactionsActivity" />
         <activity
             android:name="com.facebook.CustomTabActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
 
+        <receiver android:name=".receivers.ScheduledTransactionReceiver" />
+
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id"/>
+            android:value="@string/facebook_app_id" />
+
     </application>
+
 </manifest>

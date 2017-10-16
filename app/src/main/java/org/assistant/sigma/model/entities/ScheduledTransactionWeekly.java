@@ -2,13 +2,14 @@ package org.assistant.sigma.model.entities;
 
 import java.util.UUID;
 
+import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
 /**
  * Created by giovanni on 11/10/17.
  *
  */
-public class ScheduleTransactionWeekly {
+public class ScheduledTransactionWeekly extends RealmObject {
 
     @PrimaryKey
     private String id = UUID.randomUUID().toString();

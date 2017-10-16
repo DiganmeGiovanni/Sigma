@@ -2,6 +2,8 @@ package org.assistant.sigma.model.migrations;
 
 import android.util.Log;
 
+import java.util.Date;
+
 import io.realm.DynamicRealm;
 import io.realm.FieldAttribute;
 import io.realm.RealmMigration;
@@ -28,6 +30,7 @@ public class Migration implements RealmMigration {
         if (oldVersion < 4) {
             schema.create("ScheduledTransaction")
                     .addField("id", String.class, FieldAttribute.PRIMARY_KEY)
+                    .addField("createdAt", Date.class)
                     .addField("hourOfDay", int.class)
                     .addField("minute", int.class)
                     .addField("quantity", double.class)
@@ -46,7 +49,7 @@ public class Migration implements RealmMigration {
                     .addField("onSaturday", boolean.class)
                     .addRealmObjectField("scheduledTransaction", schema.get("ScheduledTransaction"));
 
-            schema.create("ScheduleTransactionMonthly")
+            schema.create("ScheduledTransactionMonthly")
                     .addField("id", String.class, FieldAttribute.PRIMARY_KEY)
                     .addField("dayOfMonth", int.class)
                     .addRealmObjectField("scheduledTransaction", schema.get("ScheduledTransaction"));
