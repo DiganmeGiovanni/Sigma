@@ -27,6 +27,7 @@
         <activity android:name=".transactions.form.TransactionsFormActivity" />
         <activity android:name=".transactions.details.TransactionDetailsActivity" />
         <activity android:name=".ui.scheduled_transactions.ScheduledTransactionsActivity" />
+        <activity android:name=".ui.scheduled_transactions.weekly.form.STWeeklyFormActivity" />
         <activity
             android:name="com.facebook.CustomTabActivity"
             android:exported="true">

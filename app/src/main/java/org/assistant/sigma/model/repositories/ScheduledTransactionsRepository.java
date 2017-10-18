@@ -33,4 +33,16 @@ public class ScheduledTransactionsRepository {
                 .where(ScheduledTransactionMonthly.class)
                 .findAllSorted("scheduledTransaction.createdAt", Sort.DESCENDING);
     }
+
+    public void upsert(ScheduledTransactionWeekly stWeekly) {
+        realm.beginTransaction();
+        realm.copyToRealmOrUpdate(stWeekly);
+        realm.commitTransaction();
+    }
+
+    public ScheduledTransactionWeekly find(String stWeeklyId) {
+        return realm.where(ScheduledTransactionWeekly.class)
+                .equalTo("id", stWeeklyId)
+                .findFirst();
+    }
 }

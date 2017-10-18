@@ -1,8 +1,10 @@
 package org.assistant.sigma.ui.scheduled_transactions;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
 
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.MaterialIcons;
@@ -14,6 +16,7 @@ import org.assistant.sigma.model.repositories.UsersRepository;
 import org.assistant.sigma.ui.adapters.scheduledtransactions.ScheduledTransactionsPagerAdapter;
 import org.assistant.sigma.ui.scheduled_transactions.monthly.list.STMonthlyListFragment;
 import org.assistant.sigma.ui.scheduled_transactions.monthly.list.STMonthlyListPresenter;
+import org.assistant.sigma.ui.scheduled_transactions.weekly.form.STWeeklyFormActivity;
 import org.assistant.sigma.ui.scheduled_transactions.weekly.list.STWeeklyListFragment;
 import org.assistant.sigma.ui.scheduled_transactions.weekly.list.STWeeklyListPresenter;
 
@@ -63,6 +66,19 @@ public class ScheduledTransactionsActivity extends DrawerActivity {
                 .colorRes(R.color.gray_light)
                 .sizeDp(24);
         viewBinding.btnAdd.setImageDrawable(iconAdd);
+        viewBinding.btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // TODO Verify if user has active accounts
 
+
+                // Go to add scheduled transaction
+                Intent intent = new Intent(
+                        ScheduledTransactionsActivity.this,
+                        STWeeklyFormActivity.class
+                );
+                startActivity(intent);
+            }
+        });
     }
 }

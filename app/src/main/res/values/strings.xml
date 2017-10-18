@@ -115,4 +115,12 @@
     <string name="title_activity_scheduled_trans">Transacciones programadas</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
+    <string name="schedule_for_days">Programar los días</string>
+    <string name="sunday_abbr">D</string>
+    <string name="monday_abbr">L</string>
+    <string name="tuesday_abbr">M</string>
+    <string name="wednesday_abbr">M</string>
+    <string name="thursday_abbr">J</string>
+    <string name="friday_abbr">V</string>
+    <string name="saturday_abbr">S</string>
 </resources>
