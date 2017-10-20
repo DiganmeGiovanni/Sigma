@@ -40,9 +40,21 @@ public class ScheduledTransactionsRepository {
         realm.commitTransaction();
     }
 
-    public ScheduledTransactionWeekly find(String stWeeklyId) {
-        return realm.where(ScheduledTransactionWeekly.class)
+    public ScheduledTransactionWeekly findWeekly(String stWeeklyId) {
+        ScheduledTransactionWeekly stWeeklyDB = realm.where(ScheduledTransactionWeekly.class)
                 .equalTo("id", stWeeklyId)
                 .findFirst();
+        return realm.copyFromRealm(stWeeklyDB);
+    }
+
+    public void deleteWeekly(String stWeeklyId) {
+        ScheduledTransactionWeekly sTrans = realm.where(ScheduledTransactionWeekly.class)
+                .equalTo("id", stWeeklyId)
+                .findFirst();
+        if (sTrans != null) {
+            realm.beginTransaction();
+            sTrans.deleteFromRealm();
+            realm.commitTransaction();
+        }
     }
 }

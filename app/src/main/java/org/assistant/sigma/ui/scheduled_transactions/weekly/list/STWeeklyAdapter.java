@@ -24,7 +24,10 @@ public class STWeeklyAdapter extends RecyclerView.Adapter<STWeeklyAdapter.ViewHo
     private CategoryIconProvider categoryIconProvider;
     private OnSTWeeklyClickListener onClickListener;
 
+    private Context mContext;
+
     STWeeklyAdapter(Context mContext, RealmResults<ScheduledTransactionWeekly> transactions) {
+        this.mContext = mContext;
         this.transactions = transactions;
         categoryIconProvider = new CategoryIconProvider(mContext, R.color.colorPrimary);
     }
@@ -53,6 +56,49 @@ public class STWeeklyAdapter extends RecyclerView.Adapter<STWeeklyAdapter.ViewHo
         holder.tvQuantity.setText(TextUtils.asMoney(
                 Math.abs(stWeekly.getScheduledTransaction().getQuantity())
         ));
+
+        // Show active days
+        StringBuilder activeDaysBuilder = new StringBuilder();
+        if (stWeekly.isOnSunday()) {
+            activeDaysBuilder.append(mContext.getString(R.string.sunday_abbr_md));
+        }
+        if (stWeekly.isOnMonday()) {
+            if (activeDaysBuilder.length() > 0) {
+                activeDaysBuilder.append(" | ");
+            }
+            activeDaysBuilder.append(mContext.getString(R.string.monday_abbr_md));
+        }
+        if (stWeekly.isOnTuesday()) {
+            if (activeDaysBuilder.length() > 0) {
+                activeDaysBuilder.append(" | ");
+            }
+            activeDaysBuilder.append(mContext.getString(R.string.tuesday_abbr_md));
+        }
+        if (stWeekly.isOnWednesday()) {
+            if (activeDaysBuilder.length() > 0) {
+                activeDaysBuilder.append(" | ");
+            }
+            activeDaysBuilder.append(mContext.getString(R.string.wednesday_abbr_md));
+        }
+        if (stWeekly.isOnThursday()) {
+            if (activeDaysBuilder.length() > 0) {
+                activeDaysBuilder.append(" | ");
+            }
+            activeDaysBuilder.append(mContext.getString(R.string.thursday_abbr_md));
+        }
+        if (stWeekly.isOnFriday()) {
+            if (activeDaysBuilder.length() > 0) {
+                activeDaysBuilder.append(" | ");
+            }
+            activeDaysBuilder.append(mContext.getString(R.string.friday_abbr_md));
+        }
+        if (stWeekly.isOnSaturday()) {
+            if (activeDaysBuilder.length() > 0) {
+                activeDaysBuilder.append(" | ");
+            }
+            activeDaysBuilder.append(mContext.getString(R.string.saturday_abbr_md));
+        }
+        holder.tvDays.setText(activeDaysBuilder.toString());
 
         categoryIconProvider.setIcon(
                 holder.ivIconCategory,

@@ -38,13 +38,13 @@ public class STWeeklyFormPresenter implements STWeeklyFormContract.Presenter {
     }
 
     @Override
-    public void saveTransaction(ScheduledTransactionWeekly sTWeekly) {
+    public void upsertTransaction(ScheduledTransactionWeekly sTWeekly) {
         stRepository.upsert(sTWeekly);
     }
 
     @Override
     public void loadTransaction(String stWeeklyId) {
-        ScheduledTransactionWeekly stWeekly = stRepository.find(stWeeklyId);
+        ScheduledTransactionWeekly stWeekly = stRepository.findWeekly(stWeeklyId);
         if (stWeekly != null) {
             mView.preloadTransaction(stWeekly);
         }

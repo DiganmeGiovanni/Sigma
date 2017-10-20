@@ -95,4 +95,10 @@ public class ScheduledTransactionWeekly extends RealmObject {
     public void setScheduledTransaction(ScheduledTransaction scheduledTransaction) {
         this.scheduledTransaction = scheduledTransaction;
     }
+
+
+    public boolean atLeastOneDay() {
+        return onMonday || onSunday || onTuesday
+                || onWednesday || onThursday || onFriday || onSaturday;
+    }
 }

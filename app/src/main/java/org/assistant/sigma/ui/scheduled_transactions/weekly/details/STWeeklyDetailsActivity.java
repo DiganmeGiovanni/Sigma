@@ -1,4 +1,4 @@
-package org.assistant.sigma.ui.scheduled_transactions.weekly.form;
+package org.assistant.sigma.ui.scheduled_transactions.weekly.details;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -14,11 +14,12 @@ import org.assistant.sigma.databinding.ActToolbarBinding;
 import org.assistant.sigma.utils.ActivityUtils;
 
 /**
- * Created by giovanni on 17/10/17.
+ * Created by giovanni on 19/10/17.
  *
  */
-public class STWeeklyFormActivity extends AppCompatActivity {
+public class STWeeklyDetailsActivity extends AppCompatActivity {
     public static final String ST_WEEKLY_ID = "ST_WEEKLY_ID";
+
     private ActToolbarBinding viewBinding;
 
     @Override
@@ -27,30 +28,25 @@ public class STWeeklyFormActivity extends AppCompatActivity {
         viewBinding = DataBindingUtil.setContentView(this, R.layout.act_toolbar);
         setupToolbar();
 
-        // Load st weekly form fragment
-        STWeeklyFormFragment formFragment = (STWeeklyFormFragment) getSupportFragmentManager()
+        // Load details fragment
+        STWeeklyDetailsFragment detailsFragment = (STWeeklyDetailsFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.content);
-        if (formFragment == null) {
-            formFragment = new STWeeklyFormFragment();
+        if (detailsFragment == null) {
+            detailsFragment = new STWeeklyDetailsFragment();
 
-            // Load scheduled transaction to edit
-            if (getIntent().getExtras() != null && getIntent().hasExtra(ST_WEEKLY_ID)) {
-                String stWeeklyId = getIntent().getStringExtra(ST_WEEKLY_ID);
-
-                Bundle params = new Bundle();
-                params.putString(ST_WEEKLY_ID, stWeeklyId);
-                formFragment.setArguments(params);
-            }
+            // Retrieve st weekly id
+            Bundle args = new Bundle();
+            args.putString(ST_WEEKLY_ID, getIntent().getStringExtra(ST_WEEKLY_ID));
+            detailsFragment.setArguments(args);
 
             ActivityUtils.addFragmentToActivity(
                     getSupportFragmentManager(),
-                    formFragment,
+                    detailsFragment,
                     R.id.content
             );
         }
 
-        // Init presenter
-        new STWeeklyFormPresenter(formFragment);
+        new STWeeklyDetailsPresenter(detailsFragment);
     }
 
     @Override
@@ -71,11 +67,7 @@ public class STWeeklyFormActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowHomeEnabled(true);
 
-//            if (getIntent().getExtras() != null && getIntent().hasExtra(TRANSACTION_ID)) {
-//                actionBar.setTitle(R.string.edit_transaction);
-//            } else {
-//                actionBar.setTitle(R.string.add_transaction);
-//            }
+            actionBar.setTitle(R.string.scheduled_transaction);
         }
     }
 }

@@ -123,4 +123,17 @@
     <string name="thursday_abbr">J</string>
     <string name="friday_abbr">V</string>
     <string name="saturday_abbr">S</string>
+    <string name="choose_at_least_one_day">Elije por lo menos un dia de la semana</string>
+    <string name="scheduled_transaction_hour_required">Ingrese la hora para la transacción programada</string>
+    <string name="sunday_abbr_md">Dom</string>
+    <string name="monday_abbr_md">Lun</string>
+    <string name="tuesday_abbr_md">Mar</string>
+    <string name="wednesday_abbr_md">Mie</string>
+    <string name="thursday_abbr_md">Jue</string>
+    <string name="friday_abbr_md">Vie</string>
+    <string name="saturday_abbr_md">Sab</string>
+    <string name="scheduled_for_days">Programada para los dias</string>
+    <string name="scheduled_transaction">Transacción programada</string>
+    <string name="u_sure">¿Estas seguro?</string>
+    <string name="confirm_delete_scheduled_transaction">¿Confirmas que deseas eliminar esta transacción programada?</string>
 </resources>

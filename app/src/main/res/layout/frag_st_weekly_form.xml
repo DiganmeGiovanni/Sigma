@@ -152,14 +152,14 @@
 
                 <!-- Time -->
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/til_date"
+                    android:id="@+id/til_time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     app:errorTextAppearance="@style/til_error_appearance">
 
                     <EditText
-                        android:id="@+id/et_date"
+                        android:id="@+id/et_time"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"

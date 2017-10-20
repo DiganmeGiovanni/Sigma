@@ -1,5 +1,6 @@
 package org.assistant.sigma.ui.scheduled_transactions.weekly.list;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import org.assistant.sigma.R;
 import org.assistant.sigma.databinding.FragScheduledTransactionsBinding;
 import org.assistant.sigma.model.entities.ScheduledTransactionWeekly;
+import org.assistant.sigma.ui.scheduled_transactions.weekly.details.STWeeklyDetailsActivity;
 
 import io.realm.RealmResults;
 
@@ -56,7 +58,13 @@ public class STWeeklyListFragment extends Fragment implements STWeeklyListContra
                     new STWeeklyAdapter.OnSTWeeklyClickListener() {
                         @Override
                         public void onSTWeeklyClicked(ScheduledTransactionWeekly sTWeekly) {
+                            Intent intent = new Intent(getContext(), STWeeklyDetailsActivity.class);
+                            intent.putExtra(
+                                    STWeeklyDetailsActivity.ST_WEEKLY_ID,
+                                    sTWeekly.getId()
+                            );
 
+                            startActivity(intent);
                         }
                     }
             );

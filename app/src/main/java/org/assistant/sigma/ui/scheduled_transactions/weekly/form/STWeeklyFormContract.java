@@ -17,7 +17,7 @@ interface STWeeklyFormContract {
     interface Presenter extends BasePresenter {
         void loadAccounts();
 
-        void saveTransaction(ScheduledTransactionWeekly transaction);
+        void upsertTransaction(ScheduledTransactionWeekly transaction);
 
         void loadTransaction(String stWeeklyId);
 
