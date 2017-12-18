@@ -1,5 +1,6 @@
 package org.assistant.sigma.transactions.details;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,6 +19,7 @@ import org.assistant.sigma.R;
 import org.assistant.sigma.databinding.FragTransactionDetailsBinding;
 import org.assistant.sigma.model.entities.Transaction;
 import org.assistant.sigma.transactions.form.TransactionsFormActivity;
+import org.assistant.sigma.ui.util.AlertPresenter;
 import org.assistant.sigma.utils.TextUtils;
 import org.assistant.sigma.utils.callbacks.CBGeneric;
 import org.assistant.sigma.utils.services.CategoryIconProvider;
@@ -128,13 +130,24 @@ public class TransactionDetailsFragment extends Fragment implements TransactionD
 
     @Override
     public void onDeleteBtnClicked() {
-        // TODO Show progress dialog
-        mPresenter.deleteTransaction(transactionId, new CBGeneric<Boolean>() {
-            @Override
-            public void onResponse(Boolean response) {
-                // TODO Hide progress dialog
-                getActivity().finish();
-            }
-        });
+        AlertPresenter.confirm(
+                getContext(),
+                null,
+                getString(R.string.confirm_transaction_delete),
+                getString(R.string.delete),
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // TODO Show progress dialog
+                        mPresenter.deleteTransaction(transactionId, new CBGeneric<Boolean>() {
+                            @Override
+                            public void onResponse(Boolean response) {
+                                // TODO Hide progress dialog
+                                getActivity().finish();
+                            }
+                        });
+                    }
+                }
+        );
     }
 }

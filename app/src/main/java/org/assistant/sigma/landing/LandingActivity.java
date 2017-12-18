@@ -54,6 +54,21 @@ public class LandingActivity extends DrawerActivity {
 
         // Setup add transactions button
         setupAddButton();
+
+
+        // Temporal alarm
+//        AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+//        Intent intent = new Intent(this, ScheduledTransactionReceiver.class);
+//        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+//
+//        // Set alarm fire time
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.setTimeInMillis(System.currentTimeMillis());
+//        calendar.set(Calendar.HOUR_OF_DAY, 21);
+//        calendar.set(Calendar.MINUTE, 5);
+//
+//        alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 5 * 1000, pendingIntent);
+//        Toast.makeText(this, "Alarm scheduled", Toast.LENGTH_SHORT).show();
     }
 
     @Override

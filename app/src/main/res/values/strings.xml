@@ -136,4 +136,5 @@
     <string name="scheduled_transaction">Transacción programada</string>
     <string name="u_sure">¿Estas seguro?</string>
     <string name="confirm_delete_scheduled_transaction">¿Confirmas que deseas eliminar esta transacción programada?</string>
+    <string name="confirm_transaction_delete">Seguro que deseas eliminar esta transacción? Esta acción es irreversible</string>
 </resources>
