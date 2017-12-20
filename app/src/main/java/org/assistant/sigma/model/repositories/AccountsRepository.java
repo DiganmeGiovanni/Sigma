@@ -36,6 +36,10 @@ public class AccountsRepository {
         return realm.where(Account.class).equalTo("active", true).findAll();
     }
 
+    public boolean haveActive() {
+        return realm.where(Account.class).equalTo("active", true).count() > 0;
+    }
+
     public void save(Account account, User user) {
         realm.beginTransaction();
         user.getAccounts().add(account);

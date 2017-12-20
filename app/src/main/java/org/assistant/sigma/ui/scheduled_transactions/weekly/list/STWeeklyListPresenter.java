@@ -28,13 +28,13 @@ public class STWeeklyListPresenter implements STWeeklyListContract.Presenter {
 
     @Override
     public void loadTransactions() {
-        RealmResults<ScheduledTransactionWeekly> transactions = mSTRepository.allWeeklyST();
+        final RealmResults<ScheduledTransactionWeekly> transactions = mSTRepository.allWeeklyST();
         mSTWeeklyListView.renderTransactions(transactions);
 
         transactions.addChangeListener(new RealmChangeListener<RealmResults<ScheduledTransactionWeekly>>() {
             @Override
-            public void onChange(RealmResults<ScheduledTransactionWeekly> element) {
-                mSTWeeklyListView.notifyTransactionsChanged();
+            public void onChange(RealmResults<ScheduledTransactionWeekly> updatedTransactions) {
+                mSTWeeklyListView.renderTransactions(transactions);
             }
         });
     }

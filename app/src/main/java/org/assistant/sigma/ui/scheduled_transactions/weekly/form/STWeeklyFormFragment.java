@@ -357,5 +357,9 @@ public class STWeeklyFormFragment extends Fragment implements STWeeklyFormContra
                         ? R.drawable.background_circle_choosen
                         : R.drawable.background_circle_bordered
         ));
+        tvWeekDay.setTextColor(isActive
+                ? ContextCompat.getColor(getContext(), R.color.mdtp_white)
+                : ContextCompat.getColor(getContext(), R.color.mdtp_dark_gray)
+        );
     }
 }

@@ -20,7 +20,5 @@ interface STWeeklyListContract {
     interface View extends BaseView<Presenter> {
 
         void renderTransactions(RealmResults<ScheduledTransactionWeekly> transactions);
-
-        void notifyTransactionsChanged();
     }
 }

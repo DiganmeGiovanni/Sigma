@@ -78,13 +78,6 @@ public class STWeeklyListFragment extends Fragment implements STWeeklyListContra
         }
     }
 
-    @Override
-    public void notifyTransactionsChanged() {
-        if (stWeeklyAdapter != null) {
-            stWeeklyAdapter.notifyDataSetChanged();
-        }
-    }
-
     private void setupRVTransactions() {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         viewBinding.rvTransactions.setLayoutManager(layoutManager);

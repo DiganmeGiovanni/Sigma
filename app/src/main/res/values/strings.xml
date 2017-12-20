@@ -137,4 +137,6 @@
     <string name="u_sure">¿Estas seguro?</string>
     <string name="confirm_delete_scheduled_transaction">¿Confirmas que deseas eliminar esta transacción programada?</string>
     <string name="confirm_transaction_delete">Seguro que deseas eliminar esta transacción? Esta acción es irreversible</string>
+    <string name="without_accounts">Sin cuentas activas</string>
+    <string name="active_accounts_required">Asegurate de registrar al menos una cuenta antes de continuar</string>
 </resources>
