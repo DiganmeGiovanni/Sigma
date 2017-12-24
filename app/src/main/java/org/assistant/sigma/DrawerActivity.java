@@ -21,6 +21,7 @@ import com.joanzapata.iconify.fonts.MaterialIcons;
 import org.assistant.sigma.accounts.AccountsActivity;
 import org.assistant.sigma.model.entities.User;
 import org.assistant.sigma.ui.scheduled_transactions.ScheduledTransactionsActivity;
+import org.assistant.sigma.ui.transactions.ActTransactions;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -93,6 +94,27 @@ public class DrawerActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     DrawerActivity.this.finish();
+                }
+            });
+        }
+
+        //
+        // Transactions menu entry
+        IconDrawable iconTrans = new IconDrawable(this, MaterialIcons.md_attach_money);
+        iconTrans.colorRes(R.color.textColorSecondary);
+        iconTrans.sizeDp(24);
+        TextView tvTransPAccount = findViewById(R.id.tv_transactions_per_account);
+        tvTransPAccount.setCompoundDrawablesWithIntrinsicBounds(iconTrans, null, null, null);
+        if (activeItem == R.id.tv_transactions_per_account) {
+            tvTransPAccount.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_background));
+        } else {
+            tvTransPAccount.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mDrawerLayout.closeDrawer(Gravity.START);
+
+                    Intent i = new Intent(DrawerActivity.this, ActTransactions.class);
+                    startActivity(i);
                 }
             });
         }

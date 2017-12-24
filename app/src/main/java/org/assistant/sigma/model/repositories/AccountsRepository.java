@@ -28,6 +28,10 @@ public class AccountsRepository {
         realm.close();
     }
 
+    public Account find(String id) {
+        return realm.where(Account.class).equalTo("id", id).findFirst();
+    }
+
     public RealmList<Account> userAccounts(User user) {
         return user.getAccounts();
     }

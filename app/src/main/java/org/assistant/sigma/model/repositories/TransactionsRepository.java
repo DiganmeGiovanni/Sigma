@@ -89,6 +89,12 @@ public class TransactionsRepository {
         return null;
     }
 
+    public RealmResults<Transaction> findAccountTransactions(String accountId) {
+        return realm.where(Transaction.class)
+                .equalTo("account.id", accountId)
+                .findAllSorted("createdAt", Sort.DESCENDING);
+    }
+
     /**
      * Calculates the spent amount since a given date
      * @param startDate Date which start calculation
