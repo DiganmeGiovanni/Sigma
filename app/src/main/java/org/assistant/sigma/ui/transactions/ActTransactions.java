@@ -63,6 +63,10 @@ public class ActTransactions extends DrawerActivity {
             );
         }
 
+        if (accounts.size() > 3) {
+            vBind.tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        }
+
         vBind.viewpager.setAdapter(adapter);
         vBind.tabLayout.setupWithViewPager(vBind.viewpager);
         vBind.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
