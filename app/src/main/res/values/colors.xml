@@ -35,4 +35,13 @@
     <color name="gray_medium">#F6F6F6</color>
     <color name="textColorPrimary">#243235</color>
     <color name="textColorSecondary">#757575</color>
+
+    <!-- Categories colors -->
+    <color name="colorCategoryProvisions">#8E44AD</color>
+    <color name="colorCategoryBar">#009688</color>
+    <color name="colorCategoryHome">#E74C3C</color>
+    <color name="colorCategoryRestaurant">#122A38</color>
+    <color name="colorCategoryClothes">#A2847D</color>
+    <color name="colorCategoryTransport">#E67E22</color>
+    <color name="colorCategoryOther">#757575</color>
 </resources>

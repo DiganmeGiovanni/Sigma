@@ -93,4 +93,10 @@ public class TransactionCategoriesRepository extends RealmRepository {
         realm.copyToRealmOrUpdate(categories);
         realm.commitTransaction();
     }
+
+    public RealmResults<TransactionCategory> allSpent() {
+        return realm.where(TransactionCategory.class)
+                .equalTo("incomeCategory", false)
+                .findAllSorted("id");
+    }
 }

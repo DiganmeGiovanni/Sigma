@@ -70,4 +70,7 @@ dependencies {
 
     // Iconify
     compile 'com.joanzapata.iconify:android-iconify-material:2.2.2' // (v2.0.0)
+
+    // Chart
+    compile 'com.github.bmarrdev:android-DecoView-charting:v1.2'
 }

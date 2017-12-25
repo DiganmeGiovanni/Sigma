@@ -123,17 +123,45 @@ public class TransactionsRepository {
         });
     }
 
-    public void transactionsSince(final Date startDate, final CBGeneric<Long> callback) {
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                Realm realm = Realm.getDefaultInstance();
-                long count = realm.where(Transaction.class)
-                        .greaterThan("createdAt", startDate)
-                        .count();
-                callback.onResponse(count);
-                realm.close();
-            }
-        });
+    /**
+     * Calculates the spent amount since given date
+     * @param startDate Only transactions after this date will be considered
+     * @param includeExcludedTrans If true, even transactions marked as 'exclude from spent resume'
+     *                             will be included in calculation
+     * @return The spent amount
+     */
+    public double spentSince(Date startDate, boolean includeExcludedTrans) {
+        RealmQuery<Transaction> query = realm.where(Transaction.class)
+                .greaterThan("createdAt", startDate)
+                .lessThan("quantity", 0d);
+
+        if (!includeExcludedTrans) {
+            query.equalTo("excludeFromSpentResume", false);
+        }
+
+        double spent = query.sum("quantity").doubleValue();
+        return Math.abs(spent);
+    }
+
+    /**
+     * Calculates the spent amount since given date for a specific category
+     * @param startDate Calculations since
+     * @param includeExcludedTrans If true even transactions marked as 'exclude from spent resume'
+     *                             will be included in calculation
+     * @param categoryId Category to calculate
+     * @return The spent amount
+     */
+    public double spentSince(Date startDate, boolean includeExcludedTrans, int categoryId) {
+        RealmQuery<Transaction> query = realm.where(Transaction.class)
+                .equalTo("transactionCategory.id", categoryId)
+                .greaterThan("createdAt", startDate)
+                .lessThan("quantity", 0d);
+
+        if (!includeExcludedTrans) {
+            query.equalTo("excludeFromSpentResume", false);
+        }
+
+        double spent = query.sum("quantity").doubleValue();
+        return Math.abs(spent);
     }
 }

@@ -20,8 +20,8 @@ import com.joanzapata.iconify.fonts.MaterialIcons;
 
 import org.assistant.sigma.accounts.AccountsActivity;
 import org.assistant.sigma.model.entities.User;
+import org.assistant.sigma.ui.overview.ActOverview;
 import org.assistant.sigma.ui.scheduled_transactions.ScheduledTransactionsActivity;
-import org.assistant.sigma.ui.transactions.ActTransactions;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -113,7 +113,7 @@ public class DrawerActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     mDrawerLayout.closeDrawer(Gravity.START);
 
-                    Intent i = new Intent(DrawerActivity.this, ActTransactions.class);
+                    Intent i = new Intent(DrawerActivity.this, ActOverview.class);
                     startActivity(i);
                 }
             });
