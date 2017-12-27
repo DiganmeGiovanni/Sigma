@@ -7,13 +7,19 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import com.hookedonplay.decoviewlib.charts.SeriesItem;
 import com.hookedonplay.decoviewlib.events.DecoEvent;
+import com.joanzapata.iconify.IconDrawable;
 
 import org.assistant.sigma.R;
 import org.assistant.sigma.databinding.ActOverviewBinding;
+import org.assistant.sigma.databinding.ItemOverviewCategoryBinding;
 import org.assistant.sigma.model.catalogs.DefaultTransactionCategories;
+import org.assistant.sigma.model.entities.TransactionCategory;
+import org.assistant.sigma.utils.TextUtils;
+import org.assistant.sigma.utils.services.CategoryIconProvider;
 
 /**
  * Created by giovanni on 24/12/17.
@@ -49,8 +55,9 @@ public class ActOverview extends AppCompatActivity {
         mPresenter.onDestroy();
     }
 
-    public void addSpent(int categoryId, float percent) {
-        addChartItem(categoryId, percent);
+    public void addSpent(TransactionCategory category, float percent, double spent) {
+        addChartItem(category.getId(), percent);
+        addCategorySpent(category, percent, spent);
     }
 
     private void addChartItem(int categoryId, float value) {
@@ -69,6 +76,27 @@ public class ActOverview extends AppCompatActivity {
         chartLinesCount++;
     }
 
+    private void addCategorySpent(TransactionCategory category, float percent, double amount) {
+        View categoryView = getLayoutInflater().inflate(
+                R.layout.item_overview_category,
+                vBind.llRoot,
+                false
+        );
+        ItemOverviewCategoryBinding itemBind = ItemOverviewCategoryBinding.bind(categoryView);
+        IconDrawable icon = CategoryIconProvider.makeCategoryIcon(
+                this,
+                category,
+                getCategoryColor(category.getId())
+        );
+
+        itemBind.ivIcon.setImageDrawable(icon);
+        itemBind.tvCategoryDescription.setText(category.getName());
+        itemBind.tvAmount.setText(TextUtils.asMoney(amount));
+        itemBind.tvPercent.setText(String.format("%s%%", Math.round(percent)));
+
+        vBind.llCategories.addView(categoryView);
+    }
+
     @NonNull
     private PointF getInsetPointF() {
         float pointCoordinate = chartLinesCount * CHART_LINE_WIDTH;
@@ -79,7 +107,7 @@ public class ActOverview extends AppCompatActivity {
     }
 
     private int getCategoryColor(int categoryId) {
-        int colorId = -1;
+        int colorId;
         switch (categoryId) {
             case DefaultTransactionCategories.ID_PROVISIONS:
                 colorId = R.color.colorCategoryProvisions;

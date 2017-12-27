@@ -50,7 +50,7 @@ public class OverviewPresenter implements BasePresenter {
 
             final float percent = (float) ((spent/totalSpent) * 100);
             if (!view.isDestroyed() && percent > 0) {
-                view.addSpent(category.getId(), percent);
+                view.addSpent(category, percent, spent);
             }
         }
     }
