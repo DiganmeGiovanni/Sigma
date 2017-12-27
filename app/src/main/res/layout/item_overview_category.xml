@@ -24,6 +24,7 @@
             android:layout_toStartOf="@+id/tv_percent"
             android:layout_marginStart="16dp"
             android:textSize="@dimen/text_subheading"
+            android:textStyle="bold"
             tools:text="@string/category_description_clother_shoes"/>
         <TextView
             android:id="@+id/tv_amount"
