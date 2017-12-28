@@ -2,7 +2,6 @@ package org.assistant.sigma.utils.services;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,8 +13,8 @@ import org.assistant.sigma.model.catalogs.DefaultTransactionCategories;
 import org.assistant.sigma.model.entities.TransactionCategory;
 
 /**
- *
  * Created by giovanni on 29/05/17.
+ * @Deprecated
  */
 public class CategoryIconProvider {
 
@@ -48,38 +47,6 @@ public class CategoryIconProvider {
         this.size = size;
 
         initIcons();
-    }
-
-    public static IconDrawable makeCategoryIcon(Context mContext, TransactionCategory category,
-                                                @ColorInt int color) {
-        IconDrawable iconDrawable;
-        switch (category.getId()) {
-            case DefaultTransactionCategories.ID_TRANSPORT:
-                iconDrawable = new IconDrawable(mContext, MaterialIcons.md_directions_bus);
-                break;
-            case DefaultTransactionCategories.ID_PROVISIONS:
-                iconDrawable = new IconDrawable(mContext, MaterialIcons.md_local_mall);
-                break;
-            case DefaultTransactionCategories.ID_CLOTHES:
-                iconDrawable = new IconDrawable(mContext, MaterialIcons.md_local_offer);
-                break;
-            case DefaultTransactionCategories.ID_HOME:
-                iconDrawable = new IconDrawable(mContext, MaterialIcons.md_home);
-                break;
-            case DefaultTransactionCategories.ID_RESTAURANT:
-                iconDrawable = new IconDrawable(mContext, MaterialIcons.md_restaurant_menu);
-                break;
-            case DefaultTransactionCategories.ID_BAR:
-                iconDrawable = new IconDrawable(mContext, MaterialIcons.md_local_bar);
-                break;
-            case DefaultTransactionCategories.ID_OTHER_SPENT:
-            default:
-                iconDrawable = new IconDrawable(mContext, MaterialIcons.md_help_outline);
-                break;
-        }
-
-        iconDrawable.color(color);
-        return iconDrawable;
     }
 
     public void setIcon(ImageView imageView, TransactionCategory transactionCategory) {

@@ -35,7 +35,15 @@ public class OverviewPresenter implements BasePresenter {
         transactionsRepository.destroy();
     }
 
-    void computeCurrentLargePeriodSpent() {
+    void calcCurrLgPeriodSpent() {
+        // TODO
+    }
+
+    void calcCurrShPeriodSpent() {
+        // TODO
+    }
+
+    void calcCurrLgPeriodSpentByCategory() {
         User user = usersRepository.activeUser();
         Date start = TimeUtils.getCurrentLargePeriodStart(user.getSettings());
         double totalSpent = transactionsRepository.spentSince(start, false);
@@ -50,7 +58,7 @@ public class OverviewPresenter implements BasePresenter {
 
             final float percent = (float) ((spent/totalSpent) * 100);
             if (!view.isDestroyed() && percent > 0) {
-                view.addSpent(category, percent, spent);
+                view.renderSpentForCategory(category, spent, percent);
             }
         }
     }
