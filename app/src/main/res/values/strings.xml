@@ -142,4 +142,10 @@
     <string name="ago">Hace</string>
     <string name="minutes">minutos</string>
     <string name="minute">minuto</string>
+    <string name="fortnight">Quincena</string>
+    <string name="week">Semana</string>
+    <string name="month">Este mes</string>
+    <string name="outcome">Egreso</string>
+    <string name="outcomes">Egresos</string>
+    <string name="incomes">Ingresos</string>
 </resources>

@@ -124,6 +124,26 @@ public class TransactionsRepository {
     }
 
     /**
+     * Calculates the income amount since given date
+     * @param start Only transactions after this date will be considered
+     * @param includeExcludedTrans If true, even transactions marked as 'exclude from spent resume'
+     *                             will be included in calculation
+     * @return The income amount
+     */
+    public double incomeSince(Date start, boolean includeExcludedTrans) {
+        RealmQuery<Transaction> query = realm.where(Transaction.class)
+                .greaterThan("createdAt", start)
+                .greaterThan("quantity", 0d);
+
+        if (!includeExcludedTrans) {
+            query.equalTo("excludeFromSpentResume", false);
+        }
+
+        double spent = query.sum("quantity").doubleValue();
+        return Math.abs(spent);
+    }
+
+    /**
      * Calculates the spent amount since given date
      * @param startDate Only transactions after this date will be considered
      * @param includeExcludedTrans If true, even transactions marked as 'exclude from spent resume'
