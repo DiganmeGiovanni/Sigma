@@ -24,6 +24,7 @@ public class SigmaApplication extends Application {
         super.onCreate();
         Realm.init(this);
         RealmConfiguration config = new RealmConfiguration.Builder()
+//                .assetFile("default.realm")
                 .schemaVersion(5)
                 .migration(new Migration())
                 .build();

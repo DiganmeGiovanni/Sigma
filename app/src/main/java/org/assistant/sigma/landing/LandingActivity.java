@@ -117,6 +117,8 @@ public class LandingActivity extends DrawerActivity {
         viewBinding.btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                DBTransfer dbTransfer = new DBTransfer();
+//                dbTransfer.backupDatabase(LandingActivity.this);
                 if (dashboardPresenter.allowAddTransaction()) {
 
                     // Go to add transactions
