@@ -148,4 +148,5 @@
     <string name="outcome">Egreso</string>
     <string name="outcomes">Egresos</string>
     <string name="incomes">Ingresos</string>
+    <string name="current_period">Periodo actual</string>
 </resources>

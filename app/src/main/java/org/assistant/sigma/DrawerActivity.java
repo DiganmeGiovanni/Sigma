@@ -22,6 +22,7 @@ import org.assistant.sigma.accounts.AccountsActivity;
 import org.assistant.sigma.model.entities.User;
 import org.assistant.sigma.ui.overview.ActOverview;
 import org.assistant.sigma.ui.scheduled_transactions.ScheduledTransactionsActivity;
+import org.assistant.sigma.ui.transactions.ActTransactions;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -80,25 +81,23 @@ public class DrawerActivity extends AppCompatActivity {
 
     private void setupDrawerMenuItems(final DrawerLayout mDrawerLayout, int activeItem) {
 
-        //
-        // Transactions menu entry
-        IconDrawable iconMoney = new IconDrawable(this, MaterialIcons.md_attach_money)
-                .colorRes(R.color.textColorSecondary)
-                .sizeDp(24);
-        TextView tvTransactions = (TextView) findViewById(R.id.tv_transactions);
-        tvTransactions.setCompoundDrawablesWithIntrinsicBounds(iconMoney, null, null, null);
-        if (activeItem == R.id.tv_transactions) {
-            tvTransactions.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_background));
-        } else {
-            tvTransactions.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    DrawerActivity.this.finish();
-                }
-            });
-        }
+        // Resume pane menu entry
+//        IconDrawable iconMoney = new IconDrawable(this, MaterialIcons.md_attach_money)
+//                .colorRes(R.color.textColorSecondary)
+//                .sizeDp(24);
+//        TextView tvTransactions = (TextView) findViewById(R.id.tv_transactions);
+//        tvTransactions.setCompoundDrawablesWithIntrinsicBounds(iconMoney, null, null, null);
+//        if (activeItem == R.id.tv_transactions) {
+//            tvTransactions.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_background));
+//        } else {
+//            tvTransactions.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    DrawerActivity.this.finish();
+//                }
+//            });
+//        }
 
-        //
         // Transactions menu entry
         IconDrawable iconTrans = new IconDrawable(this, MaterialIcons.md_attach_money);
         iconTrans.colorRes(R.color.textColorSecondary);
@@ -109,6 +108,26 @@ public class DrawerActivity extends AppCompatActivity {
             tvTransPAccount.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_background));
         } else {
             tvTransPAccount.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mDrawerLayout.closeDrawer(Gravity.START);
+
+                    Intent i = new Intent(DrawerActivity.this, ActTransactions.class);
+                    startActivity(i);
+                }
+            });
+        }
+
+        // Current period menu entry
+        IconDrawable icOverview = new IconDrawable(this, MaterialIcons.md_insert_invitation);
+        icOverview.colorRes(R.color.textColorSecondary);
+        icOverview.sizeDp(24);
+        TextView tvOverview = findViewById(R.id.tv_current_period);
+        tvOverview.setCompoundDrawablesWithIntrinsicBounds(icOverview, null, null, null);
+        if (activeItem == R.id.tv_current_period) {
+            tvOverview.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_background));
+        } else {
+            tvOverview.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     mDrawerLayout.closeDrawer(Gravity.START);
@@ -195,13 +214,13 @@ public class DrawerActivity extends AppCompatActivity {
     }
 
     public void setupDrawerUserData(User user) {
-        TextView tvUserName = (TextView) findViewById(R.id.tv_user_name);
+        TextView tvUserName = findViewById(R.id.tv_user_name);
         tvUserName.setText(user.fullName());
 
-        TextView tvUserEmail = (TextView) findViewById(R.id.tv_user_email);
+        TextView tvUserEmail = findViewById(R.id.tv_user_email);
         tvUserEmail.setText(user.getEmail());
 
-        CircleImageView civProfile = (CircleImageView) findViewById(R.id.civ_user_profile_image);
+        CircleImageView civProfile = findViewById(R.id.civ_user_profile_image);
         Glide.with(this).load(user.getUrlPicture()).into(civProfile);
     }
 }

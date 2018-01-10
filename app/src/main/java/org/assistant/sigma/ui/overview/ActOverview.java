@@ -3,11 +3,12 @@ package org.assistant.sigma.ui.overview;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 
+import org.assistant.sigma.DrawerActivity;
 import org.assistant.sigma.R;
 import org.assistant.sigma.databinding.ActOverviewBinding;
 import org.assistant.sigma.model.entities.Settings;
+import org.assistant.sigma.model.repositories.UsersRepository;
 import org.assistant.sigma.ui.adapters.FragPagerAdapter;
 import org.assistant.sigma.utils.PeriodUtils;
 
@@ -17,7 +18,7 @@ import java.util.Date;
  * Created by giovanni on 24/12/17.
  *
  */
-public class ActOverview extends AppCompatActivity {
+public class ActOverview extends DrawerActivity {
     private ActOverviewBinding vBind;
     private OverviewPresenter mPresenter;
 
@@ -29,6 +30,16 @@ public class ActOverview extends AppCompatActivity {
                 this,
                 R.layout.act_overview
         );
+
+        // Setup toolbar
+        UsersRepository usersRepository = new UsersRepository();
+        super.setupToolbar(
+                vBind.toolbar,
+                vBind.drawerLayout,
+                usersRepository.activeUser(),
+                R.id.tv_current_period
+        );
+        vBind.toolbar.setTitle(R.string.current_period);
 
         setupTabLayout();
     }
