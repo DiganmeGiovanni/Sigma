@@ -1,10 +1,10 @@
-package org.assistant.sigma.login;
+package org.assistant.sigma.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +19,7 @@ import com.facebook.login.LoginResult;
 
 import org.assistant.sigma.R;
 import org.assistant.sigma.databinding.FragLoginBinding;
-import org.assistant.sigma.landing.LandingActivity;
+import org.assistant.sigma.ui.transactions.ActTransactions;
 import org.json.JSONObject;
 
 import java.util.Arrays;
@@ -50,7 +50,7 @@ public class LoginFragment extends Fragment implements LoginContract.View {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.frag_login, container, false);
         viewBinding = FragLoginBinding.bind(rootView);
@@ -71,10 +71,11 @@ public class LoginFragment extends Fragment implements LoginContract.View {
 
     @Override
     public void goToDashboard() {
-        Log.i(getClass().getName(), "Going to dashboard");
-        Intent intent = new Intent(getActivity(), LandingActivity.class);
+        Intent intent = new Intent(getActivity(), ActTransactions.class);
         startActivity(intent);
-        getActivity().finish();
+        if (getActivity() != null) {
+            getActivity().finish();
+        }
     }
 
     @Override

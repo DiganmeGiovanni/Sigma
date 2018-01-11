@@ -1,4 +1,4 @@
-package org.assistant.sigma.login;
+package org.assistant.sigma.ui.login;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

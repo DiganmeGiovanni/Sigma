@@ -1,4 +1,4 @@
-package org.assistant.sigma.login;
+package org.assistant.sigma.ui.login;
 
 import android.util.Log;
 
