@@ -149,4 +149,7 @@
     <string name="outcomes">Egresos</string>
     <string name="incomes">Ingresos</string>
     <string name="current_period">Periodo actual</string>
+    <string name="to_the">a las</string>
+    <string name="yesterday">Ayer</string>
+    <string name="before_yesterday">Antier</string>
 </resources>

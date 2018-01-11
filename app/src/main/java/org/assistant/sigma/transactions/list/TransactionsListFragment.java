@@ -12,10 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import org.assistant.sigma.R;
-import org.assistant.sigma.adapters.TransactionsAdapter;
 import org.assistant.sigma.databinding.FragTransactionsBinding;
 import org.assistant.sigma.model.entities.Transaction;
 import org.assistant.sigma.transactions.details.TransactionDetailsActivity;
+import org.assistant.sigma.ui.transactions.TransactionsAdapter;
 
 import io.realm.RealmResults;
 

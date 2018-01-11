@@ -14,7 +14,7 @@ import org.assistant.sigma.model.entities.TransactionCategory;
 
 /**
  * Created by giovanni on 29/05/17.
- * @Deprecated
+ * @deprecated
  */
 public class CategoryIconProvider {
 

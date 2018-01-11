@@ -4,6 +4,7 @@ import android.content.Context;
 
 import org.assistant.sigma.R;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -13,52 +14,65 @@ import java.util.Locale;
  *
  */
 public class DateFormatter {
+    private static SimpleDateFormat monthFormatter = new SimpleDateFormat(
+            "dd MMM",
+            Locale.getDefault()
+    );
+    private static SimpleDateFormat timeFormatter = new SimpleDateFormat(
+            "hh:mm a",
+            Locale.getDefault()
+    );
 
-    public String format(int hour, int min) {
-        StringBuilder sBuilder = new StringBuilder();
+    /**
+     * Formats given date as a moment in past examples:
+     * - Today at 14:02
+     * - Yesterday at 23:50
+     * - Before yesterday at 13:15
+     * - 15 Nov at 15:18
+     *
+     * @param mContext Current context to access strings
+     * @param date Moment to format
+     * @return Human friendly formatted date
+     */
+    public static String asPastTime(Context mContext, Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
 
-        if (hour < 10) {
-            sBuilder.append("0");
-        }
-        sBuilder.append(hour);
-        sBuilder.append(":");
-
-        if (min < 10) {
-            sBuilder.append("0");
-        }
-        sBuilder.append(min);
-
-        return sBuilder.toString();
+        return getDayPrefix(mContext, calendar) +
+                " " +
+                formatTime(mContext, calendar);
     }
 
-    public String relativePast(Date date) {
-        Calendar calDate = Calendar.getInstance(Locale.getDefault());
+    /**
+     * Creates a human friendly string for given day
+     * @param date Date which to get prefix
+     * @return Today, Yesterday, Before yesterday or dd MMM
+     */
+    private static String getDayPrefix(Context mContext, Calendar date) {
         Calendar calNow = Calendar.getInstance(Locale.getDefault());
-        calDate.setTime(date);
 
-        return "";
-    }
-
-    public String agoMinutes(Context mContext, Calendar date, Calendar now) {
-        long diff = now.getTimeInMillis() - date.getTimeInMillis();
-        int min = Math.round(diff / 1000 / 60);
-
-        String ago = mContext.getString(R.string.ago);
-        StringBuilder sBuilder = new StringBuilder(ago)
-                .append(" ")
-                .append(min)
-                .append(" ");
-
-        if (min == 1) {
-            sBuilder.append(mContext.getString(R.string.minute));
+        if (calNow.get(Calendar.DAY_OF_MONTH) == date.get(Calendar.DAY_OF_MONTH)) {
+            return mContext.getString(R.string.today);
         }
 
-        return ago + " " + min + " " + mContext.getString(R.string.minutes);
+        Calendar yesterday = (Calendar) calNow.clone();
+        yesterday.add(Calendar.DAY_OF_MONTH, -1);
+        if (yesterday.get(Calendar.DAY_OF_MONTH) == date.get(Calendar.DAY_OF_MONTH)) {
+            return mContext.getString(R.string.yesterday);
+        }
+
+        Calendar beforeYesterday = (Calendar) yesterday.clone();
+        beforeYesterday.add(Calendar.DAY_OF_MONTH, -1);
+        if (beforeYesterday.get(Calendar.DAY_OF_MONTH) == date.get(Calendar.DAY_OF_MONTH)) {
+            return mContext.getString(R.string.before_yesterday);
+        }
+
+        return monthFormatter.format(date.getTime()).toUpperCase();
     }
 
-    public boolean lessThanAWeek(Calendar date, Calendar now) {
-//        Calendar.
-
-        return true;
+    private static String formatTime(Context mContext, Calendar date) {
+        return mContext.getString(R.string.to_the) +
+                " " +
+                timeFormatter.format(date.getTime());
     }
 }

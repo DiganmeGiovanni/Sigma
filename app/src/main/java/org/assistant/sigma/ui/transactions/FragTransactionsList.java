@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import org.assistant.sigma.R;
-import org.assistant.sigma.adapters.TransactionsAdapter;
 import org.assistant.sigma.databinding.FragTransactionsBinding;
 import org.assistant.sigma.model.entities.Transaction;
 
