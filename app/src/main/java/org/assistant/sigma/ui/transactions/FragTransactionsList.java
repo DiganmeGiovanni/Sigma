@@ -1,5 +1,6 @@
 package org.assistant.sigma.ui.transactions;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import org.assistant.sigma.R;
 import org.assistant.sigma.databinding.FragTransactionsBinding;
 import org.assistant.sigma.model.entities.Transaction;
+import org.assistant.sigma.transactions.details.TransactionDetailsActivity;
 
 import io.realm.RealmChangeListener;
 import io.realm.RealmResults;
@@ -64,7 +66,22 @@ public class FragTransactionsList extends Fragment {
     }
 
     private void renderTransactions(RealmResults<Transaction> transactions) {
-        TransactionsAdapter adapter = new TransactionsAdapter(getContext(), transactions);
+        TransactionsAdapter adapter = new TransactionsAdapter(
+                getContext(),
+                transactions,
+                new TransactionsAdapter.OnTransactionClickListener() {
+                    @Override
+                    public void onTransactionClicked(Transaction transaction) {
+                        Intent intent = new Intent(getContext(), TransactionDetailsActivity.class);
+                        intent.putExtra(
+                                TransactionDetailsActivity.TRANSACTION_ID,
+                                transaction.getId()
+                        );
+
+                        startActivity(intent);
+                    }
+                }
+        );
         vBind.rvTransactions.setAdapter(adapter);
 
         vBind.pbLoading.setVisibility(View.GONE);

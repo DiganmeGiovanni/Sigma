@@ -1,5 +1,6 @@
 package org.assistant.sigma.ui.transactions;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,9 +11,11 @@ import com.joanzapata.iconify.fonts.MaterialIcons;
 
 import org.assistant.sigma.DrawerActivity;
 import org.assistant.sigma.R;
+import org.assistant.sigma.accounts.AccountsActivity;
 import org.assistant.sigma.databinding.ActTransactionsBinding;
 import org.assistant.sigma.model.entities.Account;
 import org.assistant.sigma.model.repositories.UsersRepository;
+import org.assistant.sigma.transactions.form.TransactionsFormActivity;
 import org.assistant.sigma.ui.util.ButtonsUtils;
 
 import io.realm.RealmResults;
@@ -95,7 +98,21 @@ public class ActTransactions extends DrawerActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
+                        if (transPresenter.getAccounts().size() > 0) {
+                            // Go to add transactions
+                            Intent intent = new Intent(
+                                    ActTransactions.this,
+                                    TransactionsFormActivity.class
+                            );
+                            startActivity(intent);
+                        } else {
+                            // Go to accounts
+                            Intent intent = new Intent(
+                                    ActTransactions.this,
+                                    AccountsActivity.class
+                            );
+                            startActivity(intent);
+                        }
                     }
                 }
         );
