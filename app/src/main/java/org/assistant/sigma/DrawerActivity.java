@@ -37,6 +37,16 @@ public class DrawerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
     }
 
+    /**
+     * If current activity is different of landing activity
+     * current activity is finished
+     */
+    private void finishCurrentIfNecessary() {
+        if (!(this instanceof ActTransactions)) {
+            finish();
+        }
+    }
+
     public void setupToolbar(@NonNull Toolbar toolbar, @NonNull DrawerLayout mDrawerLayout,
                              @NonNull User user, @IdRes int activeItem) {
         IconDrawable iconMenu = new IconDrawable(this, MaterialIcons.md_menu)
@@ -81,23 +91,6 @@ public class DrawerActivity extends AppCompatActivity {
 
     private void setupDrawerMenuItems(final DrawerLayout mDrawerLayout, int activeItem) {
 
-        // Resume pane menu entry
-//        IconDrawable iconMoney = new IconDrawable(this, MaterialIcons.md_attach_money)
-//                .colorRes(R.color.textColorSecondary)
-//                .sizeDp(24);
-//        TextView tvTransactions = (TextView) findViewById(R.id.tv_transactions);
-//        tvTransactions.setCompoundDrawablesWithIntrinsicBounds(iconMoney, null, null, null);
-//        if (activeItem == R.id.tv_transactions) {
-//            tvTransactions.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_background));
-//        } else {
-//            tvTransactions.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    DrawerActivity.this.finish();
-//                }
-//            });
-//        }
-
         // Transactions menu entry
         IconDrawable iconTrans = new IconDrawable(this, MaterialIcons.md_attach_money);
         iconTrans.colorRes(R.color.textColorSecondary);
@@ -114,6 +107,8 @@ public class DrawerActivity extends AppCompatActivity {
 
                     Intent i = new Intent(DrawerActivity.this, ActTransactions.class);
                     startActivity(i);
+
+                    finishCurrentIfNecessary();
                 }
             });
         }
@@ -134,6 +129,8 @@ public class DrawerActivity extends AppCompatActivity {
 
                     Intent i = new Intent(DrawerActivity.this, ActOverview.class);
                     startActivity(i);
+
+                    finishCurrentIfNecessary();
                 }
             });
         }
@@ -155,6 +152,8 @@ public class DrawerActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(DrawerActivity.this, AccountsActivity.class);
                     startActivity(intent);
+
+                    finishCurrentIfNecessary();
                 }
             });
         }
@@ -176,6 +175,8 @@ public class DrawerActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(DrawerActivity.this, ScheduledTransactionsActivity.class);
                     startActivity(intent);
+
+                    finishCurrentIfNecessary();
                 }
             });
         }
@@ -185,7 +186,7 @@ public class DrawerActivity extends AppCompatActivity {
         IconDrawable iconChart = new IconDrawable(this, MaterialIcons.md_insert_chart)
                 .colorRes(R.color.textColorSecondary)
                 .sizeDp(24);
-        TextView tvCharts = (TextView) findViewById(R.id.tv_charts);
+        TextView tvCharts = findViewById(R.id.tv_charts);
         tvCharts.setCompoundDrawablesWithIntrinsicBounds(iconChart, null, null, null);
 
         //
