@@ -1,4 +1,4 @@
-package org.assistant.sigma.ui.transactions;
+package org.assistant.sigma.ui.transactions.listing;
 
 import android.content.Context;
 import android.support.v4.content.ContextCompat;

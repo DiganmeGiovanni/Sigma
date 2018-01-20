@@ -1,4 +1,4 @@
-package org.assistant.sigma.ui.transactions;
+package org.assistant.sigma.ui.transactions.listing;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;

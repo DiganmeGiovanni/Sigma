@@ -1,4 +1,4 @@
-package org.assistant.sigma.ui.transactions;
+package org.assistant.sigma.ui.transactions.listing;
 
 import org.assistant.sigma.model.entities.Account;
 import org.assistant.sigma.model.entities.Transaction;
