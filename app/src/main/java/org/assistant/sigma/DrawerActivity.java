@@ -22,7 +22,7 @@ import org.assistant.sigma.accounts.AccountsActivity;
 import org.assistant.sigma.model.entities.User;
 import org.assistant.sigma.ui.overview.ActOverview;
 import org.assistant.sigma.ui.scheduled_transactions.ScheduledTransactionsActivity;
-import org.assistant.sigma.ui.transactions.ActTransactions;
+import org.assistant.sigma.ui.transactions.listing.ActTransactions;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 

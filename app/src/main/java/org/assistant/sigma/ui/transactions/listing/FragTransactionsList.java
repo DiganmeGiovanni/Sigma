@@ -1,5 +1,6 @@
 package org.assistant.sigma.ui.transactions.listing;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -30,6 +31,15 @@ public class FragTransactionsList extends Fragment {
     private FragTransactionsBinding vBind;
     private TransactionsPresenter transPresenter;
     private String accountId;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        if (getActivity() != null) {
+            transPresenter = ((ActTransactions) getActivity()).getPresenter();
+        }
+    }
 
     @Nullable
     @Override
@@ -92,9 +102,5 @@ public class FragTransactionsList extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         vBind.rvTransactions.setLayoutManager(layoutManager);
         vBind.rvTransactions.setItemAnimator(new DefaultItemAnimator());
-    }
-
-    public void setTransPresenter(TransactionsPresenter transPresenter) {
-        this.transPresenter = transPresenter;
     }
 }

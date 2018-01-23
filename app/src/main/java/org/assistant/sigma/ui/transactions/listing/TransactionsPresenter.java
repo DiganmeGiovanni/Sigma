@@ -1,9 +1,10 @@
 package org.assistant.sigma.ui.transactions.listing;
 
+import org.assistant.sigma.AbstractPresenter;
+import org.assistant.sigma.model.dao.AccountsDao;
+import org.assistant.sigma.model.dao.TransactionsDao;
 import org.assistant.sigma.model.entities.Account;
 import org.assistant.sigma.model.entities.Transaction;
-import org.assistant.sigma.model.repositories.AccountsRepository;
-import org.assistant.sigma.model.repositories.TransactionsRepository;
 
 import io.realm.RealmResults;
 
@@ -11,24 +12,32 @@ import io.realm.RealmResults;
  * Created by giovanni on 24/12/17.
  *
  */
-public class TransactionsPresenter {
-    private AccountsRepository accountsRepository;
-    private TransactionsRepository transactionsRepository;
+public class TransactionsPresenter implements AbstractPresenter {
+    private TransactionsDao transactionsDao;
+    private AccountsDao accountsDao;
 
     TransactionsPresenter() {
-        accountsRepository = new AccountsRepository();
-        transactionsRepository = new TransactionsRepository();
+        transactionsDao = new TransactionsDao();
+        accountsDao = new AccountsDao();
     }
 
+    @Override
+    public void onCreate() {
+        transactionsDao.onCreate();
+        accountsDao.onCreate();
+    }
+
+    @Override
     public void onDestroy() {
-        accountsRepository.destroy();
+        transactionsDao.onDestroy();
+        accountsDao.onDestroy();
     }
 
     public RealmResults<Account> getAccounts() {
-        return accountsRepository.allActive();
+        return accountsDao.allActive();
     }
 
-    public RealmResults<Transaction> getTransactions(String accountId) {
-        return transactionsRepository.findAccountTransactions(accountId);
+    RealmResults<Transaction> getTransactions(String accountId) {
+        return transactionsDao.findByAccount(accountId);
     }
 }

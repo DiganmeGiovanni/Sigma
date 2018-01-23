@@ -3,6 +3,7 @@ package org.assistant.sigma.ui.transactions.listing;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.view.View;
@@ -38,6 +39,7 @@ public class ActTransactions extends DrawerActivity {
         );
 
         transPresenter = new TransactionsPresenter();
+        transPresenter.onCreate();
 
         setupToolbar();
         makeTabs();
@@ -52,24 +54,14 @@ public class ActTransactions extends DrawerActivity {
 
     private void makeTabs() {
         RealmResults<Account> accounts = transPresenter.getAccounts();
-        TransactionsPagerAdapter adapter = new TransactionsPagerAdapter(getSupportFragmentManager());
-        for (Account account : accounts) {
-            Bundle arguments = new Bundle();
-            arguments.putString(FragTransactionsList.ACCOUNT_ID, account.getId());
-
-            FragTransactionsList mFragment = new FragTransactionsList();
-            mFragment.setTransPresenter(transPresenter);
-            mFragment.setArguments(arguments);
-            adapter.addFragment(
-                    mFragment,
-                    account.getName()
-            );
-        }
+        TransactionsPagerAdapter adapter = new TransactionsPagerAdapter(
+                getSupportFragmentManager(),
+                accounts
+        );
 
         if (accounts.size() > 3) {
             vBind.tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         }
-
         vBind.viewpager.setAdapter(adapter);
         vBind.tabLayout.setupWithViewPager(vBind.viewpager);
         vBind.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -128,5 +120,14 @@ public class ActTransactions extends DrawerActivity {
         );
 
         vBind.toolbar.setTitle(R.string.transactions);
+    }
+
+    @NonNull
+    protected TransactionsPresenter getPresenter() {
+        if (transPresenter == null) {
+            transPresenter = new TransactionsPresenter();
+            transPresenter.onCreate();
+        }
+        return transPresenter;
     }
 }

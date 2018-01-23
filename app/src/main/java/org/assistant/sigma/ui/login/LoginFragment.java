@@ -19,7 +19,7 @@ import com.facebook.login.LoginResult;
 
 import org.assistant.sigma.R;
 import org.assistant.sigma.databinding.FragLoginBinding;
-import org.assistant.sigma.ui.transactions.ActTransactions;
+import org.assistant.sigma.ui.transactions.listing.ActTransactions;
 import org.json.JSONObject;
 
 import java.util.Arrays;

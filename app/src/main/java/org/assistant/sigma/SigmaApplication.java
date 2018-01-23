@@ -29,6 +29,7 @@ public class SigmaApplication extends Application {
                 .migration(new Migration())
                 .build();
         Realm.setDefaultConfiguration(config);
+        DBInitializer.init(this); // Init/Verify database
 
         Stetho.initialize(
                 Stetho.newInitializerBuilder(this)
@@ -38,8 +39,5 @@ public class SigmaApplication extends Application {
         );
 
         Iconify.with(new MaterialModule());
-
-        // Init/Verify database
-        DBInitializer.init(this);
     }
 }
