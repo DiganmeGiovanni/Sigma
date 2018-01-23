@@ -1,7 +1,5 @@
 package org.assistant.sigma.model.catalogs;
 
-import org.assistant.sigma.model.entities.TransactionCategory;
-
 /**
  * Created by giovanni on 28/09/17.
  *
@@ -19,7 +17,6 @@ public class DefaultTransactionCategories {
     public static final int ID_SALARY = 8;
     public static final int ID_OTHER_INCOME = 9;
 
-    public static boolean isDefault(TransactionCategory category) {
-        return category.getId() >= 1 && category.getId() <= 9;
-    }
+    public static final int ID_THEATHER = 10;
+    public static final int ID_ADJUST = 11;
 }
