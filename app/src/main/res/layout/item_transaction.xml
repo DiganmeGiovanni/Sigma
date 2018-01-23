@@ -16,7 +16,7 @@
         tools:src="@drawable/ic_category_market_2x"/>
 
     <TextView
-        android:id="@+id/tv_account"
+        android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/iv_icon_category"
@@ -26,10 +26,10 @@
         tools:text="Cuenta citibanamex"/>
 
     <TextView
-        android:id="@+id/tv_time"
+        android:id="@+id/tv_subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_account"
+        android:layout_below="@id/tv_title"
         android:layout_toEndOf="@id/iv_icon_category"
         android:layout_toStartOf="@+id/tv_quantity"
         android:textSize="@dimen/text_regular"
@@ -52,5 +52,5 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="16dp"
-        android:layout_below="@id/tv_time"/>
+        android:layout_below="@id/tv_subtitle"/>
 </RelativeLayout>

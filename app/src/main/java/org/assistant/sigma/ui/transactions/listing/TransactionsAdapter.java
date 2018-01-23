@@ -59,8 +59,8 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Transaction transaction = transactions.get(position);
-        holder.tvAccount.setText(transaction.getAccount().getName());
-        holder.tvTime.setText(DateFormatter.asPastTime(mContext, transaction.getCreatedAt()));
+        holder.tvTitle.setText(transaction.getTransactionCategory().getName());
+        holder.tvSubtitle.setText(DateFormatter.asPastTime(mContext, transaction.getCreatedAt()));
         holder.ivIconCategory.setImageDrawable(getCategoryIcon(transaction.getTransactionCategory()));
 
         if (transaction.getQuantity() < 0) {
@@ -97,16 +97,16 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
 
     class ViewHolder extends RecyclerView.ViewHolder {
         ImageView ivIconCategory;
-        TextView tvAccount;
-        TextView tvTime;
+        TextView tvTitle;
+        TextView tvSubtitle;
         TextView tvQuantity;
 
         ViewHolder(View itemView) {
             super(itemView);
 
             ivIconCategory = itemView.findViewById(R.id.iv_icon_category);
-            tvAccount = itemView.findViewById(R.id.tv_account);
-            tvTime = itemView.findViewById(R.id.tv_time);
+            tvTitle = itemView.findViewById(R.id.tv_title);
+            tvSubtitle = itemView.findViewById(R.id.tv_subtitle);
             tvQuantity = itemView.findViewById(R.id.tv_quantity);
         }
     }
