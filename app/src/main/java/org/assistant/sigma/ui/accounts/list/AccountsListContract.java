@@ -1,4 +1,4 @@
-package org.assistant.sigma.accounts.list;
+package org.assistant.sigma.ui.accounts.list;
 
 import org.assistant.sigma.BasePresenter;
 import org.assistant.sigma.BaseView;

@@ -18,4 +18,10 @@ public class TransactionsDao extends AbstractDao {
                 .equalTo("account.id", accountId)
                 .findAllSorted("createdAt", Sort.DESCENDING);
     }
+
+    public Transaction last() {
+        return realm.where(Transaction.class)
+                .findAllSorted("createdAt", Sort.DESCENDING)
+                .first();
+    }
 }

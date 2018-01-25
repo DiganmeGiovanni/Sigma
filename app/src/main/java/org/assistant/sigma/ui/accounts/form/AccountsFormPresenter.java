@@ -1,4 +1,4 @@
-package org.assistant.sigma.accounts.form;
+package org.assistant.sigma.ui.accounts.form;
 
 import org.assistant.sigma.model.entities.Account;
 import org.assistant.sigma.model.entities.User;

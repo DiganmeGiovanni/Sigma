@@ -1,4 +1,4 @@
-package org.assistant.sigma.accounts.list;
+package org.assistant.sigma.ui.accounts.list;
 
 import org.assistant.sigma.model.entities.Account;
 import org.assistant.sigma.model.entities.User;

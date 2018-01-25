@@ -18,8 +18,9 @@ import com.bumptech.glide.Glide;
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.MaterialIcons;
 
-import org.assistant.sigma.accounts.AccountsActivity;
 import org.assistant.sigma.model.entities.User;
+import org.assistant.sigma.ui.accounts.AccountsActivity;
+import org.assistant.sigma.ui.drawer.DrawerPresenter;
 import org.assistant.sigma.ui.overview.ActOverview;
 import org.assistant.sigma.ui.scheduled_transactions.ScheduledTransactionsActivity;
 import org.assistant.sigma.ui.transactions.listing.ActTransactions;
@@ -31,10 +32,52 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by giovanni on 31/07/17.
  */
 public class DrawerActivity extends AppCompatActivity {
+    private DrawerPresenter drawerPresenter;
+
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        loadUserData(drawerPresenter.getActiveUser());
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        drawerPresenter = new DrawerPresenter();
+        drawerPresenter.onCreate();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        drawerPresenter.onDestroy();
+    }
+
+    public void setupToolbar(@NonNull Toolbar toolbar, @NonNull DrawerLayout mDrawerLayout,
+                             @IdRes int activeItem) {
+        IconDrawable iconMenu = new IconDrawable(this, MaterialIcons.md_menu)
+                .colorRes(R.color.gray_light)
+                .actionBarSize();
+        toolbar.setNavigationIcon(iconMenu);
+        setSupportActionBar(toolbar);
+
+        if (getActionBar() != null) {
+            getActionBar().setDisplayHomeAsUpEnabled(true);
+            getActionBar().setHomeButtonEnabled(true);
+        }
+
+        setupDrawerLayout(toolbar, mDrawerLayout, activeItem);
+    }
+
+    private void loadUserData(User user) {
+        TextView tvUserName = findViewById(R.id.tv_user_name);
+        tvUserName.setText(user.fullName());
+
+        TextView tvUserEmail = findViewById(R.id.tv_user_email);
+        tvUserEmail.setText(user.getEmail());
+
+        CircleImageView civProfile = findViewById(R.id.civ_user_profile_image);
+        Glide.with(this).load(user.getUrlPicture()).into(civProfile);
     }
 
     /**
@@ -47,24 +90,7 @@ public class DrawerActivity extends AppCompatActivity {
         }
     }
 
-    public void setupToolbar(@NonNull Toolbar toolbar, @NonNull DrawerLayout mDrawerLayout,
-                             @NonNull User user, @IdRes int activeItem) {
-        IconDrawable iconMenu = new IconDrawable(this, MaterialIcons.md_menu)
-                .colorRes(R.color.gray_light)
-                .actionBarSize();
-        toolbar.setNavigationIcon(iconMenu);
-        setSupportActionBar(toolbar);
-
-        if (getActionBar() != null) {
-            getActionBar().setDisplayHomeAsUpEnabled(true);
-            getActionBar().setHomeButtonEnabled(true);
-        }
-
-        setupDrawerLayout(toolbar, mDrawerLayout, user, activeItem);
-    }
-
-    private void setupDrawerLayout(Toolbar toolbar, DrawerLayout mDrawerLayout, User user,
-                                   int activeItem) {
+    private void setupDrawerLayout(Toolbar toolbar, DrawerLayout mDrawerLayout, int activeItem) {
         ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(
                 this,
                 mDrawerLayout,
@@ -86,7 +112,6 @@ public class DrawerActivity extends AppCompatActivity {
 
         mDrawerLayout.addDrawerListener(mDrawerToggle);
         setupDrawerMenuItems(mDrawerLayout, activeItem);
-        setupDrawerUserData(user);
     }
 
     private void setupDrawerMenuItems(final DrawerLayout mDrawerLayout, int activeItem) {
@@ -214,14 +239,4 @@ public class DrawerActivity extends AppCompatActivity {
         });
     }
 
-    public void setupDrawerUserData(User user) {
-        TextView tvUserName = findViewById(R.id.tv_user_name);
-        tvUserName.setText(user.fullName());
-
-        TextView tvUserEmail = findViewById(R.id.tv_user_email);
-        tvUserEmail.setText(user.getEmail());
-
-        CircleImageView civProfile = findViewById(R.id.civ_user_profile_image);
-        Glide.with(this).load(user.getUrlPicture()).into(civProfile);
-    }
 }

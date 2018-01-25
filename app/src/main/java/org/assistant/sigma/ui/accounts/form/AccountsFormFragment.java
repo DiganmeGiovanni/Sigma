@@ -1,4 +1,4 @@
-package org.assistant.sigma.accounts.form;
+package org.assistant.sigma.ui.accounts.form;
 
 import android.app.Dialog;
 import android.os.Bundle;

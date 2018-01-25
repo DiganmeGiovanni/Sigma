@@ -37,6 +37,10 @@ public class TransactionsPresenter implements AbstractPresenter {
         return accountsDao.allActive();
     }
 
+//    public RealmResults<Account> getAccountsByLastUsed() {
+//        return
+//    }
+
     RealmResults<Transaction> getTransactions(String accountId) {
         return transactionsDao.findByAccount(accountId);
     }

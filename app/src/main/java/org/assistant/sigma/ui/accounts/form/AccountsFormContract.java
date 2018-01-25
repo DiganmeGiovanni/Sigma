@@ -1,4 +1,4 @@
-package org.assistant.sigma.accounts.form;
+package org.assistant.sigma.ui.accounts.form;
 
 import org.assistant.sigma.BasePresenter;
 import org.assistant.sigma.BaseView;

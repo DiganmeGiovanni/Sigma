@@ -12,11 +12,10 @@ import com.joanzapata.iconify.fonts.MaterialIcons;
 
 import org.assistant.sigma.DrawerActivity;
 import org.assistant.sigma.R;
-import org.assistant.sigma.accounts.AccountsActivity;
 import org.assistant.sigma.databinding.ActTransactionsBinding;
 import org.assistant.sigma.model.entities.Account;
-import org.assistant.sigma.model.repositories.UsersRepository;
 import org.assistant.sigma.transactions.form.TransactionsFormActivity;
+import org.assistant.sigma.ui.accounts.AccountsActivity;
 import org.assistant.sigma.ui.util.ButtonsUtils;
 
 import io.realm.RealmResults;
@@ -37,11 +36,14 @@ public class ActTransactions extends DrawerActivity {
                 this,
                 R.layout.act_transactions
         );
+        super.setupToolbar(
+                vBind.toolbar,
+                vBind.drawerLayout,
+                R.id.tv_transactions_per_account
+        );
 
         transPresenter = new TransactionsPresenter();
         transPresenter.onCreate();
-
-        setupToolbar();
         makeTabs();
         setupAddButton();
     }
@@ -108,18 +110,6 @@ public class ActTransactions extends DrawerActivity {
                     }
                 }
         );
-    }
-
-    private void setupToolbar() {
-        UsersRepository usersRepository = new UsersRepository();
-        super.setupToolbar(
-                vBind.toolbar,
-                vBind.drawerLayout,
-                usersRepository.activeUser(),
-                R.id.tv_transactions_per_account
-        );
-
-        vBind.toolbar.setTitle(R.string.transactions);
     }
 
     @NonNull

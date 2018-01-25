@@ -8,7 +8,6 @@ import org.assistant.sigma.DrawerActivity;
 import org.assistant.sigma.R;
 import org.assistant.sigma.databinding.ActOverviewBinding;
 import org.assistant.sigma.model.entities.Settings;
-import org.assistant.sigma.model.repositories.UsersRepository;
 import org.assistant.sigma.ui.adapters.FragPagerAdapter;
 import org.assistant.sigma.utils.PeriodUtils;
 
@@ -30,16 +29,11 @@ public class ActOverview extends DrawerActivity {
                 this,
                 R.layout.act_overview
         );
-
-        // Setup toolbar
-        UsersRepository usersRepository = new UsersRepository();
         super.setupToolbar(
                 vBind.toolbar,
                 vBind.drawerLayout,
-                usersRepository.activeUser(),
                 R.id.tv_current_period
         );
-        vBind.toolbar.setTitle(R.string.current_period);
 
         setupTabLayout();
     }

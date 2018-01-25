@@ -1,4 +1,4 @@
-package org.assistant.sigma.accounts.list;
+package org.assistant.sigma.ui.accounts.list;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,11 +11,11 @@ import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.MaterialIcons;
 
 import org.assistant.sigma.R;
-import org.assistant.sigma.accounts.form.AccountsFormFragment;
-import org.assistant.sigma.accounts.form.AccountsFormPresenter;
 import org.assistant.sigma.adapters.AccountsAdapter;
 import org.assistant.sigma.databinding.FragAccountsListBinding;
 import org.assistant.sigma.model.entities.Account;
+import org.assistant.sigma.ui.accounts.form.AccountsFormFragment;
+import org.assistant.sigma.ui.accounts.form.AccountsFormPresenter;
 
 import io.realm.RealmList;
 

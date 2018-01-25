@@ -13,7 +13,6 @@ import com.joanzapata.iconify.fonts.MaterialIcons;
 import org.assistant.sigma.DrawerActivity;
 import org.assistant.sigma.R;
 import org.assistant.sigma.databinding.ActScheduledTransactionsBinding;
-import org.assistant.sigma.model.repositories.UsersRepository;
 import org.assistant.sigma.ui.adapters.scheduledtransactions.ScheduledTransactionsPagerAdapter;
 import org.assistant.sigma.ui.scheduled_transactions.monthly.list.STMonthlyListFragment;
 import org.assistant.sigma.ui.scheduled_transactions.monthly.list.STMonthlyListPresenter;
@@ -34,17 +33,17 @@ public class ScheduledTransactionsActivity extends DrawerActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.schTransPresenter = new SchTransActPresenter();
-
-        // Setup toolbar
-        viewBinding = DataBindingUtil.setContentView(this, R.layout.act_scheduled_transactions);
-        UsersRepository usersRepository = new UsersRepository();
+        viewBinding = DataBindingUtil.setContentView(
+                this,
+                R.layout.act_scheduled_transactions
+        );
         super.setupToolbar(
                 viewBinding.toolbar,
                 viewBinding.drawerLayout,
-                usersRepository.activeUser(),
                 R.id.tv_scheduled_transactions
         );
+
+        this.schTransPresenter = new SchTransActPresenter();
 
         loadTabsContent();
         setupFabButton();
