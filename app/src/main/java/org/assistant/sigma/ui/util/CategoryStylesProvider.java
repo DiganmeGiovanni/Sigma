@@ -43,6 +43,9 @@ public class CategoryStylesProvider {
             case DefaultTransactionCategories.ID_BAR:
                 iconDrawable = new IconDrawable(mContext, MaterialIcons.md_local_bar);
                 break;
+            case DefaultTransactionCategories.ID_SALARY:
+                iconDrawable = new IconDrawable(mContext, MaterialIcons.md_account_balance_wallet);
+                break;
             case DefaultTransactionCategories.ID_OTHER_SPENT:
             default:
                 iconDrawable = new IconDrawable(mContext, MaterialIcons.md_help_outline);
