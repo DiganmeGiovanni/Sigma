@@ -48,16 +48,6 @@ public class ActOverview extends DrawerActivity {
         Settings settings = mPresenter.getCurrentUserSettings();
         FragPagerAdapter fragPagerAdapter = new FragPagerAdapter(getSupportFragmentManager());
 
-        Date shPStart = PeriodUtils.getCurrentShortPeriodStart(settings);
-        Bundle shortPeriodArgs = new Bundle();
-        shortPeriodArgs.putLong(FragOverview.START_TIME_MILLIS, shPStart.getTime());
-        FragOverview shortPeriodOverviewFrag = new FragOverview();
-        shortPeriodOverviewFrag.setArguments(shortPeriodArgs);
-        fragPagerAdapter.addFragment(
-                shortPeriodOverviewFrag,
-                getString(PeriodUtils.getCurrentShortPeriodLabel(settings))
-        );
-
         Date lgPStart = PeriodUtils.getCurrentLargePeriodStart(settings);
         Bundle largePeriodArgs = new Bundle();
         largePeriodArgs.putLong(FragOverview.START_TIME_MILLIS, lgPStart.getTime());
@@ -66,6 +56,16 @@ public class ActOverview extends DrawerActivity {
         fragPagerAdapter.addFragment(
                 largePeriodOverviewFrag,
                 getString(PeriodUtils.getCurrentLargePeriodLabel(settings))
+        );
+
+        Date shPStart = PeriodUtils.getCurrentShortPeriodStart(settings);
+        Bundle shortPeriodArgs = new Bundle();
+        shortPeriodArgs.putLong(FragOverview.START_TIME_MILLIS, shPStart.getTime());
+        FragOverview shortPeriodOverviewFrag = new FragOverview();
+        shortPeriodOverviewFrag.setArguments(shortPeriodArgs);
+        fragPagerAdapter.addFragment(
+                shortPeriodOverviewFrag,
+                getString(PeriodUtils.getCurrentShortPeriodLabel(settings))
         );
 
         vBind.pager.setAdapter(fragPagerAdapter);
