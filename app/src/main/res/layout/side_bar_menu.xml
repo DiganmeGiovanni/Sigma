@@ -74,19 +74,6 @@
             android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/tv_current_period"
-            android:drawableStart="@drawable/ic_accounts_1x"
-            android:drawablePadding="16dp"
-            android:gravity="center_vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:text="@string/current_period"
-            android:textColor="@color/textColorSecondary"
-            android:textSize="@dimen/text_subheading"
-            android:textStyle="bold"/>
-
-        <TextView
             android:id="@+id/tv_accounts"
             android:drawableStart="@drawable/ic_accounts_1x"
             android:drawablePadding="16dp"
@@ -95,6 +82,19 @@
             android:layout_height="wrap_content"
             android:padding="16dp"
             android:text="@string/accounts"
+            android:textColor="@color/textColorSecondary"
+            android:textSize="@dimen/text_subheading"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tv_current_period"
+            android:drawableStart="@drawable/ic_accounts_1x"
+            android:drawablePadding="16dp"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="@string/current_period"
             android:textColor="@color/textColorSecondary"
             android:textSize="@dimen/text_subheading"
             android:textStyle="bold"/>
