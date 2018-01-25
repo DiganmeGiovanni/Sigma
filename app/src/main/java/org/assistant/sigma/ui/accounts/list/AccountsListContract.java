@@ -1,7 +1,5 @@
 package org.assistant.sigma.ui.accounts.list;
 
-import org.assistant.sigma.BasePresenter;
-import org.assistant.sigma.BaseView;
 import org.assistant.sigma.model.entities.Account;
 
 import io.realm.RealmList;
@@ -12,13 +10,8 @@ import io.realm.RealmList;
  */
 interface AccountsListContract {
 
-    interface Presenter extends BasePresenter {
-
-        void loadAccounts();
-    }
-
-    interface View extends BaseView<Presenter> {
-        void goToAccountDetails();
+    interface View {
+        void goToAccountDetails(String accountId);
 
         void goToNewAccount();
 

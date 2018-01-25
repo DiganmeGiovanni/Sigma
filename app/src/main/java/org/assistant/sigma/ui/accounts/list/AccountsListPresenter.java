@@ -1,9 +1,11 @@
 package org.assistant.sigma.ui.accounts.list;
 
+import org.assistant.sigma.AbstractPresenter;
+import org.assistant.sigma.model.dao.TransactionsDao;
+import org.assistant.sigma.model.dao.UserDao;
 import org.assistant.sigma.model.entities.Account;
+import org.assistant.sigma.model.entities.Transaction;
 import org.assistant.sigma.model.entities.User;
-import org.assistant.sigma.model.repositories.AccountsRepository;
-import org.assistant.sigma.model.repositories.UsersRepository;
 
 import io.realm.RealmChangeListener;
 import io.realm.RealmList;
@@ -12,30 +14,41 @@ import io.realm.RealmList;
  *
  * Created by giovanni on 5/05/17.
  */
-public class AccountsListPresenter implements AccountsListContract.Presenter {
-
+public class AccountsListPresenter implements AbstractPresenter {
     private final AccountsListContract.View mAccountsListView;
-    private AccountsRepository accountsRepository;
-    private UsersRepository usersRepository;
+    private TransactionsDao transactionsDao;
+    private UserDao userDao;
 
-    public AccountsListPresenter(AccountsListContract.View mAccountsListView) {
+    AccountsListPresenter(AccountsListContract.View mAccountsListView) {
         this.mAccountsListView = mAccountsListView;
-        mAccountsListView.setPresenter(this);
+        transactionsDao = new TransactionsDao();
+        userDao = new UserDao();
+    }
 
-        accountsRepository = new AccountsRepository();
-        usersRepository = new UsersRepository();
+    @Override
+    public void onCreate() {
+        transactionsDao.onCreate();
+        userDao.onCreate();
     }
 
     @Override
     public void onDestroy() {
-        accountsRepository.destroy();
-        usersRepository.onDestroy();
+        transactionsDao.onDestroy();
+        userDao.onDestroy();
     }
 
-    @Override
-    public void loadAccounts() {
-        User user = usersRepository.activeUser();
-        RealmList<Account> accounts = accountsRepository.userAccounts(user);
+    double currentBalance(String accountId) {
+        Transaction last = transactionsDao.last(accountId);
+        if (last != null) {
+            return last.getCurrentAccountBalance();
+        }
+
+        return 0;
+    }
+
+    void loadAccounts() {
+        User user = userDao.findActive();
+        RealmList<Account> accounts = user.getAccounts();
         accounts.addChangeListener(new RealmChangeListener<RealmList<Account>>() {
             @Override
             public void onChange(RealmList<Account> sameAccounts) {

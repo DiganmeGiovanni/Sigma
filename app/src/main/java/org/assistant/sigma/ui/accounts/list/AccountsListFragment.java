@@ -1,19 +1,22 @@
 package org.assistant.sigma.ui.accounts.list;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.MaterialIcons;
 
 import org.assistant.sigma.R;
-import org.assistant.sigma.adapters.AccountsAdapter;
 import org.assistant.sigma.databinding.FragAccountsListBinding;
 import org.assistant.sigma.model.entities.Account;
+import org.assistant.sigma.ui.accounts.detail.ActAccountDetail;
 import org.assistant.sigma.ui.accounts.form.AccountsFormFragment;
 import org.assistant.sigma.ui.accounts.form.AccountsFormPresenter;
 
@@ -24,11 +27,17 @@ import io.realm.RealmList;
  *
  */
 public class AccountsListFragment extends Fragment implements AccountsListContract.View {
-
     private FragAccountsListBinding viewBinding;
-    private AccountsListContract.Presenter mPresenter;
-
+    private AccountsListPresenter mPresenter;
     private AccountsAdapter accountsAdapter;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        mPresenter = new AccountsListPresenter(this);
+        mPresenter.onCreate();
+    }
 
     @Nullable
     @Override
@@ -38,22 +47,22 @@ public class AccountsListFragment extends Fragment implements AccountsListContra
         viewBinding = FragAccountsListBinding.bind(rootView);
 
         setupAddAccountBtn();
-
-        if (mPresenter != null) {
-            mPresenter.loadAccounts();
-        }
+        mPresenter.loadAccounts();
 
         return rootView;
     }
 
     @Override
-    public void setPresenter(AccountsListContract.Presenter mPresenter) {
-        this.mPresenter = mPresenter;
+    public void onDestroy() {
+        super.onDestroy();
+        mPresenter.onDestroy();
     }
 
     @Override
-    public void goToAccountDetails() {
-
+    public void goToAccountDetails(String accountId) {
+        Intent i = new Intent(getActivity(), ActAccountDetail.class);
+        i.putExtra(ActAccountDetail.ACCOUNT_ID, accountId);
+        startActivity(i);
     }
 
     @Override
@@ -72,9 +81,16 @@ public class AccountsListFragment extends Fragment implements AccountsListContra
     }
 
     @Override
-    public void updateAccountsList(RealmList<Account> accounts) {
-        accountsAdapter = new AccountsAdapter(getContext(), accounts);
+    public void updateAccountsList(final RealmList<Account> accounts) {
+        accountsAdapter = new AccountsAdapter(getContext(), accounts, mPresenter);
         viewBinding.lvAccounts.setAdapter(accountsAdapter);
+        viewBinding.lvAccounts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Account account = accounts.get(i);
+                goToAccountDetails(account.getId());
+            }
+        });
     }
 
     private void setupAddAccountBtn() {

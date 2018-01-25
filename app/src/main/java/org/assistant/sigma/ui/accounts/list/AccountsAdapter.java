@@ -1,4 +1,4 @@
-package org.assistant.sigma.adapters;
+package org.assistant.sigma.ui.accounts.list;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import org.assistant.sigma.R;
 import org.assistant.sigma.model.entities.Account;
-import org.assistant.sigma.model.repositories.AccountsRepository;
 import org.assistant.sigma.utils.TextUtils;
 
 import io.realm.RealmList;
@@ -19,16 +18,15 @@ import io.realm.RealmList;
  * Created by giovanni on 5/05/17.
  */
 public class AccountsAdapter extends BaseAdapter {
-
-    private AccountsRepository accountsRepository;
+    private AccountsListPresenter mPresenter;
     private RealmList<Account> accounts;
     private LayoutInflater inflater;
 
-    public AccountsAdapter(Context mContext, RealmList<Account> accounts) {
+    AccountsAdapter(Context mContext, RealmList<Account> accounts,
+                    AccountsListPresenter mPresenter) {
+        this.mPresenter = mPresenter;
         this.accounts = accounts;
         inflater = LayoutInflater.from(mContext);
-
-        accountsRepository = new AccountsRepository();
     }
 
     @Override
@@ -56,16 +54,16 @@ public class AccountsAdapter extends BaseAdapter {
         }
 
         // Set name
-        TextView tvName = (TextView) contentView.findViewById(R.id.tv_name);
+        TextView tvName = contentView.findViewById(R.id.tv_name);
         tvName.setText(account.getName());
 
         // Set card digits
-        TextView tvCardDigits = (TextView) contentView.findViewById(R.id.tv_last_card_digits);
+        TextView tvCardDigits = contentView.findViewById(R.id.tv_last_card_digits);
         tvCardDigits.setText(account.lastCardDigits());
 
         // Set current account balance
-        TextView tvBalance = (TextView) contentView.findViewById(R.id.tv_balance);
-        tvBalance.setText(TextUtils.asMoney(accountsRepository.currentBalance(account)));
+        TextView tvBalance = contentView.findViewById(R.id.tv_balance);
+        tvBalance.setText(TextUtils.asMoney(mPresenter.currentBalance(account.getId())));
 
         return contentView;
     }

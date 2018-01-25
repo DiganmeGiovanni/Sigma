@@ -8,7 +8,6 @@ import org.assistant.sigma.DrawerActivity;
 import org.assistant.sigma.R;
 import org.assistant.sigma.databinding.ActDrawerBinding;
 import org.assistant.sigma.ui.accounts.list.AccountsListFragment;
-import org.assistant.sigma.ui.accounts.list.AccountsListPresenter;
 import org.assistant.sigma.utils.ActivityUtils;
 
 /**
@@ -40,9 +39,6 @@ public class AccountsActivity extends DrawerActivity {
                     R.id.content
             );
         }
-
-        // Initialize presenter
-        new AccountsListPresenter(accountsListFragment);
     }
 
 }

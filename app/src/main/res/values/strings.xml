@@ -152,4 +152,8 @@
     <string name="to_the">a las</string>
     <string name="yesterday">Ayer</string>
     <string name="before_yesterday">Antier</string>
+    <string name="account_details">Detalles de cuenta</string>
+    <string name="wait_a_moment_please">Espere un momento por favor ...</string>
+    <string name="recalculate_balance">Recalcular saldo</string>
+    <string name="adjust_balance">Ajustar saldo</string>
 </resources>

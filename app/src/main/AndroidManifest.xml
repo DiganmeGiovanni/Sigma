@@ -23,9 +23,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.overview.ActOverview"/>
-        <activity android:name=".landing.LandingActivity" />
-        <activity android:name=".dashboard.DashboardActivity" />
         <activity android:name=".ui.accounts.AccountsActivity" />
+        <activity android:name=".ui.accounts.detail.ActAccountDetail" />
         <activity android:name=".ui.transactions.listing.ActTransactions"/>
         <activity android:name=".transactions.form.TransactionsFormActivity" />
         <activity android:name=".transactions.details.TransactionDetailsActivity" />
@@ -50,7 +49,5 @@
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
-
     </application>
-
 </manifest>

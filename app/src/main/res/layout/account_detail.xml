@@ -1,98 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingTop="32dp">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/tv_account_name"
-            android:layout_gravity="center_horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_big"
-            tools:text="Cuenta banamex"/>
-        <TextView
-            android:id="@+id/tv_account_number"
-            android:layout_gravity="center_horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="32dp"
-            android:textSize="@dimen/text_subheading"
-            android:visibility="gone"
-            tools:text="XXXX XXXX XXXX 0999"
-            tools:visibility="visible"/>
-
-        <TextView
-            android:id="@+id/tv_balance_now"
-            android:layout_gravity="center_horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/green"
-            android:textSize="@dimen/text_big"
-            tools:text="$5,500.00"/>
-        <TextView
-            android:layout_gravity="center_horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/now"
-            android:textAllCaps="true"
-            android:textSize="@dimen/text_regular"/>
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:background="@color/colorAccent"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:theme="@style/AppTheme.AppBarOverlay"/>
 
         <LinearLayout
-            android:baselineAligned="false"
+            android:id="@+id/ll_details_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:orientation="horizontal">
-            <LinearLayout
-                android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_account_name"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight=".5"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tv_balance_large_period"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/blue_dark"
-                    android:textSize="@dimen/text_title"
-                    tools:text="$5,500.00"/>
-                <TextView
-                    android:id="@+id/tv_date_large_period"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAllCaps="true"
-                    android:textSize="@dimen/text_regular"
-                    tools:text="15 Jun"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="0dp"
+                android:layout_marginTop="32dp"
+                android:textSize="@dimen/text_big"
+                tools:text="Cuenta banamex"/>
+            <TextView
+                android:id="@+id/tv_account_number"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight=".5"
-                android:orientation="vertical">
+                android:textSize="@dimen/text_subheading"
+                android:visibility="gone"
+                tools:text="XXXX XXXX XXXX 0999"
+                tools:visibility="visible"/>
 
-                <TextView
-                    android:id="@+id/tv_balance_short_period"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/tv_balance_now"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:textColor="@color/green"
+                android:textSize="@dimen/text_big"
+                tools:text="$5,500.00"/>
+            <TextView
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/now"
+                android:textAllCaps="true"
+                android:textSize="@dimen/text_regular"/>
+
+            <LinearLayout
+                android:baselineAligned="false"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/blue_dark"
-                    android:textSize="@dimen/text_title"
-                    tools:text="$5,500.00"/>
-                <TextView
-                    android:id="@+id/tv_date_short_period"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_width="wrap_content"
+                    android:layout_weight=".5"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_balance_large_period"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/blue_dark"
+                        android:textSize="@dimen/text_title"
+                        tools:text="$5,500.00"/>
+                    <TextView
+                        android:id="@+id/tv_date_large_period"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAllCaps="true"
+                        android:textSize="@dimen/text_regular"
+                        tools:text="15 Jun"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textAllCaps="true"
-                    android:textSize="@dimen/text_regular"
-                    tools:text="21 Jun"/>
+                    android:layout_weight=".5"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_balance_short_period"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/blue_dark"
+                        android:textSize="@dimen/text_title"
+                        tools:text="$5,500.00"/>
+                    <TextView
+                        android:id="@+id/tv_date_short_period"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAllCaps="true"
+                        android:textSize="@dimen/text_regular"
+                        tools:text="21 Jun"/>
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+
+        <!-- Loading animation -->
+        <LinearLayout
+            android:id="@+id/ll_loading_container"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <ProgressBar
+                android:layout_width="200dp"
+                android:layout_height="200dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/wait_a_moment_please"
+                android:textSize="@dimen/text_subheading"/>
+        </LinearLayout>
+    </RelativeLayout>
 </layout>
