@@ -15,7 +15,7 @@ import org.assistant.sigma.R;
 import org.assistant.sigma.databinding.ActTransactionsBinding;
 import org.assistant.sigma.model.entities.Account;
 import org.assistant.sigma.transactions.form.TransactionsFormActivity;
-import org.assistant.sigma.ui.accounts.AccountsActivity;
+import org.assistant.sigma.ui.accounts.ActAccounts;
 import org.assistant.sigma.ui.util.ButtonsUtils;
 
 import io.realm.RealmResults;
@@ -103,7 +103,7 @@ public class ActTransactions extends DrawerActivity {
                             // Go to accounts
                             Intent intent = new Intent(
                                     ActTransactions.this,
-                                    AccountsActivity.class
+                                    ActAccounts.class
                             );
                             startActivity(intent);
                         }

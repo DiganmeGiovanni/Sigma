@@ -19,7 +19,7 @@ import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.MaterialIcons;
 
 import org.assistant.sigma.model.entities.User;
-import org.assistant.sigma.ui.accounts.AccountsActivity;
+import org.assistant.sigma.ui.accounts.ActAccounts;
 import org.assistant.sigma.ui.drawer.DrawerPresenter;
 import org.assistant.sigma.ui.overview.ActOverview;
 import org.assistant.sigma.ui.scheduled_transactions.ScheduledTransactionsActivity;
@@ -175,7 +175,7 @@ public class DrawerActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     mDrawerLayout.closeDrawer(Gravity.START);
 
-                    Intent intent = new Intent(DrawerActivity.this, AccountsActivity.class);
+                    Intent intent = new Intent(DrawerActivity.this, ActAccounts.class);
                     startActivity(intent);
 
                     finishCurrentIfNecessary();
