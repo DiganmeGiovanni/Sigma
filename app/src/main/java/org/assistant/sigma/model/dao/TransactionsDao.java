@@ -2,6 +2,7 @@ package org.assistant.sigma.model.dao;
 
 import org.assistant.sigma.model.entities.Transaction;
 
+import io.realm.RealmQuery;
 import io.realm.RealmResults;
 import io.realm.Sort;
 
@@ -20,9 +21,14 @@ public class TransactionsDao extends AbstractDao {
     }
 
     public Transaction last(String accountId) {
-        return realm.where(Transaction.class)
-                .equalTo("account.id", accountId)
-                .findAllSorted("createdAt", Sort.DESCENDING)
-                .first();
+        RealmQuery<Transaction> query = realm.where(Transaction.class)
+                .equalTo("account.id", accountId);
+        if (query.count() > 0) {
+            return query
+                    .findAllSorted("createdAt", Sort.DESCENDING)
+                    .first();
+        } else {
+            return null;
+        }
     }
 }
