@@ -36,6 +36,10 @@ public class ActOverview extends DrawerActivity {
         );
 
         setupTabLayout();
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(R.string.current_period);
+        }
     }
 
     @Override
