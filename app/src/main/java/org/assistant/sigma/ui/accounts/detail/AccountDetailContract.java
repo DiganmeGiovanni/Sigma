@@ -13,6 +13,14 @@ public interface AccountDetailContract {
 
         void renderCurrentBalance(Double balance);
 
+        void renderCurrShortPeriodLabel(String label);
+
+        void renderCurrShortPeriodBalance(Double balance);
+
+        void renderCurrLargePeriodLabel(String label);
+
+        void renderCurrLargePeriodBalance(Double balance);
+
         void toggleLoading(boolean isLoading);
     }
 }

@@ -44,6 +44,18 @@ public class DateFormatter {
     }
 
     /**
+     * Formats given date as: dd MMM, eg:
+     * - 15 Nov
+     * - 01 Ene
+     *
+     * @param date Moment to format
+     * @return Human friendly date month string
+     */
+    public static String asSimpleDateMonth(Date date) {
+        return monthFormatter.format(date);
+    }
+
+    /**
      * Creates a human friendly string for given day
      * @param date Date which to get prefix
      * @return Today, Yesterday, Before yesterday or dd MMM

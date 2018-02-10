@@ -5,9 +5,15 @@ import android.util.Log;
 import org.assistant.sigma.AbstractPresenter;
 import org.assistant.sigma.model.dao.AccountsDao;
 import org.assistant.sigma.model.dao.TransactionsDao;
+import org.assistant.sigma.model.dao.UserDao;
 import org.assistant.sigma.model.entities.Account;
+import org.assistant.sigma.model.entities.Settings;
 import org.assistant.sigma.model.entities.Transaction;
+import org.assistant.sigma.utils.DateFormatter;
+import org.assistant.sigma.utils.PeriodUtils;
 import org.assistant.sigma.utils.callbacks.CBGeneric;
+
+import java.util.Date;
 
 /**
  * Created by giovanni on 24/01/18.
@@ -17,11 +23,13 @@ public class AccountDetailPresenter implements AbstractPresenter {
     private AccountDetailContract.View view;
     private AccountsDao accountsDao;
     private TransactionsDao transactionsDao;
+    private UserDao userDao;
 
     AccountDetailPresenter(AccountDetailContract.View view) {
         this.view = view;
         accountsDao = new AccountsDao();
         transactionsDao = new TransactionsDao();
+        userDao = new UserDao();
 
         onCreate();
     }
@@ -30,12 +38,14 @@ public class AccountDetailPresenter implements AbstractPresenter {
     public void onCreate() {
         accountsDao.onCreate();
         transactionsDao.onCreate();
+        userDao.onCreate();
     }
 
     @Override
     public void onDestroy() {
         accountsDao.onDestroy();
         transactionsDao.onDestroy();
+        userDao.onDestroy();
     }
 
     void loadAccount(String accountId) {
@@ -59,12 +69,40 @@ public class AccountDetailPresenter implements AbstractPresenter {
         }
     }
 
+    void loadBalanceAtCurrShortPeriod(String accountId) {
+        Settings settings = userDao.findActive().getSettings();
+        Date periodStart = PeriodUtils.getCurrentShortPeriodStart(settings);
+        String periodStartLb = DateFormatter.asSimpleDateMonth(periodStart);
+        view.renderCurrShortPeriodLabel(periodStartLb);
+
+        Transaction lastTrans = transactionsDao.lastUntil(accountId, periodStart);
+        if (lastTrans == null) {
+            view.renderCurrShortPeriodBalance(0d);
+        } else {
+            view.renderCurrShortPeriodBalance(lastTrans.getCurrentAccountBalance());
+        }
+    }
+
+    void loadBalanceAtCurrLargePeriod(String accountId) {
+        Settings settings = userDao.findActive().getSettings();
+        Date periodStart = PeriodUtils.getCurrentLargePeriodStart(settings);
+        String periodStartLb = DateFormatter.asSimpleDateMonth(periodStart);
+        view.renderCurrLargePeriodLabel(periodStartLb);
+
+        Transaction lastTrans = transactionsDao.lastUntil(accountId, periodStart);
+        if (lastTrans == null) {
+            view.renderCurrLargePeriodBalance(0d);
+        } else {
+            view.renderCurrLargePeriodBalance(lastTrans.getCurrentAccountBalance());
+        }
+    }
+
     void recalculateBalance(final String accountId) {
         view.toggleLoading(true);
         accountsDao.recalculateBalance(accountId, new CBGeneric<Boolean>() {
             @Override
             public void onResponse(Boolean response) {
-                loadCurrentBalance(accountId);
+//                loadCurrentBalance(accountId);
                 view.toggleLoading(false);
             }
         });

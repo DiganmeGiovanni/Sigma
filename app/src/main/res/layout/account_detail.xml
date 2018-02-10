@@ -98,6 +98,13 @@
                         tools:text="21 Jun"/>
                 </LinearLayout>
             </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_recalculate_balance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="@string/recalculate_balance"/>
         </LinearLayout>
 
         <!-- Loading animation -->

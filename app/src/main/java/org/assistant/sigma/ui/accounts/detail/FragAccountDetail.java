@@ -37,10 +37,19 @@ public class FragAccountDetail extends Fragment implements AccountDetailContract
         vBind = AccountDetailBinding.bind(rootView);
 
         if (getArguments() != null && getArguments().containsKey(ACCOUNT_ID)) {
-            String accountId = getArguments().getString(ACCOUNT_ID);
+            final String accountId = getArguments().getString(ACCOUNT_ID);
 
             mPresenter.loadAccount(accountId);
             mPresenter.loadCurrentBalance(accountId);
+            mPresenter.loadBalanceAtCurrShortPeriod(accountId);
+            mPresenter.loadBalanceAtCurrLargePeriod(accountId);
+
+            vBind.btnRecalculateBalance.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mPresenter.recalculateBalance(accountId);
+                }
+            });
         }
 
         return rootView;
@@ -66,6 +75,26 @@ public class FragAccountDetail extends Fragment implements AccountDetailContract
     @Override
     public void renderCurrentBalance(Double balance) {
         vBind.tvBalanceNow.setText(TextUtils.asMoney(balance));
+    }
+
+    @Override
+    public void renderCurrShortPeriodLabel(String label) {
+        vBind.tvDateShortPeriod.setText(label);
+    }
+
+    @Override
+    public void renderCurrShortPeriodBalance(Double balance) {
+        vBind.tvBalanceShortPeriod.setText(TextUtils.asMoney(balance));
+    }
+
+    @Override
+    public void renderCurrLargePeriodLabel(String label) {
+        vBind.tvDateLargePeriod.setText(label);
+    }
+
+    @Override
+    public void renderCurrLargePeriodBalance(Double balance) {
+        vBind.tvBalanceLargePeriod.setText(TextUtils.asMoney(balance));
     }
 
     @Override
