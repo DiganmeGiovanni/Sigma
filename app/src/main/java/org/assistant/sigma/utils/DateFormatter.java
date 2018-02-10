@@ -58,28 +58,35 @@ public class DateFormatter {
     /**
      * Creates a human friendly string for given day
      * @param date Date which to get prefix
-     * @return Today, Yesterday, Before yesterday or dd MMM
+     * @return Today dd MMM, Yesterday dd MMM, Before yesterday dd MMM or simply dd MMM
      */
     private static String getDayPrefix(Context mContext, Calendar date) {
         Calendar calNow = Calendar.getInstance(Locale.getDefault());
+        StringBuilder prefixBuilder = new StringBuilder();
 
         if (calNow.get(Calendar.DAY_OF_MONTH) == date.get(Calendar.DAY_OF_MONTH)) {
-            return mContext.getString(R.string.today);
+             prefixBuilder.append(mContext.getString(R.string.today));
         }
 
         Calendar yesterday = (Calendar) calNow.clone();
         yesterday.add(Calendar.DAY_OF_MONTH, -1);
         if (yesterday.get(Calendar.DAY_OF_MONTH) == date.get(Calendar.DAY_OF_MONTH)) {
-            return mContext.getString(R.string.yesterday);
+             prefixBuilder.append(mContext.getString(R.string.yesterday));
         }
 
         Calendar beforeYesterday = (Calendar) yesterday.clone();
         beforeYesterday.add(Calendar.DAY_OF_MONTH, -1);
         if (beforeYesterday.get(Calendar.DAY_OF_MONTH) == date.get(Calendar.DAY_OF_MONTH)) {
-            return mContext.getString(R.string.before_yesterday);
+             prefixBuilder.append(mContext.getString(R.string.before_yesterday));
         }
 
-        return monthFormatter.format(date.getTime()).toUpperCase();
+        // Append space before date if string is not empty
+        if (prefixBuilder.length() > 0) {
+            prefixBuilder.append(" ");
+        }
+
+        prefixBuilder.append(monthFormatter.format(date.getTime()).toUpperCase());
+        return prefixBuilder.toString();
     }
 
     private static String formatTime(Context mContext, Calendar date) {
