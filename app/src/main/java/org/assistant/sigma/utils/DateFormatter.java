@@ -44,6 +44,17 @@ public class DateFormatter {
     }
 
     /**
+     * Formats given date as: hh:mm, eg:
+     * - 01:23 AM
+     * - 03:23 PM
+     * @param calendar Moment to format
+     * @return Human friendly time
+     */
+    public static String asHourMinute(Calendar calendar) {
+        return timeFormatter.format(calendar.getTime());
+    }
+
+    /**
      * Formats given date as: dd MMM, eg:
      * - 15 Nov
      * - 01 Ene
@@ -89,7 +100,7 @@ public class DateFormatter {
         return prefixBuilder.toString();
     }
 
-    private static String formatTime(Context mContext, Calendar date) {
+    public static String formatTime(Context mContext, Calendar date) {
         return mContext.getString(R.string.to_the) +
                 " " +
                 timeFormatter.format(date.getTime());

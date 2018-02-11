@@ -50,7 +50,7 @@ public class SPAccountsAdapter extends BaseAdapter {
             containerView = inflater.inflate(R.layout.item_generic_name_only, viewGroup, false);
         }
 
-        TextView tvName = (TextView) containerView.findViewById(R.id.tv_name);
+        TextView tvName = containerView.findViewById(R.id.tv_name);
         tvName.setText(account.getName());
 
         return containerView;

@@ -35,6 +35,10 @@
     <color name="gray_medium">#F6F6F6</color>
     <color name="textColorPrimary">#243235</color>
     <color name="textColorSecondary">#757575</color>
+    <color name="graySubtle">#95A5A6</color>
+
+    <!-- Text colors -->
+    <color name="textGray">#95A5A6</color>
 
     <!-- Categories colors -->
     <color name="colorCategoryProvisions">#8E44AD</color>

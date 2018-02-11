@@ -156,4 +156,8 @@
     <string name="wait_a_moment_please">Espere un momento por favor ...</string>
     <string name="recalculate_balance">Recalcular saldo</string>
     <string name="adjust_balance">Ajustar saldo</string>
+    <string name="error_insufficient_funds">Saldo insuficiente</string>
+    <string name="error_insufficient_funds_detail">Parece que no tienes fondos suficientes en esta cuenta.</string>
+    <string name="error_transaction_save_title">Transacción no guardada</string>
+    <string name="error_transaction_save">La transacción no se pudo guardar con los datos proporcionados. Intenta de nuevo por favor ...</string>
 </resources>

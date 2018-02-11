@@ -42,6 +42,7 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.transactions.form.ActTransactionForm" />
 
         <receiver android:name=".receivers.ScheduledTransactionReceiver" />
 
