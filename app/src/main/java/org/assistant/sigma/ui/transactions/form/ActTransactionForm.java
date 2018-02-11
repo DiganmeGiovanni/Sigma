@@ -3,6 +3,7 @@ package org.assistant.sigma.ui.transactions.form;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +22,10 @@ import org.assistant.sigma.databinding.ActTransactionFormBinding;
 import org.assistant.sigma.model.entities.Account;
 import org.assistant.sigma.model.entities.Transaction;
 import org.assistant.sigma.model.entities.TransactionCategory;
+import org.assistant.sigma.ui.categories.picker.CatPickerPresenter;
+import org.assistant.sigma.ui.categories.picker.CatPickerView;
+import org.assistant.sigma.ui.categories.picker.OnCategorySelectedListener;
+import org.assistant.sigma.ui.util.CategoryStylesProvider;
 import org.assistant.sigma.utils.DateFormatter;
 import org.assistant.sigma.utils.callbacks.CBGeneric;
 
@@ -38,6 +43,9 @@ public class ActTransactionForm extends AppCompatActivity implements Transaction
     private ActTransactionFormBinding vBind;
     private TransactionsFormPresenter mPresenter = new TransactionsFormPresenter(this);
     private SPAccountsAdapter accountsAdapter;
+
+    private CatPickerPresenter catPickerPresenter;
+    private CatPickerView catPickerView;
 
     private String transactionId;
     private Calendar transactionDate;
@@ -63,12 +71,14 @@ public class ActTransactionForm extends AppCompatActivity implements Transaction
             mPresenter.loadTransaction(transactionId);
         }
 
+        setupCategoryPicker();
         setupSaveBtn();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        catPickerPresenter.onDestroy();
         mPresenter.onDestroy();
     }
 
@@ -159,6 +169,55 @@ public class ActTransactionForm extends AppCompatActivity implements Transaction
         vBind.formView.swExcludeFromSpentResume.setChecked(transaction.isExcludeFromSpentResume());
 
         vBind.formView.etDescription.setText(transaction.getDescription());
+    }
+
+    private void setupCategoryPicker() {
+        final BottomSheetBehavior<View> bsBehavior = BottomSheetBehavior
+                .from(vBind.bottomSheetContainer.getRoot());
+
+        catPickerView = new CatPickerView(
+                vBind.bottomSheetContainer.catPicker.getRoot(),
+                new OnCategorySelectedListener() {
+                    @Override
+                    public void onCategorySelected(TransactionCategory category) {
+                        ActTransactionForm.this.category = category;
+                        bsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+
+                        // Set category icon
+                        vBind.formView.tvCategory.setCompoundDrawablePadding(8);
+                        final IconDrawable icon = CategoryStylesProvider.makeCategoryIcon(
+                                ActTransactionForm.this,
+                                category
+                        );
+                        icon.sizeDp(16);
+
+                        // Set category text
+                        vBind.formView.tvCategory.setCompoundDrawablesWithIntrinsicBounds(
+                                icon,
+                                null,
+                                null,
+                                null
+                        );
+                        vBind.formView.tvCategory.setTextColor(CategoryStylesProvider.getCategoryColor(
+                                ActTransactionForm.this,
+                                category
+                        ));
+                        vBind.formView.tvCategory.setText(category.getName());
+                    }
+                }
+        );
+        catPickerPresenter = new CatPickerPresenter(catPickerView);
+        catPickerPresenter.onCreate();
+        catPickerView.setPresenter(catPickerPresenter);
+        catPickerView.init();
+
+        vBind.formView.tvCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bsBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+            }
+        });
+        bsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
     }
 
     private void setupDateAndTimePickers() {

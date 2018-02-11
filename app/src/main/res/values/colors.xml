@@ -35,7 +35,8 @@
     <color name="gray_medium">#F6F6F6</color>
     <color name="textColorPrimary">#243235</color>
     <color name="textColorSecondary">#757575</color>
-    <color name="graySubtle">#95A5A6</color>
+    <color name="gray_subtle">#999</color>
+    <color name="gray">#777</color>
 
     <!-- Text colors -->
     <color name="textGray">#95A5A6</color>

@@ -77,7 +77,7 @@
                 android:layout_height="wrap_content"
                 android:padding="8dp"
                 android:text="@string/choose_category"
-                android:textColor="@color/graySubtle"/>
+                android:textColor="@color/gray_subtle"/>
         </LinearLayout>
 
         <LinearLayout

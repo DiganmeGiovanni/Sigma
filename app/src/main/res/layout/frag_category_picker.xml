@@ -49,6 +49,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginTop="24dp"
+            android:visibility="gone"
             tools:visibility="gone"/>
 
         <ScrollView
@@ -61,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
                 android:layout_marginStart="24dp"
-                android:visibility="gone"
+                android:visibility="visible"
                 app:flexWrap="wrap"
                 app:justifyContent="flex_start"
                 tools:visibility="visible">

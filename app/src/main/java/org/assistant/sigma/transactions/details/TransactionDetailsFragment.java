@@ -18,7 +18,7 @@ import com.joanzapata.iconify.fonts.MaterialIcons;
 import org.assistant.sigma.R;
 import org.assistant.sigma.databinding.FragTransactionDetailsBinding;
 import org.assistant.sigma.model.entities.Transaction;
-import org.assistant.sigma.transactions.form.TransactionsFormActivity;
+import org.assistant.sigma.ui.transactions.form.ActTransactionForm;
 import org.assistant.sigma.ui.util.AlertPresenter;
 import org.assistant.sigma.utils.TextUtils;
 import org.assistant.sigma.utils.callbacks.CBGeneric;
@@ -118,14 +118,16 @@ public class TransactionDetailsFragment extends Fragment implements TransactionD
 
     @Override
     public void editTransaction(String transactionId) {
-        Intent intent = new Intent(getContext(), TransactionsFormActivity.class);
+        Intent intent = new Intent(getContext(), ActTransactionForm.class);
         intent.putExtra(
-                TransactionsFormActivity.TRANSACTION_ID,
+                ActTransactionForm.TRANSACTION_ID,
                 transactionId
         );
 
         startActivity(intent);
-        getActivity().finish();
+        if (getActivity() != null) {
+            getActivity().finish();
+        }
     }
 
     @Override

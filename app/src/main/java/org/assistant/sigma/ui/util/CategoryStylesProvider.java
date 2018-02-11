@@ -1,8 +1,14 @@
 package org.assistant.sigma.ui.util;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
 import android.support.v4.content.ContextCompat;
+import android.view.View;
+import android.widget.TextView;
 
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.MaterialIcons;
@@ -93,5 +99,85 @@ public class CategoryStylesProvider {
                 mContext,
                 colorId
         );
+    }
+
+    public static TextView makeCatPickerItem(final Context mContext,
+                                             final TransactionCategory category,
+                                             final View.OnClickListener onClickListener) {
+        int dp10 = (int) mContext.getResources().getDimension(R.dimen.dp10);
+
+        final Drawable drawable = ContextCompat
+                .getDrawable(mContext, R.drawable.background_category);
+        final int grayColor = ContextCompat.getColor(mContext, R.color.gray);
+        final int catColor = getCategoryColor(mContext, category);
+
+        final TextView textView = new TextView(mContext);
+        textView.setBackground(drawable);
+        textView.setPadding(dp10, dp10, dp10, dp10);
+        textView.setTextColor(grayColor);
+        textView.setText(category.getName());
+
+        // Set category icon
+        textView.setCompoundDrawablePadding(8);
+        final IconDrawable icon = makeCategoryIcon(mContext, category, grayColor);
+        icon.sizeDp(16);
+        textView.setCompoundDrawablesWithIntrinsicBounds(
+                icon,
+                null,
+                null,
+                null
+        );
+
+        // Setup click listener
+        if (onClickListener != null) {
+            textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ObjectAnimator textColorAnimation = ObjectAnimator.ofObject(
+                            textView,
+                            "textColor",
+                            new ArgbEvaluator(),
+                            grayColor,
+                            catColor
+                    );
+                    textColorAnimation.start();
+
+                    ValueAnimator icColorAnimation = ValueAnimator.ofObject(
+                            new ArgbEvaluator(),
+                            grayColor,
+                            catColor
+                    );
+                    icColorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                        @Override
+                        public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                            icon.color((Integer) valueAnimator.getAnimatedValue());
+                        }
+                    });
+                    icColorAnimation.start();
+                    onClickListener.onClick(view);
+                }
+            });
+        }
+        return textView;
+    }
+
+    public static void unSelectCatPickerItem(final TextView textView) {
+        final IconDrawable icon = (IconDrawable) textView.getCompoundDrawables()[0];
+        final int currentTextColor = textView.getCurrentTextColor();
+        final int grayColor = ContextCompat.getColor(textView.getContext(), R.color.gray);
+
+        ValueAnimator icColorAnimation = ValueAnimator.ofObject(
+                new ArgbEvaluator(),
+                currentTextColor,
+                grayColor
+        );
+        icColorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                icon.color((Integer) valueAnimator.getAnimatedValue());
+                textView.setTextColor((Integer) valueAnimator.getAnimatedValue());
+            }
+        });
+        icColorAnimation.start();
     }
 }

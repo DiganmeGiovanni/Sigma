@@ -5,7 +5,6 @@ import org.assistant.sigma.utils.callbacks.CBGeneric;
 
 import java.util.Date;
 
-import io.realm.Realm;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
 import io.realm.Sort;
@@ -74,76 +73,65 @@ public class TransactionsDao extends AbstractDao {
     }
 
     public void upsert(final Transaction transaction, final CBGeneric<Boolean> cb) {
-        realm.executeTransactionAsync(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                Transaction oldTrans = realm.where(Transaction.class)
-                        .equalTo("id", transaction.getId())
-                        .findFirst();
+        realm.beginTransaction();
+        Transaction oldTrans = realm.where(Transaction.class)
+                .equalTo("id", transaction.getId())
+                .findFirst();
 
-                //
-                // Calculate balance and insert transaction as new
-                if (oldTrans == null) {
-                    RealmQuery<Transaction> query = realm.where(Transaction.class)
-                            .equalTo("account.id", transaction.getAccount().getId());
-                    if (query.count() > 0) {
-                        Transaction lastTrans = query
-                                .findAllSorted("createdAt", Sort.DESCENDING)
-                                .first();
-                        double balance = lastTrans.getCurrentAccountBalance() + transaction.getQuantity();
-                        transaction.setCurrentAccountBalance(balance);
-                        realm.insert(transaction);
-                    } else {
-                        double balance = transaction.getQuantity();
-                        transaction.setCurrentAccountBalance(balance);
-                        realm.insert(transaction);
-                    }
-                }
+        //
+        // Calculate balance and insert transaction as new
+        if (oldTrans == null) {
+            RealmQuery<Transaction> query = realm.where(Transaction.class)
+                    .equalTo("account.id", transaction.getAccount().getId());
+            if (query.count() > 0) {
+                Transaction lastTrans = query
+                        .findAllSorted("createdAt", Sort.DESCENDING)
+                        .first();
+                double balance = lastTrans.getCurrentAccountBalance() + transaction.getQuantity();
+                transaction.setCurrentAccountBalance(balance);
+                realm.copyToRealmOrUpdate(transaction);
+            } else {
+                double balance = transaction.getQuantity();
+                transaction.setCurrentAccountBalance(balance);
+                realm.copyToRealmOrUpdate(transaction);
+            }
+        }
 
-                //
-                // Update trans and recalculate accounts balances
-                else {
-                    String oldAccountId = oldTrans.getAccount().getId();
-                    String newAccountId = transaction.getAccount().getId();
-                    realm.insertOrUpdate(transaction);
+        //
+        // Update trans and recalculate accounts balances
+        else {
+            String oldAccountId = oldTrans.getAccount().getId();
+            String newAccountId = transaction.getAccount().getId();
+            realm.copyToRealmOrUpdate(transaction);
 
-                    //
-                    // Recalculate balance for old account
-                    RealmResults<Transaction> transactions = realm.where(Transaction.class)
-                            .equalTo("account.id", oldAccountId)
-                            .findAllSorted("createdAt", Sort.ASCENDING);
-                    double balance = 0;
-                    for (Transaction transaction : transactions) {
-                        balance += transaction.getQuantity();
-                        transaction.setCurrentAccountBalance(balance);
-                    }
+            //
+            // Recalculate balance for old account
+            RealmResults<Transaction> transactions = realm.where(Transaction.class)
+                    .equalTo("account.id", oldAccountId)
+                    .findAllSorted("createdAt", Sort.ASCENDING);
+            double balance = 0;
+            for (Transaction transactionX : transactions) {
+                balance += transactionX.getQuantity();
+                transactionX.setCurrentAccountBalance(balance);
+            }
 
-                    //
-                    // Recalculate balance for new account if is different than old
-                    if (!oldAccountId.equals(newAccountId)) {
-                        RealmResults<Transaction> transactionsNewAccount = realm
-                                .where(Transaction.class)
-                                .equalTo("account.id", newAccountId)
-                                .findAllSorted("createdAt", Sort.ASCENDING);
-                        double balanceNewAccount = 0;
-                        for (Transaction transaction : transactionsNewAccount) {
-                            balanceNewAccount += transaction.getQuantity();
-                            transaction.setCurrentAccountBalance(balanceNewAccount);
-                        }
-                    }
+            //
+            // Recalculate balance for new account if is different than old
+            if (!oldAccountId.equals(newAccountId)) {
+                RealmResults<Transaction> transactionsNewAccount = realm
+                        .where(Transaction.class)
+                        .equalTo("account.id", newAccountId)
+                        .findAllSorted("createdAt", Sort.ASCENDING);
+                double balanceNewAccount = 0;
+                for (Transaction transactionX : transactionsNewAccount) {
+                    balanceNewAccount += transactionX.getQuantity();
+                    transactionX.setCurrentAccountBalance(balanceNewAccount);
                 }
             }
-        }, new Realm.Transaction.OnSuccess() {
-            @Override
-            public void onSuccess() {
-                cb.onResponse(true);
-            }
-        }, new Realm.Transaction.OnError() {
-            @Override
-            public void onError(Throwable error) {
-                cb.onResponse(false);
-            }
-        });
+        }
+
+        realm.commitTransaction();
+        cb.onResponse(true);
     }
 
     public void delete(String transactionId) {
