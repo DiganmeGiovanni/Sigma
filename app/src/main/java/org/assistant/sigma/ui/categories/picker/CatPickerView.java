@@ -14,7 +14,9 @@ import org.assistant.sigma.model.entities.TransactionCategory;
 import org.assistant.sigma.ui.util.CategoryStylesProvider;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by giovanni on 10/02/18.
@@ -24,7 +26,7 @@ public class CatPickerView implements CatPickerContract.View {
     private CatPickerPresenter mPresenter;
     private View rootView;
     private OnCategorySelectedListener listener;
-    private List<TextView> catPickerItems = new ArrayList<>();
+    private Map<Integer, TextView> catPickerItems = new HashMap<>();
 
     private FlexboxLayout fblCategories;
     private ProgressBar pbLoadingCats;
@@ -65,14 +67,14 @@ public class CatPickerView implements CatPickerContract.View {
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            onCategorySelected(category, (TextView) view);
+                            onCategorySelected(category);
                         }
                     }
             );
             textView.setLayoutParams(lParams);
 
             fblCategories.addView(textView);
-            catPickerItems.add(textView);
+            catPickerItems.put(category.getId(), textView);
         }
     }
 
@@ -121,10 +123,22 @@ public class CatPickerView implements CatPickerContract.View {
         mPresenter.loadCategories(false, firsts, lasts);
     }
 
-    private void onCategorySelected(TransactionCategory category, TextView view) {
-        for (TextView catPickerItem : catPickerItems) {
-            if (catPickerItem != view) {
-                CategoryStylesProvider.unSelectCatPickerItem(catPickerItem);
+    private void onCategorySelected(TransactionCategory category) {
+        for (Map.Entry<Integer, TextView> entry : catPickerItems.entrySet()) {
+            if (entry.getKey() != category.getId()) {
+                CategoryStylesProvider.unSelectCatPickerItem(entry.getValue());
+            }
+        }
+
+        listener.onCategorySelected(category);
+    }
+
+    public void selectCategory(TransactionCategory category) {
+        for (Map.Entry<Integer, TextView> entry : catPickerItems.entrySet()) {
+            if (entry.getKey() != category.getId()) {
+                CategoryStylesProvider.unSelectCatPickerItem(entry.getValue());
+            } else {
+                CategoryStylesProvider.selectCatPickerItem(category, entry.getValue());
             }
         }
 

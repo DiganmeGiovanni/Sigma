@@ -110,7 +110,6 @@ public class CategoryStylesProvider {
         final Drawable drawable = ContextCompat
                 .getDrawable(mContext, R.drawable.background_category);
         final int grayColor = ContextCompat.getColor(mContext, R.color.gray);
-        final int catColor = getCategoryColor(mContext, category);
 
         final TextView textView = new TextView(mContext);
         textView.setBackground(drawable);
@@ -134,35 +133,42 @@ public class CategoryStylesProvider {
             textView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    final GradientDrawable background = (GradientDrawable) view.getBackground();
-
-                    ObjectAnimator textColorAnimation = ObjectAnimator.ofObject(
-                            textView,
-                            "textColor",
-                            new ArgbEvaluator(),
-                            grayColor,
-                            catColor
-                    );
-                    textColorAnimation.start();
-
-                    ValueAnimator icColorAnimation = ValueAnimator.ofObject(
-                            new ArgbEvaluator(),
-                            grayColor,
-                            catColor
-                    );
-                    icColorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                        @Override
-                        public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                            icon.color((Integer) valueAnimator.getAnimatedValue());
-                            background.setStroke(3, (int) valueAnimator.getAnimatedValue());
-                        }
-                    });
-                    icColorAnimation.start();
+                    selectCatPickerItem(category, textView);
                     onClickListener.onClick(view);
                 }
             });
         }
         return textView;
+    }
+
+    public static void selectCatPickerItem(TransactionCategory category, final TextView textView) {
+        final int grayColor = ContextCompat.getColor(textView.getContext(), R.color.gray);
+        final int catColor = getCategoryColor(textView.getContext(), category);
+        final IconDrawable icon = (IconDrawable) textView.getCompoundDrawables()[0];
+        final GradientDrawable background = (GradientDrawable) textView.getBackground();
+
+        ObjectAnimator textColorAnimation = ObjectAnimator.ofObject(
+                textView,
+                "textColor",
+                new ArgbEvaluator(),
+                grayColor,
+                catColor
+        );
+        textColorAnimation.start();
+
+        ValueAnimator icColorAnimation = ValueAnimator.ofObject(
+                new ArgbEvaluator(),
+                grayColor,
+                catColor
+        );
+        icColorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                icon.color((Integer) valueAnimator.getAnimatedValue());
+                background.setStroke(3, (int) valueAnimator.getAnimatedValue());
+            }
+        });
+        icColorAnimation.start();
     }
 
     public static void unSelectCatPickerItem(final TextView textView) {

@@ -86,6 +86,7 @@ public class ActTransactionForm extends AppCompatActivity implements Transaction
         mPresenter.onCreate();
         mPresenter.loadAccounts();
         setupDateAndTimePickers();
+        setupCategoryPicker();
 
         // Check if transaction was passed to edit it
         if (getIntent().hasExtra(TRANSACTION_ID)) {
@@ -93,7 +94,6 @@ public class ActTransactionForm extends AppCompatActivity implements Transaction
             mPresenter.loadTransaction(transactionId);
         }
 
-        setupCategoryPicker();
         setupSaveBtn();
     }
 
@@ -181,6 +181,7 @@ public class ActTransactionForm extends AppCompatActivity implements Transaction
         account = transaction.getAccount();
 
         category = transaction.getTransactionCategory();
+        catPickerView.selectCategory(category);
         // TODO .tvCategory.setText(category.getName());
         // TODO categoryIconProvider.setCompoundIcon(viewBinding.tvCategory, category);
 
