@@ -5,6 +5,7 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.support.annotation.ColorInt;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
@@ -114,8 +115,8 @@ public class CategoryStylesProvider {
         final TextView textView = new TextView(mContext);
         textView.setBackground(drawable);
         textView.setPadding(dp10, dp10, dp10, dp10);
-        textView.setTextColor(grayColor);
         textView.setText(category.getName());
+        textView.setTextColor(grayColor);
 
         // Set category icon
         textView.setCompoundDrawablePadding(8);
@@ -133,6 +134,8 @@ public class CategoryStylesProvider {
             textView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    final GradientDrawable background = (GradientDrawable) view.getBackground();
+
                     ObjectAnimator textColorAnimation = ObjectAnimator.ofObject(
                             textView,
                             "textColor",
@@ -151,6 +154,7 @@ public class CategoryStylesProvider {
                         @Override
                         public void onAnimationUpdate(ValueAnimator valueAnimator) {
                             icon.color((Integer) valueAnimator.getAnimatedValue());
+                            background.setStroke(3, (int) valueAnimator.getAnimatedValue());
                         }
                     });
                     icColorAnimation.start();
@@ -162,6 +166,7 @@ public class CategoryStylesProvider {
     }
 
     public static void unSelectCatPickerItem(final TextView textView) {
+        final GradientDrawable background = (GradientDrawable) textView.getBackground();
         final IconDrawable icon = (IconDrawable) textView.getCompoundDrawables()[0];
         final int currentTextColor = textView.getCurrentTextColor();
         final int grayColor = ContextCompat.getColor(textView.getContext(), R.color.gray);
@@ -176,6 +181,7 @@ public class CategoryStylesProvider {
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
                 icon.color((Integer) valueAnimator.getAnimatedValue());
                 textView.setTextColor((Integer) valueAnimator.getAnimatedValue());
+                background.setStroke(3, grayColor);
             }
         });
         icColorAnimation.start();

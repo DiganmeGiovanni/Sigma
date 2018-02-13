@@ -8,6 +8,7 @@
     android:layout_height="340dp"
     app:behavior_hideable="true"
     app:behavior_peekHeight="80dp"
+    android:clickable="true"
     app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
 
     <include

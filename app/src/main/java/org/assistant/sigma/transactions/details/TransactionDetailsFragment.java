@@ -20,9 +20,12 @@ import org.assistant.sigma.databinding.FragTransactionDetailsBinding;
 import org.assistant.sigma.model.entities.Transaction;
 import org.assistant.sigma.ui.transactions.form.ActTransactionForm;
 import org.assistant.sigma.ui.util.AlertPresenter;
+import org.assistant.sigma.utils.DateFormatter;
 import org.assistant.sigma.utils.TextUtils;
 import org.assistant.sigma.utils.callbacks.CBGeneric;
 import org.assistant.sigma.utils.services.CategoryIconProvider;
+
+import java.util.Calendar;
 
 /**
  * Created by giovanni on 27/09/17.
@@ -112,7 +115,12 @@ public class TransactionDetailsFragment extends Fragment implements TransactionD
                 transaction.getTransactionCategory()
         );
 
-        viewBinding.tvDateTime.setText(TextUtils.forHumans(transaction.getCreatedAt()));
+        viewBinding.tvDate.setText(DateFormatter.asSimpleDateMonth(transaction.getCreatedAt()));
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(transaction.getCreatedAt());
+        viewBinding.tvTime.setText(DateFormatter.asHourMinute(cal));
+
         viewBinding.tvDescription.setText(transaction.getDescription());
     }
 

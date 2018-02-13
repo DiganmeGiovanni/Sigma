@@ -15,64 +15,139 @@
                 android:orientation="vertical"
                 android:padding="@dimen/dp16">
 
-                <TextView
+                <LinearLayout
+                    android:gravity="center_vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/account"
-                    android:textSize="@dimen/text_title_2"
-                    android:textColor="@color/colorAccent"/>
-                <TextView
-                    android:id="@+id/tv_account"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_subheading"
-                    tools:text="@string/account"/>
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:labelFor="@+id/et_quantity"
+                        android:layout_weight=".3"
+                        android:textAllCaps="true"
+                        android:textColor="@color/textGray"
+                        android:textSize="@dimen/text_caption"
+                        android:textStyle="bold"
+                        android:text="@string/quantity"/>
+                    <TextView
+                        android:id="@+id/tv_quantity"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".7"
+                        android:layout_marginStart="8dp"
+                        android:textSize="@dimen/text_headline"/>
+                </LinearLayout>
 
-                <TextView
+                <LinearLayout
+                    android:gravity="center_vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="@string/quantity"
-                    android:textSize="@dimen/text_title_2"
-                    android:textColor="@color/colorAccent"/>
-                <TextView
-                    android:id="@+id/tv_quantity"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_subheading"
-                    android:textStyle="bold"
-                    tools:text="@string/quantity"/>
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".3"
+                        android:textAllCaps="true"
+                        android:textColor="@color/textGray"
+                        android:textSize="@dimen/text_caption"
+                        android:textStyle="bold"
+                        android:text="@string/account"/>
+                    <TextView
+                        android:id="@+id/tv_account"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".7"
+                        android:layout_marginStart="8dp"/>
+                </LinearLayout>
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="@string/category"
-                    android:textSize="@dimen/text_title_2"
-                    android:textColor="@color/colorAccent"/>
-                <TextView
-                    android:id="@+id/tv_category"
-                    android:background="@drawable/background_category"
-                    android:drawablePadding="8dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:padding="8dp"
-                    android:text="@string/category"/>
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".3"
+                        android:textAllCaps="true"
+                        android:textColor="@color/textGray"
+                        android:textSize="@dimen/text_caption"
+                        android:textStyle="bold"
+                        android:text="@string/category"/>
+                    <TextView
+                        android:id="@+id/tv_category"
+                        android:drawablePadding="8dp"
+                        android:background="@drawable/background_category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:text="@string/choose_category"
+                        android:textColor="@color/gray_subtle"/>
+                </LinearLayout>
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="@string/date_time"
-                    android:textSize="@dimen/text_title_2"
-                    android:textColor="@color/colorAccent"/>
-                <TextView
-                    android:id="@+id/tv_date_time"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".15"
+                        android:labelFor="@+id/et_date"
+                        android:textAllCaps="true"
+                        android:textColor="@color/textGray"
+                        android:textSize="@dimen/text_caption"
+                        android:textStyle="bold"
+                        android:text="@string/date"/>
+                    <TextView
+                        android:id="@+id/tv_date"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".35"
+                        android:layout_marginStart="8dp"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".15"
+                        android:labelFor="@+id/et_time"
+                        android:textAllCaps="true"
+                        android:textColor="@color/textGray"
+                        android:textSize="@dimen/text_caption"
+                        android:textStyle="bold"
+                        android:text="@string/time"/>
+                    <TextView
+                        android:id="@+id/tv_time"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".35"
+                        android:layout_marginStart="8dp"/>
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_subheading"
-                    tools:text="@string/date_time"/>
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".7"
+                        android:textAllCaps="true"
+                        android:textColor="@color/textGray"
+                        android:textSize="@dimen/text_caption"
+                        android:textStyle="bold"
+                        android:text="@string/exclude_from_spent_resume"/>
+                    <TextView
+                        android:id="@+id/tv_exclude_from_spent_resume"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".3"
+                        android:layout_marginStart="8dp"/>
+                </LinearLayout>
 
                 <TextView
                     android:layout_width="match_parent"

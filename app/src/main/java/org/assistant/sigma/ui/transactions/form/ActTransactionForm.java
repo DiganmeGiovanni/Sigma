@@ -1,7 +1,11 @@
 package org.assistant.sigma.ui.transactions.form;
 
+import android.content.Context;
 import android.databinding.DataBindingUtil;
+import android.graphics.Rect;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v7.app.ActionBar;
@@ -9,6 +13,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 
 import com.joanzapata.iconify.IconDrawable;
@@ -46,11 +51,28 @@ public class ActTransactionForm extends AppCompatActivity implements Transaction
 
     private CatPickerPresenter catPickerPresenter;
     private CatPickerView catPickerView;
+    private BottomSheetBehavior<View> bsBehavior;
 
     private String transactionId;
     private Calendar transactionDate;
     private Account account;
     private TransactionCategory category;
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+            if (bsBehavior != null && bsBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
+                Rect outRect = new Rect();
+                vBind.bottomSheetContainer.getRoot().getGlobalVisibleRect(outRect);
+
+                if (!outRect.contains((int) ev.getRawX(), (int) ev.getRawY())) {
+                    bsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                }
+            }
+        }
+
+        return super.dispatchTouchEvent(ev);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -172,7 +194,7 @@ public class ActTransactionForm extends AppCompatActivity implements Transaction
     }
 
     private void setupCategoryPicker() {
-        final BottomSheetBehavior<View> bsBehavior = BottomSheetBehavior
+        bsBehavior = BottomSheetBehavior
                 .from(vBind.bottomSheetContainer.getRoot());
 
         catPickerView = new CatPickerView(
@@ -190,6 +212,15 @@ public class ActTransactionForm extends AppCompatActivity implements Transaction
                                 category
                         );
                         icon.sizeDp(16);
+
+                        // Tint text view background stroke
+                        GradientDrawable background = (GradientDrawable) vBind.formView
+                                .tvCategory
+                                .getBackground();
+                        background.setStroke(3, CategoryStylesProvider.getCategoryColor(
+                                ActTransactionForm.this,
+                                category
+                        ));
 
                         // Set category text
                         vBind.formView.tvCategory.setCompoundDrawablesWithIntrinsicBounds(
@@ -214,7 +245,24 @@ public class ActTransactionForm extends AppCompatActivity implements Transaction
         vBind.formView.tvCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                bsBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                if (bsBehavior != null && bsBehavior.getState() == BottomSheetBehavior.STATE_HIDDEN) {
+                    InputMethodManager inpMethodMgr =
+                            (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inpMethodMgr.hideSoftInputFromWindow(
+                            (getCurrentFocus() == null)
+                                    ? null
+                                    : getCurrentFocus().getWindowToken(),
+                            InputMethodManager.HIDE_NOT_ALWAYS
+                    );
+
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            bsBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                        }
+                    }, 300);
+                }
             }
         });
         bsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
