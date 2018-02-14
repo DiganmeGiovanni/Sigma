@@ -132,6 +132,7 @@ public class TransactionsRepository {
      */
     public double incomeSince(Date start, boolean includeExcludedTrans) {
         RealmQuery<Transaction> query = realm.where(Transaction.class)
+                .equalTo("account.active", true)
                 .greaterThan("createdAt", start)
                 .greaterThan("quantity", 0d);
 
@@ -152,6 +153,7 @@ public class TransactionsRepository {
      */
     public double spentSince(Date startDate, boolean includeExcludedTrans) {
         RealmQuery<Transaction> query = realm.where(Transaction.class)
+                .equalTo("account.active", true)
                 .greaterThan("createdAt", startDate)
                 .lessThan("quantity", 0d);
 
@@ -173,6 +175,7 @@ public class TransactionsRepository {
      */
     public double spentSince(Date startDate, boolean includeExcludedTrans, int categoryId) {
         RealmQuery<Transaction> query = realm.where(Transaction.class)
+                .equalTo("account.active", true)
                 .equalTo("transactionCategory.id", categoryId)
                 .greaterThan("createdAt", startDate)
                 .lessThan("quantity", 0d);

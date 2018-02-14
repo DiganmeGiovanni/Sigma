@@ -66,4 +66,14 @@ public class AccountsDao extends AbstractDao {
             }
         });
     }
+
+    public void delete(String accountId) {
+        Account account = find(accountId);
+        if (account != null) {
+            realm.beginTransaction();
+            account.setActive(false);
+            realm.copyToRealmOrUpdate(account);
+            realm.commitTransaction();
+        }
+    }
 }

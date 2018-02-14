@@ -45,4 +45,9 @@ public class AccountsPresenter implements AbstractPresenter {
             }
         });
     }
+
+    void deleteAccount(String accountId) {
+        accountsDao.delete(accountId);
+
+    }
 }

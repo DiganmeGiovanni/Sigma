@@ -1,8 +1,10 @@
 package org.assistant.sigma.ui.accounts.detail;
 
+import android.content.DialogInterface;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +18,7 @@ import org.assistant.sigma.model.entities.Account;
 import org.assistant.sigma.ui.accounts.form.AccountsFormFragment;
 import org.assistant.sigma.ui.accounts.form.AccountsFormPresenter;
 import org.assistant.sigma.ui.accounts.list.AccountsPagerAdapter;
+import org.assistant.sigma.ui.util.AlertPresenter;
 import org.assistant.sigma.ui.util.ButtonsUtils;
 
 import io.realm.RealmChangeListener;
@@ -28,6 +31,9 @@ import io.realm.RealmResults;
 public class ActAccounts extends DrawerActivity implements AccountsContract.View {
     private ActAccountsBinding vBind;
     private AccountsPresenter mPresenter;
+
+    private RealmResults<Account> listedAccounts;
+    private Account selectedAccount;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,23 +73,32 @@ public class ActAccounts extends DrawerActivity implements AccountsContract.View
             mPresenter.recalculateBalance();
             return true;
         }
+        if (item.getItemId() == R.id.item_delete_account) {
+            deleteCurrentAccount();
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public void renderAccounts(RealmResults<Account> accounts) {
+        listedAccounts = accounts;
         final AccountsPagerAdapter accountsAdapter = new AccountsPagerAdapter(
                 getSupportFragmentManager(),
-                accounts
+                listedAccounts
         );
+        if (accounts.size() > 0) {
+            selectedAccount = accounts.get(0);
+        }
 
         accounts.addChangeListener(new RealmChangeListener<RealmResults<Account>>() {
             @Override
             public void onChange(RealmResults<Account> updatedAccounts) {
+                listedAccounts = updatedAccounts;
                 AccountsPagerAdapter accountsPagerAdapter = new AccountsPagerAdapter(
                         getSupportFragmentManager(),
-                        updatedAccounts
+                        listedAccounts
                 );
                 vBind.viewpager.setAdapter(accountsPagerAdapter);
             }
@@ -91,6 +106,18 @@ public class ActAccounts extends DrawerActivity implements AccountsContract.View
 
         vBind.viewpager.setAdapter(accountsAdapter);
         vBind.tabLayout.setupWithViewPager(vBind.viewpager);
+        vBind.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                selectedAccount = listedAccounts.get(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) { }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) { }
+        });
     }
 
     @Override
@@ -101,6 +128,27 @@ public class ActAccounts extends DrawerActivity implements AccountsContract.View
         } else {
             vBind.pbLoading.setVisibility(View.GONE);
             vBind.viewpager.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void deleteCurrentAccount() {
+        if (selectedAccount != null) {
+            String title = getString(R.string.irreversible_action);
+            String message = getString(R.string.the_account) +
+                    " \"" + selectedAccount.getName() + "\" " +
+                    getString(R.string.and_all_its_trans_will_be_deleted_u_sure);
+            AlertPresenter.confirm(
+                    this,
+                    title,
+                    message,
+                    getString(R.string.ok),
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            mPresenter.deleteAccount(selectedAccount.getId());
+                        }
+                    }
+            );
         }
     }
 

@@ -161,4 +161,8 @@
     <string name="error_transaction_save_title">Transacción no guardada</string>
     <string name="error_transaction_save">La transacción no se pudo guardar con los datos proporcionados. Intenta de nuevo por favor ...</string>
     <string name="current_balance">Saldo al momento</string>
+    <string name="delete_account">Eliminar cuenta</string>
+    <string name="irreversible_action">Esta acción es irreversible</string>
+    <string name="the_account">La cuenta</string>
+    <string name="and_all_its_trans_will_be_deleted_u_sure">y todas sus transacciones serán eliminadas. Esta acción no podra deshacerce. ¿Estas seguro?</string>
 </resources>
