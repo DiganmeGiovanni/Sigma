@@ -23,6 +23,17 @@ public class TransactionsDao extends AbstractDao {
                 .findAllSorted("createdAt", Sort.DESCENDING);
     }
 
+    public RealmResults<Transaction> findSorted(String accountId, boolean ascending) {
+        RealmQuery<Transaction> query = realm.where(Transaction.class)
+                .equalTo("account.id", accountId);
+
+        if (ascending) {
+            return query.findAllSorted("createdAt", Sort.ASCENDING);
+        } else {
+            return query.findAllSorted("createdAt", Sort.DESCENDING);
+        }
+    }
+
     public Transaction find(String transactionId) {
         return realm.where(Transaction.class)
                 .equalTo("id", transactionId).
@@ -81,15 +92,29 @@ public class TransactionsDao extends AbstractDao {
         //
         // Calculate balance and insert transaction as new
         if (oldTrans == null) {
-            RealmQuery<Transaction> query = realm.where(Transaction.class)
+            RealmQuery<Transaction> query = realm
+                    .where(Transaction.class)
                     .equalTo("account.id", transaction.getAccount().getId());
             if (query.count() > 0) {
                 Transaction lastTrans = query
+                        .lessThanOrEqualTo("createdAt", transaction.getCreatedAt())
                         .findAllSorted("createdAt", Sort.DESCENDING)
                         .first();
                 double balance = lastTrans.getCurrentAccountBalance() + transaction.getQuantity();
                 transaction.setCurrentAccountBalance(balance);
                 realm.copyToRealmOrUpdate(transaction);
+
+                // If transaction was inserted before another existing transactions, update
+                // the balance for those
+                RealmResults<Transaction> postTransactions = realm
+                        .where(Transaction.class)
+                        .equalTo("account.id", transaction.getAccount().getId())
+                        .greaterThan("createdAt", transaction.getCreatedAt())
+                        .findAllSorted("createdAt", Sort.ASCENDING);
+                for (Transaction postTransaction : postTransactions) {
+                    balance = balance + postTransaction.getQuantity();
+                    postTransaction.setCurrentAccountBalance(balance);
+                }
             } else {
                 double balance = transaction.getQuantity();
                 transaction.setCurrentAccountBalance(balance);

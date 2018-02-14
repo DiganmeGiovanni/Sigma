@@ -14,7 +14,7 @@ import org.assistant.sigma.DrawerActivity;
 import org.assistant.sigma.R;
 import org.assistant.sigma.databinding.ActTransactionsBinding;
 import org.assistant.sigma.model.entities.Account;
-import org.assistant.sigma.ui.accounts.ActAccounts;
+import org.assistant.sigma.ui.accounts.detail.ActAccounts;
 import org.assistant.sigma.ui.transactions.form.ActTransactionForm;
 import org.assistant.sigma.ui.util.ButtonsUtils;
 

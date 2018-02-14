@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.overview.ActOverview"/>
-        <activity android:name=".ui.accounts.ActAccounts" />
+        <activity android:name=".ui.accounts.detail.ActAccounts" />
         <activity android:name=".ui.transactions.listing.ActTransactions"/>
         <activity android:name=".transactions.form.TransactionsFormActivity" />
         <activity android:name=".transactions.details.TransactionDetailsActivity" />

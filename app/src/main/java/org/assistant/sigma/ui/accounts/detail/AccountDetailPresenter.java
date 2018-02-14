@@ -11,9 +11,10 @@ import org.assistant.sigma.model.entities.Settings;
 import org.assistant.sigma.model.entities.Transaction;
 import org.assistant.sigma.utils.DateFormatter;
 import org.assistant.sigma.utils.PeriodUtils;
-import org.assistant.sigma.utils.callbacks.CBGeneric;
 
 import java.util.Date;
+
+import io.realm.RealmResults;
 
 /**
  * Created by giovanni on 24/01/18.
@@ -61,12 +62,23 @@ public class AccountDetailPresenter implements AbstractPresenter {
     }
 
     void loadCurrentBalance(String accountId) {
-        Transaction lastTrans = transactionsDao.last(accountId);
-        if (lastTrans == null) {
-            view.renderCurrentBalance(0d);
-        } else {
-            view.renderCurrentBalance(lastTrans.getCurrentAccountBalance());
+        RealmResults<Transaction> transactions = transactionsDao.findSorted(
+                accountId,
+                true
+        );
+        double balance = 0;
+        for (Transaction transaction : transactions) {
+            balance = balance + transaction.getQuantity();
         }
+
+        view.renderCurrentBalance(balance);
+
+//        Transaction lastTrans = transactionsDao.last(accountId);
+//        if (lastTrans == null) {
+//            view.renderCurrentBalance(0d);
+//        } else {
+//            view.renderCurrentBalance(lastTrans.getCurrentAccountBalance());
+//        }
     }
 
     void loadBalanceAtCurrShortPeriod(String accountId) {
@@ -97,14 +109,5 @@ public class AccountDetailPresenter implements AbstractPresenter {
         }
     }
 
-    void recalculateBalance(final String accountId) {
-        view.toggleLoading(true);
-        accountsDao.recalculateBalance(accountId, new CBGeneric<Boolean>() {
-            @Override
-            public void onResponse(Boolean response) {
-//                loadCurrentBalance(accountId);
-                view.toggleLoading(false);
-            }
-        });
-    }
+
 }

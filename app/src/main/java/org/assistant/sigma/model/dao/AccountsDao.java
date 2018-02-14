@@ -29,31 +29,30 @@ public class AccountsDao extends AbstractDao {
     }
 
     /**
-     * Sort all account transactions by creation date and recalculates
-     * the {@link Transaction#currentAccountBalance} for each transaction
-     *
-     * @param accountId Id of account to recalculate
-     * @param callback  The task will be executed in async mode and callback invoked
-     *                  on recalculation completed
+     * Recalculates the balance for each transaction on each account
+     * since begin of times
+     * @param cb Callback to exec on recalculation completes
      */
-    public void recalculateBalance(final String accountId, final CBGeneric<Boolean> callback) {
+    public void recalculateBalance(final CBGeneric<Boolean> cb) {
         realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                Account account = realm.where(Account.class).equalTo("id", accountId).findFirst();
-                RealmResults<Transaction> transactions = account.getTransactions()
-                        .sort("createdAt", Sort.ASCENDING);
-
-                double balance = 0;
-                for (Transaction transaction : transactions) {
-                    balance += transaction.getQuantity();
-                    transaction.setCurrentAccountBalance(balance);
+                RealmResults<Account> accounts = realm.where(Account.class).findAll();
+                for (Account account : accounts) {
+                    RealmResults<Transaction> transactions = realm.where(Transaction.class)
+                            .equalTo("account.id", account.getId())
+                            .findAllSorted("createdAt", Sort.ASCENDING);
+                    double balance = 0;
+                    for (Transaction transaction : transactions) {
+                        balance = balance + transaction.getQuantity();
+                        transaction.setCurrentAccountBalance(balance);
+                    }
                 }
             }
         }, new Realm.Transaction.OnSuccess() {
             @Override
             public void onSuccess() {
-                callback.onResponse(true);
+                cb.onResponse(true);
             }
         }, new Realm.Transaction.OnError() {
             @Override
@@ -63,7 +62,7 @@ public class AccountsDao extends AbstractDao {
                         "Error while recalculating balance: " + error.getMessage()
                 );
 
-                callback.onResponse(false);
+                cb.onResponse(false);
             }
         });
     }

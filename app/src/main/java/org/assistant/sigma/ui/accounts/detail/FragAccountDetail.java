@@ -43,13 +43,6 @@ public class FragAccountDetail extends Fragment implements AccountDetailContract
             mPresenter.loadCurrentBalance(accountId);
             mPresenter.loadBalanceAtCurrShortPeriod(accountId);
             mPresenter.loadBalanceAtCurrLargePeriod(accountId);
-
-            vBind.btnRecalculateBalance.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    mPresenter.recalculateBalance(accountId);
-                }
-            });
         }
 
         return rootView;

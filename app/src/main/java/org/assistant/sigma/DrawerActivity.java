@@ -19,7 +19,7 @@ import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.MaterialIcons;
 
 import org.assistant.sigma.model.entities.User;
-import org.assistant.sigma.ui.accounts.ActAccounts;
+import org.assistant.sigma.ui.accounts.detail.ActAccounts;
 import org.assistant.sigma.ui.drawer.DrawerPresenter;
 import org.assistant.sigma.ui.overview.ActOverview;
 import org.assistant.sigma.ui.scheduled_transactions.ScheduledTransactionsActivity;

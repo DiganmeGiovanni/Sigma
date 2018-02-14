@@ -48,6 +48,13 @@
                 android:layout_alignParentEnd="true"
                 app:fabSize="normal"
                 app:useCompatPadding="true"/>
+
+            <ProgressBar
+                android:id="@+id/pb_loading"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_centerInParent="true"
+                android:visibility="gone"/>
         </RelativeLayout>
 
         <!-- Drawer content -->

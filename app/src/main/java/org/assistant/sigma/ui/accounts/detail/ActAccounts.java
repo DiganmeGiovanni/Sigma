@@ -1,8 +1,10 @@
-package org.assistant.sigma.ui.accounts;
+package org.assistant.sigma.ui.accounts.detail;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.joanzapata.iconify.fonts.MaterialIcons;
@@ -14,7 +16,6 @@ import org.assistant.sigma.model.entities.Account;
 import org.assistant.sigma.ui.accounts.form.AccountsFormFragment;
 import org.assistant.sigma.ui.accounts.form.AccountsFormPresenter;
 import org.assistant.sigma.ui.accounts.list.AccountsPagerAdapter;
-import org.assistant.sigma.ui.accounts.list.AccountsPresenter;
 import org.assistant.sigma.ui.util.ButtonsUtils;
 
 import io.realm.RealmChangeListener;
@@ -24,9 +25,9 @@ import io.realm.RealmResults;
  *
  * Created by giovanni on 5/05/17.
  */
-public class ActAccounts extends DrawerActivity {
+public class ActAccounts extends DrawerActivity implements AccountsContract.View {
     private ActAccountsBinding vBind;
-    private AccountsPresenter accountsPresenter;
+    private AccountsPresenter mPresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,18 +42,37 @@ public class ActAccounts extends DrawerActivity {
                 R.id.tv_accounts
         );
 
-        accountsPresenter = new AccountsPresenter();
-        accountsPresenter.onCreate();
+        mPresenter = new AccountsPresenter(this);
+        mPresenter.onCreate();
+        mPresenter.loadAccounts();
 
-        makeTabs();
         setupFab();
     }
 
-    private void makeTabs() {
-        RealmResults<Account> accounts = accountsPresenter.getAccounts();
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.account_details, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
-        // Render accounts if any is available
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mPresenter.onDestroy();
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.item_recalculate_balance) {
+            mPresenter.recalculateBalance();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void renderAccounts(RealmResults<Account> accounts) {
         final AccountsPagerAdapter accountsAdapter = new AccountsPagerAdapter(
                 getSupportFragmentManager(),
                 accounts
@@ -71,6 +91,17 @@ public class ActAccounts extends DrawerActivity {
 
         vBind.viewpager.setAdapter(accountsAdapter);
         vBind.tabLayout.setupWithViewPager(vBind.viewpager);
+    }
+
+    @Override
+    public void toggleLoading(boolean isLoading) {
+        if (isLoading) {
+            vBind.viewpager.setVisibility(View.GONE);
+            vBind.pbLoading.setVisibility(View.VISIBLE);
+        } else {
+            vBind.pbLoading.setVisibility(View.GONE);
+            vBind.viewpager.setVisibility(View.VISIBLE);
+        }
     }
 
     private void setupFab() {

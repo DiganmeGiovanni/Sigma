@@ -121,6 +121,8 @@ public class TransactionDetailsFragment extends Fragment implements TransactionD
         cal.setTime(transaction.getCreatedAt());
         viewBinding.tvTime.setText(DateFormatter.asHourMinute(cal));
 
+        viewBinding.tvCurrentBalance.setText(TextUtils.asMoney(transaction.getCurrentAccountBalance()));
+
         viewBinding.tvDescription.setText(transaction.getDescription());
     }
 
